@@ -3,13 +3,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
+
         <variable
             name="viewmodel"
             type="com.yury.lebowski.ui.home.HomeViewModel" />
     </data>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home"
         android:layout_width="match_parent"
@@ -17,14 +18,40 @@
         tools:context=".ui.home.HomeFragment">
 
         <TextView
-            android:id="@+id/message"
+            android:id="@+id/balance_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HomeFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@{viewmodel.balanceMain}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="main" />
+
+        <TextView
+            android:id="@+id/currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{viewmodel.currency}"
+            app:layout_constraintEnd_toEndOf="@id/balance_main"
+            app:layout_constraintTop_toBottomOf="@id/balance_main"
+            tools:text="currency" />
+
+        <TextView
+            android:id="@+id/balance_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@{viewmodel.balanceSecondary}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/currency"
+            tools:text="secondary" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

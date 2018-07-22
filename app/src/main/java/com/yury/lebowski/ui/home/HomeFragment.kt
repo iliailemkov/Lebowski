@@ -26,7 +26,6 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
 
         val binding : HomeFragmentBinding = DataBindingUtil.setContentView(activity!!, R.layout.home_fragment); //DataBindingUtil.setContentView(this, R.layout.main_fragment)
         binding.viewmodel = viewModel
