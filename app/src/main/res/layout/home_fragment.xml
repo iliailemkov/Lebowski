@@ -37,10 +37,10 @@
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleGravity="top"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                android:background="@drawable/land_sm">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/home"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:context=".ui.home.HomeFragment">
