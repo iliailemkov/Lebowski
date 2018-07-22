@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Lebowski</string>
+    <string name="future_operations">Here will be your operation history</string>
 </resources>
