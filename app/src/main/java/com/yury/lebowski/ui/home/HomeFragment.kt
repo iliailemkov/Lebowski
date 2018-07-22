@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.yury.lebowski.R
+import com.yury.lebowski.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
 
@@ -25,6 +27,11 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
+
+        val binding : HomeFragmentBinding = DataBindingUtil.setContentView(activity!!, R.layout.home_fragment); //DataBindingUtil.setContentView(this, R.layout.main_fragment)
+        binding.viewmodel = viewModel
+        binding.executePendingBindings()
+        binding.setLifecycleOwner(this)
     }
 
 }
