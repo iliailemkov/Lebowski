@@ -1,12 +1,13 @@
 package com.yury.lebowski.ui.home
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.*
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.yury.lebowski.R
+import com.yury.lebowski.databinding.HomeFragmentBinding
+
 
 class HomeFragment : Fragment() {
 
@@ -21,10 +22,24 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_items, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        val binding : HomeFragmentBinding = DataBindingUtil.setContentView(activity!!, R.layout.home_fragment) //DataBindingUtil.setContentView(this, R.layout.main_fragment)
+        binding.viewmodel = viewModel
+        binding.executePendingBindings()
+        binding.setLifecycleOwner(this)
     }
 
 }
