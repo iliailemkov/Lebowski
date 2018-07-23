@@ -17,7 +17,7 @@ class HomeViewModel : ViewModel() {
         val balanceInUniversal = balanceRepository.getAmountInUniversal()
         val rate =  CurrencyType.Ruble.convertFromUniversal()
         balanceMain.value =  "$balanceInUniversal $"
-        currency.value = rate.toString()
+        currency.value = "Rate: ${rate.toString()}"
         balanceSecondary.value =  "${balanceInUniversal * rate} \u20BD"
 
     }
