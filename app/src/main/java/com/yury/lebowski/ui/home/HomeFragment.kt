@@ -1,12 +1,12 @@
 package com.yury.lebowski.ui.home
 
-import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.yury.lebowski.MainActivity
 import com.yury.lebowski.R
 import com.yury.lebowski.databinding.HomeFragmentBinding
 import com.yury.lebowski.util.autoCleared

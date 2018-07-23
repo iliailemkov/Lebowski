@@ -1,12 +1,11 @@
 package com.yury.lebowski.ui.settings
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.yury.lebowski.R
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -31,7 +30,7 @@ class SettingsFragment : Fragment() {
 
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
-        menu?.findItem(R.id.settings_item)?.isVisible = false;
+        menu?.findItem(R.id.settings_item)?.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }
 
