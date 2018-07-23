@@ -3,15 +3,18 @@ package com.yury.lebowski
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
+import com.yury.lebowski.ui.about.AboutFragment
 import com.yury.lebowski.ui.home.HomeFragment
 import com.yury.lebowski.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity(), SettingsFragment.SettingFragmentListener {
-    override fun onAboutClicked() {
 
+    override fun onAboutClicked() {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, AboutFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

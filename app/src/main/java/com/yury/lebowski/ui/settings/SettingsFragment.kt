@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.yury.lebowski.R
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class SettingsFragment : Fragment() {
@@ -32,6 +33,11 @@ class SettingsFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu?) {
         menu?.findItem(R.id.settings_item)?.isVisible = false;
         super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        open_about_button.setOnClickListener { listener?.onAboutClicked() }
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onAttach(context: Context) {
