@@ -1,7 +1,8 @@
 package com.yury.lebowski.models
 
 enum class OperationType {
-    Income, Expenditure
+    Income,
+    Expenditure
 }
 
 fun OperationType.effect() : Double {

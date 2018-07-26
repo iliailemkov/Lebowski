@@ -51,7 +51,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="8dp"
-                    android:text="@{viewmodel.currency}"
+                    android:text="@{@string/rate + `: ` + viewmodel.currency}"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add_24dp"
             android:focusable="true" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
