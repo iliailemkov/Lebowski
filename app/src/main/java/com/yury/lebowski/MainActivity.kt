@@ -4,33 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.yury.lebowski.ui.about.AboutFragment
 import com.yury.lebowski.ui.home.HomeFragment
 import com.yury.lebowski.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity(), SettingsFragment.SettingFragmentListener {
 
-    override fun onAboutClicked() {
+    private fun navigateToFragment(fragmentInstance: () -> Fragment) {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, AboutFragment.newInstance())
+                .replace(R.id.main_container, fragmentInstance())
                 .addToBackStack(null)
                 .commit()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_items, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.settings_item) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_container, SettingsFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
-            return false
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,4 +29,20 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingFragmentListen
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_items, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.settings_item) {
+            navigateToFragment { SettingsFragment.newInstance() }
+            return false
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onAboutClicked() {
+        navigateToFragment { AboutFragment.newInstance() }
+    }
 }

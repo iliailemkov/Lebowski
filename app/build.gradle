@@ -26,19 +26,27 @@ android {
     }
 }
 
+ext {
+    ktxVersion = '1.0.0-beta01'
+    lifecycleVersion = '2.0.0-beta01'
+    androidxVersion = '1.0.0-beta01'
+    constraintlayoutVersion = '1.1.2'
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // kotlin
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.0.0-beta01'
+    implementation "androidx.core:core-ktx:$ktxVersion"
 
-    implementation 'androidx.fragment:fragment:1.0.0-beta01'
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation 'androidx.cardview:cardview:1.0.0-beta01'
-    implementation 'com.google.android.material:material:1.0.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
+    //android
+    implementation "androidx.appcompat:appcompat:$androidxVersion"
+    implementation "androidx.cardview:cardview:$androidxVersion"
+    implementation "com.google.android.material:material:$androidxVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
     // test
     testImplementation 'junit:junit:4.12'

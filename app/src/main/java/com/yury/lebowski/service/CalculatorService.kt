@@ -1,6 +1,5 @@
 package com.yury.lebowski.service
 
-import com.yury.lebowski.models.effect
 import com.yury.lebowski.models.Record
 import com.yury.lebowski.repository.convertFromUniversal
 
