@@ -13,6 +13,7 @@ Lebowski
 * [Data Binding](https://developer.android.com/topic/libraries/data-binding/)
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+* [LeakCanary](https://github.com/square/leakcanary)
 
 ***
 
@@ -32,6 +33,8 @@ Lebowski
         ```
         <string name="Generic_Text">My Name is %s</string>
         ```
+    * bind viewmodel to fragment using [`AutoClearedValue`](https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.kt)
+    
 
 * #### Navigation
     * navigation to fragment
@@ -46,3 +49,7 @@ Lebowski
 
 * #### Gradle
     * [Manage Android dependencies versions using gradle extra properties](https://segunfamisa.com/posts/android-gradle-extra-properties) (can be also done using [`config.gradle` file](https://gist.github.com/truongngoclinh/af143066468ec5456cea6867350331fe#file-config-gradle))
+
+
+* #### Kotlin
+    * [Anonymous Classes in enum](https://kotlinlang.org/docs/reference/enum-classes.html#anonymous-classes)
