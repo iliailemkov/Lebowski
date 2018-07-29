@@ -66,8 +66,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="sans-serif-black"
-                    android:textSize="15sp"
                     android:text="@{viewmodel.balanceSecondary}"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/balance_main"
@@ -88,17 +88,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_balance" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+        <com.leinardi.android.speeddial.SpeedDialOverlayLayout
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.leinardi.android.speeddial.SpeedDialView
+            android:id="@+id/speedDial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add_24dp"
-            android:focusable="true" />
+            app:sdMainFabClosedSrc="@drawable/ic_add_24dp"
+            app:sdOverlayLayout="@id/overlay" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

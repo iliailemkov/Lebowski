@@ -32,6 +32,7 @@ ext {
     androidxVersion = '1.0.0-beta01'
     constraintlayoutVersion = '1.1.2'
     leakCanaryVersion = '1.6.1'
+    speedDialVersion = '1.0.2'
 }
 
 
@@ -45,9 +46,18 @@ dependencies {
     //android
     implementation "androidx.appcompat:appcompat:$androidxVersion"
     implementation "androidx.cardview:cardview:$androidxVersion"
-    implementation "com.google.android.material:material:$androidxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+
+    /*
+    UI
+     */
+
+    // material
+    implementation "com.google.android.material:material:$androidxVersion"
+
+    // Floating Action Button with Speed Dial
+    implementation "com.leinardi.android:speed-dial:$speedDialVersion"
 
     // leak canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
