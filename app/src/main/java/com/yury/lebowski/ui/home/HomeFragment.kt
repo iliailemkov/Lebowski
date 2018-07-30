@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.yury.lebowski.R
 import com.yury.lebowski.databinding.HomeFragmentBinding
 import com.yury.lebowski.models.OperationType
-import com.yury.lebowski.util.autoCleared
+import com.yury.lebowski.util.data_binding.autoCleared
 import kotlinx.android.synthetic.main.home_fragment.*
 
 
@@ -72,6 +72,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
+        binding.executePendingBindings();
     }
 
     interface HomeFragmentListener {

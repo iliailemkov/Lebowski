@@ -35,6 +35,7 @@ Lebowski
         <string name="Generic_Text">My Name is %s</string>
         ```
     * bind viewmodel to fragment using [`AutoClearedValue`](https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.kt)
+    * [Bind to spinner](https://medium.com/fueled-engineering/binding-spinner-in-android-c5fa8c084480)
     
 
 * #### Navigation

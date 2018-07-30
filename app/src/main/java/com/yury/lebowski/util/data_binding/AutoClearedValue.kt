@@ -1,4 +1,4 @@
-package com.yury.lebowski.util
+package com.yury.lebowski.util.data_binding
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle

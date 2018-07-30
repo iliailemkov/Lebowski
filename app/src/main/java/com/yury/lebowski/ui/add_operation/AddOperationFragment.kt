@@ -7,14 +7,24 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.core.os.bundleOf
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import com.yury.lebowski.LebowskiApplication
 import com.yury.lebowski.R
+import com.yury.lebowski.databinding.AddOperationFragmentBinding
 import com.yury.lebowski.models.OperationType
+import com.yury.lebowski.util.data_binding.BindingComponent
+import com.yury.lebowski.util.data_binding.autoCleared
+import com.yury.lebowski.util.data_binding.spinner.InverseSpinnerBindings
+import com.yury.lebowski.util.data_binding.spinner.SpinnerBindings
 
 
 private const val OPERATION_TYPE = "operation_type"
 
 class AddOperationFragment : Fragment() {
     private var operationType: OperationType? = null
+    private lateinit var viewModel: AddOperationViewModel
+    private var binding: AddOperationFragmentBinding by autoCleared<AddOperationFragmentBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,17 +64,22 @@ class AddOperationFragment : Fragment() {
         activity?.setTitle(R.string.app_name)
     }
 
-    private lateinit var viewModel: AddOperationViewModel
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.add_operation_fragment, container, false)
+        binding = DataBindingUtil.inflate(
+                inflater,
+                R.layout.add_operation_fragment,
+                container,
+                false, BindingComponent())
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, operationType?.let { AddOperationViewModelFactory(it) }).get(AddOperationViewModel::class.java)
-        // TODO: Use the ViewModel
+        binding.viewmodel = viewModel
+        binding.setLifecycleOwner(this)
+        binding.executePendingBindings();
     }
 
 

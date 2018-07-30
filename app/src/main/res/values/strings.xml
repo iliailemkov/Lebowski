@@ -2,8 +2,10 @@
 
     <string name="app_name">Lebowski</string>
 
-    <!--home page-->
 
+    <!--Pages-->
+
+    <!--home page-->
     <string name="rate">Rate</string>
     <string name="future_operations">Here will be your operation history</string>
     <!--speed dial-->
@@ -11,7 +13,6 @@
     <string name="add_income">Add income</string>
     <string name="manage_categories">Manage categories</string>
     <string name="tbd">TBD</string>
-
     <!--home page-->
 
     <!--settings page-->
@@ -21,14 +22,44 @@
         <item>Русский</item>
         <item>English</item>
     </string-array>
+    <!--settings page-->
 
     <!--about page-->
     <string name="about">About</string>
     <string name="year">2018</string>
     <string name="description">Coolest app to control your finance.\nThis app can help you answer the question: \'Where\'s the money?\'</string>
+    <!--about page-->
 
     <!--add operation page-->
     <string name="name">Name</string>
     <string name="date">Date</string>
+    <string name="category">Category</string>
+    <!--add operation page-->
+
+    <!--Pages-->
+
+
+    <!--Categories-->
+    <string name="vehicle">Vehicle</string>
+    <string name="housing">Housing</string>
+    <string name="health_and_beaty">Health and beauty</string>
+    <string name="art">Art</string>
+    <string name="commission">Commission</string>
+    <string name="utility_payments">Utility payments</string>
+    <string name="communication">Communication</string>
+    <string name="education">Education</string>
+    <string name="entertainment_and_leisure">Entertainment and leisure</string>
+    <string name="products">Products</string>
+    <string name="shops">Shops</string>
+    <string name="other_expenses">Other expenses</string>
+    <string name="refund">Refund</string>
+    <string name="salary">Salary</string>
+    <string name="other_income">Other income</string>
+    <!--Categories-->
+
+    <!--Accounts-->
+    <string name="cash">Cash</string>
+    <string name="credit_card">Credit card</string>
+    <!--Accounts-->
 
 </resources>
