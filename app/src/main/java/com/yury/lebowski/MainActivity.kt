@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import com.yury.lebowski.models.OperationType
 import com.yury.lebowski.ui.about.AboutFragment
+import com.yury.lebowski.ui.add_operation.AddOperationFragment
 import com.yury.lebowski.ui.home.HomeFragment
 import com.yury.lebowski.ui.settings.SettingsFragment
 
-class MainActivity : AppCompatActivity(), SettingsFragment.SettingFragmentListener {
+class MainActivity : AppCompatActivity(), HomeFragment.HomeFragmentListener, SettingsFragment.SettingFragmentListener {
 
     private fun navigateToFragment(fragmentInstance: () -> Fragment) {
         supportFragmentManager.beginTransaction()
@@ -44,5 +46,9 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingFragmentListen
 
     override fun onAboutClicked() {
         navigateToFragment { AboutFragment.newInstance() }
+    }
+
+    override fun onAddOperationClicked(operationType: OperationType) {
+        navigateToFragment { AddOperationFragment.newInstance(operationType)}
     }
 }

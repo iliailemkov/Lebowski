@@ -14,6 +14,7 @@ Lebowski
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 * [LeakCanary](https://github.com/square/leakcanary)
+* [Floating Action Button with Speed Dial](https://github.com/leinardi/FloatingActionButtonSpeedDial). See #14 for more information
 
 ***
 
@@ -53,3 +54,6 @@ Lebowski
 
 * #### Kotlin
     * [Anonymous Classes in enum](https://kotlinlang.org/docs/reference/enum-classes.html#anonymous-classes)
+
+* ### Icons
+    * <div>Icons made by <a href="https://www.flaticon.com/authors/eleonor-wang" title="Eleonor Wang">Eleonor Wang</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

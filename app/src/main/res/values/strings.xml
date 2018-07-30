@@ -27,4 +27,8 @@
     <string name="year">2018</string>
     <string name="description">Coolest app to control your finance.\nThis app can help you answer the question: \'Where\'s the money?\'</string>
 
+    <!--add operation page-->
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+
 </resources>
