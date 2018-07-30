@@ -31,6 +31,8 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_comment_24dp"
                 android:drawablePadding="16dp"
+                android:inputType="text"
+                android:maxLines="1"
                 android:hint="@string/name" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -66,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@id/categories" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/accounts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -74,6 +76,32 @@
             app:entries="@{viewmodel.accounts}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categories" />
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/money_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/amount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accounts">
+
+            <com.wajahatkarim3.easymoneywidgets.EasyMoneyEditText
+                android:id="@+id/moneyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                app:show_commas="true"
+                app:show_currency="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/add_button"

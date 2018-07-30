@@ -35,6 +35,7 @@
     <string name="date">Date</string>
     <string name="category">Category</string>
     <string name="account">Account</string>
+    <string name="amount">Amount</string>
     <string name="add">Add</string>
     <!--add operation page-->
 
@@ -62,7 +63,7 @@
     <!--Accounts-->
     <string name="cash">Cash</string>
     <string name="credit_card">Credit card</string>
-    <string name="successfully_added">Added (not yet, but soon definitely will be</string>
+    <string name="successfully_added">Added (not yet, but soon definitely will be)</string>
     <!--Accounts-->
 
 </resources>

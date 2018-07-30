@@ -61,6 +61,8 @@ dependencies {
     implementation "com.google.android.material:material:$androidxVersion"
     // Floating Action Button with Speed Dial
     implementation "com.leinardi.android:speed-dial:$speedDialVersion"
+    // money  widgets
+    implementation 'com.wajahatkarim3.EasyMoney-Widgets:EasyMoney-Widgets:1.0.0'
 
     // okhttp
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
