@@ -4,7 +4,7 @@ import com.yury.lebowski.models.CurrencyType
 import com.yury.lebowski.models.OperationType
 import com.yury.lebowski.models.Record
 import com.yury.lebowski.repository.BalanceRepository
-import com.yury.lebowski.repository.convertFromUniversal
+import com.yury.lebowski.repository.RateRepository
 import com.yury.lebowski.service.calculateBalanceAfterOperations
 import org.junit.Test
 
@@ -22,7 +22,7 @@ class BalanceUnitTest {
     @Test
     fun convertToSecondaryCurrency_isCorrect() {
         val mainCurrency = BalanceRepository().getAmountInUniversal()
-        val secondaryCurrency = mainCurrency * CurrencyType.Ruble.convertFromUniversal()
+        val secondaryCurrency = mainCurrency * RateRepository().getLastOfflineRate(CurrencyType.Ruble)
         assertEquals(1015.2, secondaryCurrency, delta)
     }
 
