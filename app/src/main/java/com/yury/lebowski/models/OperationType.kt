@@ -1,12 +1,16 @@
 package com.yury.lebowski.models
 
 enum class OperationType {
-    Income, Expenditure
-}
+    Income {
+        override fun effect(): Double {
+            return 1.0
+        }
+    },
+    Expenditure {
+        override fun effect(): Double {
+            return -1.0
+        }
+    };
 
-fun OperationType.effect() : Double {
-    return when(this) {
-        OperationType.Income -> 1.0
-        OperationType.Expenditure -> -1.0
-    }
+    abstract fun effect(): Double;
 }
