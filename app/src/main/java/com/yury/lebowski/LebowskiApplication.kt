@@ -1,9 +1,7 @@
 package com.yury.lebowski
 
 import android.app.Application
-import androidx.databinding.DataBindingUtil
 import com.squareup.leakcanary.LeakCanary
-import com.yury.lebowski.util.data_binding.BindingComponent
 
 class LebowskiApplication() : Application() {
     companion object {
@@ -19,8 +17,6 @@ class LebowskiApplication() : Application() {
             // You should not init your app in this process.
             return;
         }
-        LeakCanary.install(this);
-
-        //DataBindingUtil.setDefaultComponent(BindingComponent())
+        LeakCanary.install(this)
     }
 }

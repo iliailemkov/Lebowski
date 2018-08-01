@@ -1,28 +1,20 @@
 package com.yury.lebowski.ui.add_operation
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
-import com.google.android.material.snackbar.Snackbar
-import com.yury.lebowski.LebowskiApplication
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.yury.lebowski.R
 import com.yury.lebowski.databinding.AddOperationFragmentBinding
 import com.yury.lebowski.models.OperationType
 import com.yury.lebowski.util.data_binding.BindingComponent
 import com.yury.lebowski.util.data_binding.autoCleared
-import com.yury.lebowski.util.data_binding.spinner.InverseSpinnerBindings
-import com.yury.lebowski.util.data_binding.spinner.SpinnerBindings
 import kotlinx.android.synthetic.main.add_operation_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.main_activity.*
-
 
 private const val OPERATION_TYPE = "operation_type"
 

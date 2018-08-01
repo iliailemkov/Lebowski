@@ -26,10 +26,11 @@ class RateRepository {
             override fun onFailure(call: Call?, e: IOException?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
+
             override fun onResponse(call: Call?, response: Response?) {
                 response?.body()?.string()?.let {
                     val data = JSONObject(it)
-                    rate = data.getDouble("USD_RUB")
+                    rate = data.getDouble(direction)
                 }
             }
 

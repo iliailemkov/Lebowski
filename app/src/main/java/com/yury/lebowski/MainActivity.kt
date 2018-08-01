@@ -1,9 +1,9 @@
 package com.yury.lebowski
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.yury.lebowski.models.OperationType
 import com.yury.lebowski.ui.about.AboutFragment
@@ -49,6 +49,6 @@ class MainActivity : AppCompatActivity(), HomeFragment.HomeFragmentListener, Set
     }
 
     override fun onAddOperationClicked(operationType: OperationType) {
-        navigateToFragment { AddOperationFragment.newInstance(operationType)}
+        navigateToFragment { AddOperationFragment.newInstance(operationType) }
     }
 }
