@@ -1,10 +1,22 @@
-Lebowski
+# Lebowski
 
+***
+
+* [Continuous Integration](#continuous-integration-dev-branch)
+* [Questions](#questions)
+* [Used libraries](#used-libraries)
+* [Used materials / Thanks](#used-materials-thanks)
+
+***
+
+### Continuous Integration (dev branch)
+* CircleCI [![CircleCI](https://circleci.com/gh/bruce-willis/Lebowski/tree/develop.svg?style=svg)](https://circleci.com/gh/bruce-willis/Lebowski/tree/develop)
 
 *** 
 
 ### Questions
-* `@JvmStatic` when creating `newInstance` of fragment
+* `@JvmStatic` when creating `newInstance` of fragment - only needed for java code
+* Right way to get `R.string` in ViewModel class
 
 ***
 
@@ -14,7 +26,7 @@ Lebowski
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 * [LeakCanary](https://github.com/square/leakcanary)
-* [Floating Action Button with Speed Dial](https://github.com/leinardi/FloatingActionButtonSpeedDial). See #14 for more information
+* [Floating Action Button with Speed Dial](https://github.com/leinardi/FloatingActionButtonSpeedDial). See [#14](https://github.com/bruce-willis/Lebowski/issues/14) for more information
 
 ***
 
@@ -36,6 +48,19 @@ Lebowski
         ```
     * bind viewmodel to fragment using [`AutoClearedValue`](https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.kt)
     * [Bind to spinner](https://medium.com/fueled-engineering/binding-spinner-in-android-c5fa8c084480)
+    * BindingComponent
+        * set globally
+        ```kotlin
+        DataBindingUtil.setDefaultComponent(BindingComponent())
+        ```
+        * only for one layout
+        ```kotlin
+        DataBindingUtil.inflate(
+                inflater,
+                R.layout.,
+                container,
+                false, BindingComponent())
+        ```
     
 
 * #### Navigation

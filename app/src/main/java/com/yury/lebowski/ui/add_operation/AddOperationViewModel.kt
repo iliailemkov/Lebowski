@@ -1,8 +1,6 @@
 package com.yury.lebowski.ui.add_operation
 
-import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import com.yury.lebowski.LebowskiApplication
 import com.yury.lebowski.models.Accounts
 import com.yury.lebowski.models.Categories
@@ -13,6 +11,6 @@ class AddOperationViewModel(private val operationType: OperationType) : ViewMode
     val accounts = Accounts.map { getResourceString(it.nameResourceId) }
 
     // TODO: find better way to get resources
-    private fun getResourceString(resId : Int ) = LebowskiApplication.instance.resources.getString(resId)
+    private fun getResourceString(resId: Int) = LebowskiApplication.instance.resources.getString(resId)
 
 }

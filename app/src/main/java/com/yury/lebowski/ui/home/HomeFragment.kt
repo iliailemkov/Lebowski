@@ -40,13 +40,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         speedDial.inflate(R.menu.menu_speed_dial)
         speedDial.setOnActionSelectedListener { actionItem ->
-            when {
-                actionItem.id == R.id.manage_categories -> {
+            when (actionItem.id) {
+                R.id.manage_categories -> {
                     Toast.makeText(context, getString(R.string.tbd), Toast.LENGTH_SHORT).show()
                     return@setOnActionSelectedListener true
                 }
-                actionItem.id == R.id.add_income -> listener?.onAddOperationClicked(OperationType.Income)
-                actionItem.id == R.id.add_expenditure -> listener?.onAddOperationClicked(OperationType.Expenditure)
+                R.id.add_income -> listener?.onAddOperationClicked(OperationType.Income)
+                R.id.add_expenditure -> listener?.onAddOperationClicked(OperationType.Expenditure)
             }
             false
         }
