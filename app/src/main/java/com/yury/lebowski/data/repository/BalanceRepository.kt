@@ -1,4 +1,4 @@
-package com.yury.lebowski.repository
+package com.yury.lebowski.data.repository
 
 import javax.inject.Inject
 

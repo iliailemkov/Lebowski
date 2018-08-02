@@ -1,4 +1,4 @@
-package com.yury.lebowski.models
+package com.yury.lebowski.data.models
 
 import android.location.Location
 import java.time.LocalDateTime

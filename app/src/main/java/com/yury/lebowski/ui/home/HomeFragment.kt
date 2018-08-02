@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.beardie.currencyholder.di.ViewModelFactory
 import com.yury.lebowski.R
+import com.yury.lebowski.data.models.OperationType
 import com.yury.lebowski.databinding.HomeFragmentBinding
-import com.yury.lebowski.models.OperationType
 import com.yury.lebowski.util.data_binding.autoCleared
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -78,7 +77,7 @@ class HomeFragment : DaggerFragment() {
         super.onActivityCreated(savedInstanceState)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
-        binding.executePendingBindings();
+        binding.executePendingBindings()
     }
 
     interface HomeFragmentListener {

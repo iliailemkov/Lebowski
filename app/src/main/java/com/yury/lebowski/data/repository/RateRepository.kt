@@ -1,6 +1,6 @@
-package com.yury.lebowski.repository
+package com.yury.lebowski.data.repository
 
-import com.yury.lebowski.models.CurrencyType
+import com.yury.lebowski.data.models.CurrencyType
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
