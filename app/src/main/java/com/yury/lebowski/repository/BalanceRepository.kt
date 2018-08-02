@@ -1,5 +1,7 @@
 package com.yury.lebowski.repository
 
-class BalanceRepository {
+import javax.inject.Inject
+
+class BalanceRepository @Inject constructor() {
     fun getAmountInUniversal() = 16.0
 }

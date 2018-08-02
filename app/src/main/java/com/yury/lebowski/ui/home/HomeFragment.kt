@@ -9,18 +9,24 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.beardie.currencyholder.di.ViewModelFactory
 import com.yury.lebowski.R
 import com.yury.lebowski.databinding.HomeFragmentBinding
 import com.yury.lebowski.models.OperationType
 import com.yury.lebowski.util.data_binding.autoCleared
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.home_fragment.*
+import javax.inject.Inject
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : DaggerFragment() {
 
     companion object {
         fun newInstance() = HomeFragment()
     }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: HomeViewModel
     private var binding: HomeFragmentBinding by autoCleared<HomeFragmentBinding>()
@@ -38,6 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
         speedDial.inflate(R.menu.menu_speed_dial)
         speedDial.setOnActionSelectedListener { actionItem ->
             when (actionItem.id) {
@@ -69,7 +76,6 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
         binding.executePendingBindings();

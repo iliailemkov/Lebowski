@@ -29,6 +29,8 @@ android {
 }
 
 ext {
+    dagger_version = '2.15'
+    room_version = '1.1.1'
     ktxVersion = '1.0.0-beta01'
     lifecycleVersion = '2.0.0-beta01'
     androidxVersion = '1.0.0-beta01'
@@ -46,11 +48,21 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.core:core-ktx:$ktxVersion"
 
+    // room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
     //android
     implementation "androidx.appcompat:appcompat:$androidxVersion"
     implementation "androidx.cardview:cardview:$androidxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+
+    // dagger
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
 
     kapt 'com.android.databinding:compiler:3.2.0-alpha12'
 
@@ -77,3 +89,4 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 }
+

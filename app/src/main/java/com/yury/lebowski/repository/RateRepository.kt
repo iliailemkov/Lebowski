@@ -4,9 +4,10 @@ import com.yury.lebowski.models.CurrencyType
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
+import javax.inject.Inject
 
 
-class RateRepository {
+class RateRepository @Inject constructor() {
 
     // TODO: return last retrieved rate, saved into db
     fun getLastOfflineRate(currencyType: CurrencyType): Double {

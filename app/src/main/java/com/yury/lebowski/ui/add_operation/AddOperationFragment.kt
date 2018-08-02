@@ -9,16 +9,23 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.beardie.currencyholder.di.ViewModelFactory
 import com.yury.lebowski.R
 import com.yury.lebowski.databinding.AddOperationFragmentBinding
 import com.yury.lebowski.models.OperationType
 import com.yury.lebowski.util.data_binding.BindingComponent
 import com.yury.lebowski.util.data_binding.autoCleared
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
+import javax.inject.Inject
 
 private const val OPERATION_TYPE = "operation_type"
 
-class AddOperationFragment : Fragment() {
+class AddOperationFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private var operationType: OperationType? = null
     private lateinit var viewModel: AddOperationViewModel
     private var binding: AddOperationFragmentBinding by autoCleared<AddOperationFragmentBinding>()
@@ -73,6 +80,7 @@ class AddOperationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
         add_button.setOnClickListener {
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             activity?.onBackPressed()
@@ -81,7 +89,7 @@ class AddOperationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, operationType?.let { AddOperationViewModelFactory(it) }).get(AddOperationViewModel::class.java)
+        //viewModel = ViewModelProviders.of(this, operationType?.let { AddOperationViewModelFactory(it) }).get(AddOperationViewModel::class.java)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
         binding.executePendingBindings();
