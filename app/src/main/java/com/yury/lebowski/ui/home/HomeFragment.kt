@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.example.beardie.currencyholder.di.ViewModelFactory
+import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.R
 import com.yury.lebowski.data.models.OperationType
 import com.yury.lebowski.databinding.HomeFragmentBinding

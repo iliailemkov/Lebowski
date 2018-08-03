@@ -1,4 +1,4 @@
-package com.example.beardie.currencyholder.di
+package com.yury.lebowski.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

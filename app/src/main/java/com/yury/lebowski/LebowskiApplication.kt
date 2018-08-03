@@ -1,7 +1,7 @@
 package com.yury.lebowski
 
-import com.example.beardie.currencyholder.di.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
+import com.yury.lebowski.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 

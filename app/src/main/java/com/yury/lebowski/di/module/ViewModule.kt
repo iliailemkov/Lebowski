@@ -1,4 +1,4 @@
-package com.example.beardie.currencyholder.di.module
+package com.yury.lebowski.di.module
 
 import com.yury.lebowski.MainActivity
 import com.yury.lebowski.ui.about.AboutFragment

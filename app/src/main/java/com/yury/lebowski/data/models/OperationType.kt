@@ -1,12 +1,19 @@
 package com.yury.lebowski.data.models
 
-enum class OperationType {
-    Income {
-        override fun effect() = 1.0
-    },
-    Expenditure {
-        override fun effect() = -1.0
-    };
+import android.media.audiofx.AudioEffect
 
-    abstract fun effect(): Double;
+enum class OperationType constructor(
+        val effect: Int
+){
+    Income(1),
+    Expenditure(-1);
+
+    companion object {
+        fun findByEffect(value : Int): OperationType? {
+            for (item in OperationType.values())
+                if (item.effect == value)
+                    return item
+            return null
+        }
+    }
 }

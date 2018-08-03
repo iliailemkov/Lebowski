@@ -19,11 +19,11 @@ class HomeViewModel @Inject constructor(
 
     // TODO: use dagger
 
-    //init {
+    init {
         val balanceInUniversal = balanceRepository.getAmountInUniversal()
         val rate = rateRepository.getLastOfflineRate(CurrencyType.Ruble)
-       // balanceMain.value = "$balanceInUniversal $"
-        ///currency.value = rate.toString()
-        //b/alanceSecondary.value = "${balanceInUniversal * rate} \u20BD"
-    //}
+        balanceMain.value = "$balanceInUniversal $"
+        currency.value = rate.toString()
+        balanceSecondary.value = "${balanceInUniversal * rate} \u20BD"
+    }
 }

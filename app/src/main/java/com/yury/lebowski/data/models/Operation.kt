@@ -1,14 +1,17 @@
 package com.yury.lebowski.data.models
 
-import android.location.Location
-import java.time.LocalDateTime
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import java.util.*
 
+@Entity(tableName = "Operation")
 data class Operation(
-        val date: LocalDateTime,
-        val location: Location,
+        @PrimaryKey(autoGenerate = true) val id: Long,
+        val date: Date,
         val currencyType: CurrencyType,
         val amount: Double,
-        val amountInUniversal: Double,
-        val category: Category,
-        val account: Account
+        val amountInUniversal: Double/*,
+        @Ignore val category: Category? = null,
+        @Ignore val account: Account? = null*/
 )

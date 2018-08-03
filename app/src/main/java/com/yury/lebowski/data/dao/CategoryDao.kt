@@ -1,9 +1,14 @@
 package com.yury.lebowski.data.dao
 
-import androidx.room.Delete
+import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
+import com.yury.lebowski.data.models.Account
+import com.yury.lebowski.data.models.Category
 
+@Dao
 interface CategoryDao {
-    @Query("SELECT * FROM Category") fun getAll()
-    @Delete fun deleteAll()
+    @Query("SELECT * FROM Category") fun getAll() : List<Category>
+    @Insert fun insertAll(list: List<Category>)
+   // @Delete fun deleteAll()
 }

@@ -1,7 +1,7 @@
-package com.example.beardie.currencyholder.di.module
+package com.yury.lebowski.di.module
 
 import androidx.lifecycle.ViewModel
-import com.example.beardie.currencyholder.di.ViewModelKey
+import com.yury.lebowski.di.ViewModelKey
 import com.yury.lebowski.ui.add_operation.AddOperationViewModel
 import com.yury.lebowski.ui.home.HomeViewModel
 import dagger.Binds
