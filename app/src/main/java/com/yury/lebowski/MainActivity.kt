@@ -11,24 +11,16 @@ import com.yury.lebowski.ui.add_operation.AddOperationFragment
 import com.yury.lebowski.ui.home.HomeFragment
 import com.yury.lebowski.ui.settings.SettingsFragment
 
-class MainActivity : AppCompatActivity(), HomeFragment.HomeFragmentListener, SettingsFragment.SettingFragmentListener {
 
-    private fun navigateToFragment(fragmentInstance: () -> Fragment) {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, fragmentInstance())
-                .addToBackStack(null)
-                .commit()
-    }
+class MainActivity : AppCompatActivity(), Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_container, HomeFragment.newInstance())
-                    .commit()
-        }
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, HomeFragment.newInstance())
+                .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -38,17 +30,26 @@ class MainActivity : AppCompatActivity(), HomeFragment.HomeFragmentListener, Set
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.settings_item) {
-            navigateToFragment { SettingsFragment.newInstance() }
+            navigateTo(SettingsFragment.newInstance(), "NavigateSettings")
             return false
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onAboutClicked() {
-        navigateToFragment { AboutFragment.newInstance() }
+    override fun initToolbar(title: Int, elevation: Float) {
+        supportActionBar?.setTitle(title)
+        supportActionBar?.elevation = elevation
     }
 
-    override fun onAddOperationClicked(operationType: OperationType) {
-        navigateToFragment { AddOperationFragment.newInstance(operationType) }
+    override fun navigateTo(fragment: Fragment, transaction: String?) {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, fragment)
+                .addToBackStack(transaction)
+                .commit()
     }
+
+    override fun navigateBack() {
+        supportFragmentManager.popBackStack()
+    }
+
 }

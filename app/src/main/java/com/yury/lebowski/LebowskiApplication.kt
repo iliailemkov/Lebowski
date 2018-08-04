@@ -5,6 +5,7 @@ import com.yury.lebowski.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
+
 class LebowskiApplication() : DaggerApplication() {
     companion object {
         lateinit var instance: LebowskiApplication

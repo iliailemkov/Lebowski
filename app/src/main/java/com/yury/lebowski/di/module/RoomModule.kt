@@ -21,7 +21,7 @@ class RoomModule {
     @Singleton
     fun provideCategoryDao(db: LebowskiDb) = db.categoryDao()
 
-    /*@Provides
+    @Provides
     @Singleton
-    fun provideOperationDao(db: LebowskiDb) = db.operationDao()*/
+    fun provideOperationDao(db: LebowskiDb) = db.operationDao()
 }

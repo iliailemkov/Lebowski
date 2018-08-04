@@ -9,6 +9,7 @@ class AddOperationViewModel @Inject constructor(
         private val balanceRepository: BalanceRepository
         //private val operationType: OperationType
 ) : ViewModel() {
+
     val categories = emptyList<String>()//Categories.map { getResourceString(it.nameResourceId) }
     val accounts = emptyList<String>()// Accounts.map { getResourceString(it.nameResourceId) }
 

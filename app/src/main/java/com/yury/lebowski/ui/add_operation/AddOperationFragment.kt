@@ -6,28 +6,31 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.R
 import com.yury.lebowski.data.models.OperationType
-import com.yury.lebowski.databinding.AddOperationFragmentBinding
-import com.yury.lebowski.util.data_binding.BindingComponent
-import com.yury.lebowski.util.data_binding.autoCleared
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
 import javax.inject.Inject
 
-private const val OPERATION_TYPE = "operation_type"
 
 class AddOperationFragment : DaggerFragment() {
+
+    val OPERATION_TYPE = "operation_type"
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     private var operationType: OperationType? = null
     private lateinit var viewModel: AddOperationViewModel
-    private var binding: AddOperationFragmentBinding by autoCleared<AddOperationFragmentBinding>()
+   // private var binding: AddOperationFragmentBinding by autoCleared<AddOperationFragmentBinding>()
+
+    companion object {
+        fun newInstance(operationType: OperationType) = AddOperationFragment().apply {
+            arguments = bundleOf(OPERATION_TYPE to operationType)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,12 +72,7 @@ class AddOperationFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.add_operation_fragment,
-                container,
-                false, BindingComponent())
-        return binding.root
+        return inflater.inflate(R.layout.add_operation_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,21 +81,6 @@ class AddOperationFragment : DaggerFragment() {
         add_button.setOnClickListener {
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             activity?.onBackPressed()
-        }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        //viewModel = ViewModelProviders.of(this, operationType?.let { AddOperationViewModelFactory(it) }).get(AddOperationViewModel::class.java)
-        binding.viewmodel = viewModel
-        binding.setLifecycleOwner(this)
-        binding.executePendingBindings();
-    }
-
-
-    companion object {
-        fun newInstance(operationType: OperationType) = AddOperationFragment().apply {
-            arguments = bundleOf(OPERATION_TYPE to operationType)
         }
     }
 

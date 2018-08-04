@@ -9,6 +9,4 @@ data class Account(
         @PrimaryKey(autoGenerate = true) val id: Long,
         val nameResourceId: Int,
         val currentBalanceInUniversal: Double
-        //@ForeignKey(entity = Operation::class, parentColumns = ["id"], childColumns = ["operationId"])
-        //val operationId: Long
 )

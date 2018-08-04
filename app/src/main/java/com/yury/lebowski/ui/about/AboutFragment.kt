@@ -11,6 +11,10 @@ import com.yury.lebowski.R
 
 class AboutFragment : Fragment() {
 
+    companion object {
+        fun newInstance() = AboutFragment()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -23,7 +27,6 @@ class AboutFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
@@ -44,10 +47,5 @@ class AboutFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         activity?.setTitle(R.string.settings)
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = AboutFragment()
     }
 }

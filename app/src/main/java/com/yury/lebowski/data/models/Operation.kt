@@ -1,8 +1,6 @@
 package com.yury.lebowski.data.models
 
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.util.*
 
 @Entity(tableName = "Operation")
@@ -11,7 +9,9 @@ data class Operation(
         val date: Date,
         val currencyType: CurrencyType,
         val amount: Double,
-        val amountInUniversal: Double/*,
-        @Ignore val category: Category? = null,
-        @Ignore val account: Account? = null*/
+        val amountInUniversal: Double,
+        @ForeignKey(entity = Account::class, parentColumns = ["id"], childColumns = ["accountId"])
+        val accountId: Long
+        //@Ignore val category: Category? = null,
+       // @Relation(parentColumn = "id", entityColumn = "", entity = Account.class) val account: Account? = null
 )

@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.yury.lebowski.data.models.CurrencyType
 import com.yury.lebowski.data.models.OperationType
 
+
 class CurrencyTypeConverter {
 
     @TypeConverter

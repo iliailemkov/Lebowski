@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Category(
         @PrimaryKey(autoGenerate = true) val id: Long,
         val operationType: OperationType,
-        val nameResourceId: Int
+        val nameResourceId: Int//,
         //@ForeignKey(entity = Operation::class, parentColumns = ["id"], childColumns = ["operationId"])
         //val operationId: Long
 )

@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.yury.lebowski.data.models.OperationType
 
 class OperationTypeConverter {
+
     @TypeConverter
     fun fromInt(value: Int?): OperationType? {
         return if (value == null) null else OperationType.findByEffect(value)
