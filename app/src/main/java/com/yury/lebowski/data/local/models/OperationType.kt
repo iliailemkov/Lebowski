@@ -1,4 +1,4 @@
-package com.yury.lebowski.data.models
+package com.yury.lebowski.data.local.models
 
 import android.media.audiofx.AudioEffect
 

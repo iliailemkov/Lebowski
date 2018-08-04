@@ -1,7 +1,6 @@
 package com.yury.lebowski.service
 
-import com.yury.lebowski.data.models.Operation
-import com.yury.lebowski.data.repository.RateRepository
+import com.yury.lebowski.data.local.models.Operation
 
 
 /*fun calculateBalanceAfterOperations(start_balance: Double, operations: List<Operation>): Double {

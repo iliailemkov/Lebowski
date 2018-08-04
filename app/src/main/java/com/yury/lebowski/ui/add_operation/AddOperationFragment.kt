@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.yury.lebowski.Navigator
 import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.R
-import com.yury.lebowski.data.models.CurrencyType
-import com.yury.lebowski.data.models.Operation
-import com.yury.lebowski.data.models.OperationType
+import com.yury.lebowski.data.local.models.CurrencyType
+import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.data.local.models.OperationType
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
 import java.util.*
@@ -87,7 +87,7 @@ class AddOperationFragment : DaggerFragment() {
 
     private fun initAddButton() {
         add_button.setOnClickListener {
-            viewModel.addOperation(Operation(4, Date(), CurrencyType.Ruble, OperationType.Income, 10.0, 10.0, 1, 2))
+            viewModel.addOperation(Operation(5, Date(), CurrencyType.Ruble, OperationType.Income, -10.0, -10.0, 1, 4))
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             (activity as Navigator).navigateBack()
         }

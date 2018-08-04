@@ -1,4 +1,4 @@
-package com.yury.lebowski.data.models
+package com.yury.lebowski.data.local.models
 
 import androidx.room.*
 import java.util.*

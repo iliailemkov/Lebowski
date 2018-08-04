@@ -1,7 +1,7 @@
 package com.yury.lebowski.data.repository
 
 import android.content.SharedPreferences
-import com.yury.lebowski.data.models.Account
+import com.yury.lebowski.data.local.models.Account
 import javax.inject.Inject
 
 class SharedPrefRepository @Inject constructor(var shared : SharedPreferences) {

@@ -1,35 +1,33 @@
 package com.yury.lebowski.ui.statistics
 
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.github.mikephil.charting.data.PieDataSet
-import com.yury.lebowski.data.models.Account
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
-import com.yury.lebowski.domain.StatisticsInteractor
-import kotlinx.android.synthetic.main.home_fragment.*
 import javax.inject.Inject
 
 class StatisticsViewModel @Inject constructor(
+        app: Application,
         private val accountRepository : AccountRepository,
-        private val statisticsInteractor: StatisticsInteractor,
+        //private val statisticsInteractor: StatisticsInteractor,
         private val spref : SharedPrefRepository,
         private val operationRepository: OperationRepository
-): ViewModel() {
+): AndroidViewModel(app) {
 
-    val pieSummary by lazy {
-        statisticsInteractor.getPieChartValues(1)
-    }
+    val pieSummary : LiveData<PieDataSet> = operationRepository.s
+
+    val categories = operationRepository.getAllCategories()
 
     val lineSummary by lazy {
-        statisticsInteractor.getLineChartValues(1)
+        operationRepository.getLineChartValues(1)
     }
 
     val barSummary by lazy {
-        statisticsInteractor.getHorizontalBarChartValues(1)
+        operationRepository.getHorizontalBarChartValues(1)
     }
 
-    fun getShowLegend() = statisticsInteractor.getShowLegend()
+    fun getShowLegend() = operationRepository.getShowLegend()
 }

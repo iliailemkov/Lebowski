@@ -3,11 +3,10 @@ package com.yury.lebowski.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.yury.lebowski.data.models.Account
-import com.yury.lebowski.data.models.CurrencyType
+import com.yury.lebowski.data.local.models.Account
+import com.yury.lebowski.data.local.models.CurrencyType
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
-import com.yury.lebowski.data.repository.RateRepository
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(

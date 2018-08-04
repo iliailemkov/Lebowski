@@ -1,14 +1,15 @@
-package com.yury.lebowski.data.db
+package com.yury.lebowski.data.local
 
 import com.yury.lebowski.R
-import com.yury.lebowski.data.models.Account
-import com.yury.lebowski.data.models.Category
-import com.yury.lebowski.data.models.OperationType
+import com.yury.lebowski.data.local.models.Account
+import com.yury.lebowski.data.local.models.Category
+import com.yury.lebowski.data.local.models.CurrencyType
+import com.yury.lebowski.data.local.models.OperationType
 
 object PrepopulateData {
     val accounts = listOf(
-            Account(1, R.string.app_name, 0.0),
-            Account(2, R.string.name, 0.0)
+            Account(1, R.string.app_name, 0.0, CurrencyType.Ruble),
+            Account(2, R.string.name, 0.0, CurrencyType.Dollar)
     )
 
     val categories = listOf(

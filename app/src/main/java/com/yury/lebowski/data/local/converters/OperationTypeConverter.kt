@@ -1,7 +1,7 @@
-package com.yury.lebowski.data.converters
+package com.yury.lebowski.data.local.converters
 
 import androidx.room.TypeConverter
-import com.yury.lebowski.data.models.OperationType
+import com.yury.lebowski.data.local.models.OperationType
 
 class OperationTypeConverter {
 

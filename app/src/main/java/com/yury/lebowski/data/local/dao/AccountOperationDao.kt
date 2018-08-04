@@ -1,10 +1,10 @@
-package com.yury.lebowski.data.dao
+package com.yury.lebowski.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import com.yury.lebowski.data.models.Operation
+import com.yury.lebowski.data.local.models.Operation
 
 @Dao
 interface AccountOperationDao {

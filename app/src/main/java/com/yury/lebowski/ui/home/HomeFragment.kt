@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yury.lebowski.Navigator
 import com.yury.lebowski.R
-import com.yury.lebowski.data.models.Account
-import com.yury.lebowski.data.models.Operation
-import com.yury.lebowski.data.models.OperationType
+import com.yury.lebowski.data.local.models.Account
+import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.data.local.models.OperationType
 import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.ui.add_operation.AddOperationFragment
 import com.yury.lebowski.ui.home.OperationList.OperationAdapter

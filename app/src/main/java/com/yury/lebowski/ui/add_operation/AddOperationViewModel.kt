@@ -2,7 +2,7 @@ package com.yury.lebowski.ui.add_operation
 
 import androidx.lifecycle.ViewModel
 import com.yury.lebowski.LebowskiApplication
-import com.yury.lebowski.data.models.Operation
+import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.repository.AccountRepository
 import javax.inject.Inject
 

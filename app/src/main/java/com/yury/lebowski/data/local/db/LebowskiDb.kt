@@ -1,4 +1,4 @@
-package com.yury.lebowski.data.db
+package com.yury.lebowski.data.local.db
 
 import android.content.Context
 import androidx.room.Database
@@ -6,15 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.yury.lebowski.data.converters.CurrencyTypeConverter
-import com.yury.lebowski.data.converters.DateConverter
-import com.yury.lebowski.data.converters.OperationTypeConverter
-import com.yury.lebowski.data.dao.AccountDao
-import com.yury.lebowski.data.dao.CategoryDao
-import com.yury.lebowski.data.dao.OperationDao
-import com.yury.lebowski.data.models.Account
-import com.yury.lebowski.data.models.Category
-import com.yury.lebowski.data.models.Operation
+import com.yury.lebowski.data.local.converters.CurrencyTypeConverter
+import com.yury.lebowski.data.local.converters.DateConverter
+import com.yury.lebowski.data.local.converters.OperationTypeConverter
+import com.yury.lebowski.data.local.dao.AccountDao
+import com.yury.lebowski.data.local.dao.CategoryDao
+import com.yury.lebowski.data.local.dao.OperationDao
+import com.yury.lebowski.data.local.models.Account
+import com.yury.lebowski.data.local.models.Category
+import com.yury.lebowski.data.local.models.Operation
 import java.util.concurrent.Executors
 
 @Database(entities =

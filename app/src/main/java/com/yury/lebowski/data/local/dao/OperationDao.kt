@@ -1,9 +1,9 @@
-package com.yury.lebowski.data.dao
+package com.yury.lebowski.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
-import com.yury.lebowski.data.models.Operation
+import com.yury.lebowski.data.local.models.Operation
 
 @Dao
 interface OperationDao {

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.yury.lebowski.R
-import com.yury.lebowski.data.models.Operation
+import com.yury.lebowski.data.local.models.Operation
 import java.text.SimpleDateFormat
 
 class OperationAdapter(

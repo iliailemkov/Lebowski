@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.yury.lebowski.R
+import com.yury.lebowski.data.local.models.Category
 import com.yury.lebowski.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_statistic.*
@@ -99,6 +100,7 @@ class StatisticsFragment : DaggerFragment() {
 
     override fun onStart() {
         super.onStart()
+        //viewModel.categorie.observe(this, dataCat)
         viewModel.pieSummary.observe(this, dataPieSet)
         viewModel.lineSummary.observe(this, dataLineSet)
         viewModel.barSummary.observe(this, dataBarSet)

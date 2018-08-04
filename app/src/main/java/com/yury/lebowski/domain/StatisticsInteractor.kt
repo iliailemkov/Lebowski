@@ -1,18 +1,20 @@
 package com.yury.lebowski.domain
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import android.database.Observable
+import android.os.AsyncTask
+import androidx.lifecycle.*
 import com.github.mikephil.charting.data.*
-import com.yury.lebowski.data.models.Account
-import com.yury.lebowski.data.models.Category
-import com.yury.lebowski.data.models.Operation
-import com.yury.lebowski.data.models.OperationType
+import com.yury.lebowski.data.local.models.Account
+import com.yury.lebowski.data.local.models.Category
+import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.data.local.models.OperationType
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
 import javax.inject.Inject
+import androidx.lifecycle.LiveData
+
+
 
 class StatisticsInteractor @Inject constructor(
         private val accountRepository : AccountRepository,
@@ -20,11 +22,45 @@ class StatisticsInteractor @Inject constructor(
         private val operationRepository: OperationRepository
 ) {
 
+    //val user = Transformations.switchMap(getPieChartValues(1)) { id -> getUser(id) }
+    //val r : LiveData<PieDataSet> = Transformations.map(r, r -> getPieChartValues(1)
+
+    internal class ChartLiveData(
+            private val sourceLiveData: LiveData<List<Operation>>
+    ) : LiveData<PieDataSet>(), Observer<List<Operation>> {
+
+        override fun onActive() {
+            sourceLiveData.observeForever(this)
+        }
+
+        override fun onInactive() {
+            sourceLiveData.removeObserver(this)
+        }
+
+        override fun onChanged(dbRows: List<Operation>?) {
+            // set up a background thread to complete the transformation
+
+            /*AsyncTask.execute {
+                assert(dbRows != null)
+                val myRichObjects = LinkedList()
+                for (myDBRow in myDBRows) {
+                    myRichObjects.add(MyRichObjectBuilder.from(myDBRow).build())
+                }
+                // use LiveData method postValue (rather than setValue) on
+                // background threads
+                postValue(myRichObjects)
+            }*/
+
+        }
+    }
+
     fun getPieChartValues(accountId : Long) : LiveData<PieDataSet> {
         val liveData = MediatorLiveData<PieDataSet>()
         val entries = ArrayList<PieEntry>()
         val color = ArrayList<Int>()
         var sum = 0f
+
+        val s : Observable<Category>
 
         val account = accountRepository.getBalanceById(accountId)
         val operations = operationRepository.getAllOperations()

@@ -1,7 +1,7 @@
 package com.yury.lebowski.di.module
 
 import android.app.Application
-import com.yury.lebowski.data.LebowskiDb
+import com.yury.lebowski.data.local.LebowskiDb
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
