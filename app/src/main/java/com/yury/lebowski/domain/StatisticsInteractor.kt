@@ -1,23 +1,34 @@
 package com.yury.lebowski.domain
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.github.mikephil.charting.data.*
 import com.yury.lebowski.data.models.Account
 import com.yury.lebowski.data.models.Category
 import com.yury.lebowski.data.models.Operation
 import com.yury.lebowski.data.models.OperationType
+import com.yury.lebowski.data.repository.BalanceRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
 import javax.inject.Inject
 
-object StatisticsInteractor {
+class StatisticsInteractor @Inject constructor(
+        private val balanceRepository : BalanceRepository,
+        private val spref : SharedPrefRepository,
+        private val operationRepository: OperationRepository
+) {
 
-    fun getPieChartValues(account: LiveData<Account>, operations : LiveData<List<Operation>>, categories : LiveData<List<Category>>) : LiveData<PieDataSet> {
-        val liveData = MutableLiveData<PieDataSet>()
+    fun getPieChartValues(accountId : Long) : LiveData<PieDataSet> {
+        val liveData = MediatorLiveData<PieDataSet>()
         val entries = ArrayList<PieEntry>()
         val color = ArrayList<Int>()
         var sum = 0f
+
+        val account = balanceRepository.getBalanceById(accountId)
+        val operations = operationRepository.getAllOperations()
+        val categories = operationRepository.getAllCategories()
 
         categories.value?.forEach { category -> operations.value?.filter { el ->
             (el.accountId == account.value?.id) /*and (el == category*/ }?.forEach { t ->
@@ -32,7 +43,7 @@ object StatisticsInteractor {
         return liveData
     }
 
-    fun getLineChartValues(account: LiveData<Account>, operations : LiveData<List<Operation>>, categories : LiveData<List<Category>>) : LiveData<LineDataSet> {
+    fun getLineChartValues(accountId : Long) : LiveData<LineDataSet> {
         val liveData = MutableLiveData<LineDataSet>()
         /*val entries = ArrayList<>()
         val color = ArrayList<Int>()
@@ -58,13 +69,15 @@ object StatisticsInteractor {
         return liveData
     }
 
-    fun getHorizontalBarChartValues(account: LiveData<Account>, operations : LiveData<List<Operation>>, categories : LiveData<List<Category>>) : LiveData<BarDataSet> {
+    fun getHorizontalBarChartValues(accountId : Long) : LiveData<BarDataSet> {
         val liveData = MutableLiveData<BarDataSet>()
         val entries = ArrayList<BarEntry>()
         val color = ArrayList<Int>()
         var sum = 0f
 
-        //val operations = operationRepository.getAllOperations()
+        val account = balanceRepository.getBalanceById(accountId)
+        val operations = operationRepository.getAllOperations()
+        val categories = operationRepository.getAllCategories()
 
         categories.value?./*filter { c ->
             if (spref.getOnlyOutcomes()) {
@@ -84,7 +97,7 @@ object StatisticsInteractor {
         return liveData
     }
 
-    // fun getShowLegend() : Boolean {
-    // return spref.getShowlegend()
-    // }
+     fun getShowLegend() : Boolean {
+        return true//return spref.getShowlegend()
+     }
 }
