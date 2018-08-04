@@ -10,7 +10,7 @@ import com.yury.lebowski.data.models.Operation
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
-class BalanceRepository @Inject constructor(
+class AccountRepository @Inject constructor(
         private val accountDao : AccountDao,
         private val accountOperationDao : AccountOperationDao
 ) {

@@ -9,13 +9,13 @@ import com.yury.lebowski.data.models.Account
 import com.yury.lebowski.data.models.Category
 import com.yury.lebowski.data.models.Operation
 import com.yury.lebowski.data.models.OperationType
-import com.yury.lebowski.data.repository.BalanceRepository
+import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
 import javax.inject.Inject
 
 class StatisticsInteractor @Inject constructor(
-        private val balanceRepository : BalanceRepository,
+        private val accountRepository : AccountRepository,
         private val spref : SharedPrefRepository,
         private val operationRepository: OperationRepository
 ) {
@@ -26,12 +26,13 @@ class StatisticsInteractor @Inject constructor(
         val color = ArrayList<Int>()
         var sum = 0f
 
-        val account = balanceRepository.getBalanceById(accountId)
+        val account = accountRepository.getBalanceById(accountId)
         val operations = operationRepository.getAllOperations()
-        val categories = operationRepository.getAllCategories()
+        //val categories = operationRepository.getAllCategories()
 
-        categories.value?.forEach { category -> operations.value?.filter { el ->
-            (el.accountId == account.value?.id) /*and (el == category*/ }?.forEach { t ->
+        operationRepository.getAllCategories().value?.forEach { category -> operations.value?.filter { el ->
+            (el.accountId == account.value?.id) and (el.categoryId == category.id)
+        }?.forEach { t ->
             sum += Math.abs(t.amountInUniversal.toFloat()) }
             if (sum > 0)
                 entries.add(PieEntry(sum, category.nameResourceId))
@@ -75,7 +76,7 @@ class StatisticsInteractor @Inject constructor(
         val color = ArrayList<Int>()
         var sum = 0f
 
-        val account = balanceRepository.getBalanceById(accountId)
+        val account = accountRepository.getBalanceById(accountId)
         val operations = operationRepository.getAllOperations()
         val categories = operationRepository.getAllCategories()
 

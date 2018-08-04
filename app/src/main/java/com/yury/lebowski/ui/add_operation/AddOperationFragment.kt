@@ -87,7 +87,7 @@ class AddOperationFragment : DaggerFragment() {
 
     private fun initAddButton() {
         add_button.setOnClickListener {
-            viewModel.addOperation(Operation(4, Date(), CurrencyType.Ruble, OperationType.Income, 10.0, 10.0, 1))
+            viewModel.addOperation(Operation(4, Date(), CurrencyType.Ruble, OperationType.Income, 10.0, 10.0, 1, 2))
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             (activity as Navigator).navigateBack()
         }

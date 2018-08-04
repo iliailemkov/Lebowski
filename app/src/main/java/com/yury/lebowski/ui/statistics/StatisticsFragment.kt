@@ -94,6 +94,7 @@ class StatisticsFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(StatisticsViewModel::class.java)
         initPieChart()
+
     }
 
     override fun onStart() {

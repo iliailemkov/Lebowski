@@ -7,7 +7,7 @@ import com.yury.lebowski.data.dao.AccountDao
 import com.yury.lebowski.data.dao.AccountOperationDao
 import com.yury.lebowski.data.dao.CategoryDao
 import com.yury.lebowski.data.dao.OperationDao
-import com.yury.lebowski.data.repository.BalanceRepository
+import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
 import com.yury.lebowski.domain.StatisticsInteractor
@@ -24,8 +24,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBalanceRepository(accountDao: AccountDao, accountOperationDao: AccountOperationDao) =
-            BalanceRepository(accountDao, accountOperationDao)
+    fun provideAccountRepository(accountDao: AccountDao, accountOperationDao: AccountOperationDao) =
+            AccountRepository(accountDao, accountOperationDao)
 
     @Provides
     @Singleton
