@@ -5,11 +5,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.yury.lebowski.data.models.OperationType
-import com.yury.lebowski.ui.about.AboutFragment
-import com.yury.lebowski.ui.add_operation.AddOperationFragment
 import com.yury.lebowski.ui.home.HomeFragment
 import com.yury.lebowski.ui.settings.SettingsFragment
+import com.yury.lebowski.ui.statistics.StatisticsFragment
 
 
 class MainActivity : AppCompatActivity(), Navigator {
@@ -29,9 +27,15 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.settings_item) {
-            navigateTo(SettingsFragment.newInstance(), "NavigateSettings")
-            return false
+        when(item?.itemId) {
+            R.id.settings_item -> {
+                navigateTo(SettingsFragment.newInstance(), "NavigateSettings")
+                return false
+            }
+            R.id.statistics_item -> {
+                navigateTo(StatisticsFragment.newInstance(), "NavigateStatistics")
+                return false
+            }
         }
         return super.onOptionsItemSelected(item)
     }

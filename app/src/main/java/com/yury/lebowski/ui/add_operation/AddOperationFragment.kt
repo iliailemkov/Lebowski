@@ -7,11 +7,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
+import com.yury.lebowski.Navigator
 import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.R
+import com.yury.lebowski.data.models.CurrencyType
+import com.yury.lebowski.data.models.Operation
 import com.yury.lebowski.data.models.OperationType
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
+import java.util.*
 import javax.inject.Inject
 
 
@@ -24,7 +28,6 @@ class AddOperationFragment : DaggerFragment() {
 
     private var operationType: OperationType? = null
     private lateinit var viewModel: AddOperationViewModel
-   // private var binding: AddOperationFragmentBinding by autoCleared<AddOperationFragmentBinding>()
 
     companion object {
         fun newInstance(operationType: OperationType) = AddOperationFragment().apply {
@@ -48,12 +51,13 @@ class AddOperationFragment : DaggerFragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
         menu?.findItem(R.id.settings_item)?.isVisible = false
+        menu?.findItem(R.id.statistics_item)?.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {
-            activity?.onBackPressed()
+            (activity as Navigator).navigateBack()
             return false
         }
         return super.onOptionsItemSelected(item)
@@ -78,10 +82,14 @@ class AddOperationFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
-        add_button.setOnClickListener {
-            Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
-            activity?.onBackPressed()
-        }
+        initAddButton()
     }
 
+    private fun initAddButton() {
+        add_button.setOnClickListener {
+            viewModel.addOperation(Operation(4, Date(), CurrencyType.Ruble, OperationType.Income, 10.0, 10.0, 1))
+            Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
+            (activity as Navigator).navigateBack()
+        }
+    }
 }

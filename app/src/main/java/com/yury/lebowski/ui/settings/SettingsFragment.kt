@@ -28,6 +28,7 @@ class SettingsFragment : DaggerFragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
         menu?.findItem(R.id.settings_item)?.isVisible = false
+        menu?.findItem(R.id.statistics_item)?.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }
 

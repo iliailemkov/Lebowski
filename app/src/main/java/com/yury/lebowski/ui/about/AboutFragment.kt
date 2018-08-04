@@ -1,6 +1,5 @@
 package com.yury.lebowski.ui.about
 
-
 import android.content.Context
 import android.os.Bundle
 import android.view.*

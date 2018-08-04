@@ -8,6 +8,7 @@ data class Operation(
         @PrimaryKey(autoGenerate = true) val id: Long,
         val date: Date,
         val currencyType: CurrencyType,
+        val operationType: OperationType,
         val amount: Double,
         val amountInUniversal: Double,
         @ForeignKey(entity = Account::class, parentColumns = ["id"], childColumns = ["accountId"])

@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+
 @Module
 class RoomModule {
 
@@ -24,4 +25,8 @@ class RoomModule {
     @Provides
     @Singleton
     fun provideOperationDao(db: LebowskiDb) = db.operationDao()
+
+    @Provides
+    @Singleton
+    fun provideAccountOperationDao(db: LebowskiDb) = db.accountOperationDao()
 }

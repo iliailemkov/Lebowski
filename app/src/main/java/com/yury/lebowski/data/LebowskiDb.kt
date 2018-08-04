@@ -10,12 +10,14 @@ import com.yury.lebowski.data.converters.CurrencyTypeConverter
 import com.yury.lebowski.data.converters.DateConverter
 import com.yury.lebowski.data.converters.OperationTypeConverter
 import com.yury.lebowski.data.dao.AccountDao
+import com.yury.lebowski.data.dao.AccountOperationDao
 import com.yury.lebowski.data.dao.CategoryDao
 import com.yury.lebowski.data.dao.OperationDao
 import com.yury.lebowski.data.models.Account
 import com.yury.lebowski.data.models.Category
 import com.yury.lebowski.data.models.Operation
 import java.util.concurrent.Executors
+
 
 @Database(entities =
     [Account::class,
@@ -59,4 +61,5 @@ abstract class LebowskiDb : RoomDatabase() {
     abstract fun accountDao() : AccountDao
     abstract fun categoryDao() : CategoryDao
     abstract fun operationDao() : OperationDao
+    abstract fun accountOperationDao() : AccountOperationDao
 }
