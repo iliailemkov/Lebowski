@@ -63,7 +63,7 @@
     <!--Accounts-->
     <string name="cash">Cash</string>
     <string name="credit_card">Credit card</string>
-    <string name="successfully_added">Added (not yet, but soon definitely will be)</string>
+    <string name="successfully_added">Added successfully</string>
     <!--Accounts-->
 
 </resources>

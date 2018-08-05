@@ -3,6 +3,12 @@
     xmlns:compat="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <item
+        android:id="@+id/statistics_item"
+        android:icon="@drawable/ic_statistics_menu"
+        android:title="@string/settings"
+        compat:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+    <item
         android:id="@+id/settings_item"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings_24dp"

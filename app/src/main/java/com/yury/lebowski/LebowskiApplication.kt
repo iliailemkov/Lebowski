@@ -1,12 +1,22 @@
 package com.yury.lebowski
 
-import android.app.Application
 import com.squareup.leakcanary.LeakCanary
+import com.yury.lebowski.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 
-class LebowskiApplication() : Application() {
+
+class LebowskiApplication() : DaggerApplication() {
     companion object {
         lateinit var instance: LebowskiApplication
             private set
+    }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent
+                .builder()
+                .create(this)
+                .build()
     }
 
     override fun onCreate() {

@@ -6,20 +6,18 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.yury.lebowski.R
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : DaggerFragment() {
 
     companion object {
         fun newInstance() = SettingsFragment()
     }
 
-    private var listener: SettingFragmentListener? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
@@ -28,14 +26,15 @@ class SettingsFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-
     override fun onPrepareOptionsMenu(menu: Menu?) {
         menu?.findItem(R.id.settings_item)?.isVisible = false
+        menu?.findItem(R.id.statistics_item)?.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        open_about_button.setOnClickListener { listener?.onAboutClicked() }
+        //open_about_button.setOnClickListener {
+            //listener?.onAboutClicked() }
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -43,11 +42,6 @@ class SettingsFragment : Fragment() {
         super.onAttach(context)
         activity?.setTitle(R.string.settings)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        if (context is SettingFragmentListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement SettingFragmentListener")
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -62,11 +56,5 @@ class SettingsFragment : Fragment() {
         super.onDetach()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         activity?.setTitle(R.string.app_name)
-        listener = null
     }
-
-    interface SettingFragmentListener {
-        fun onAboutClicked()
-    }
-
 }

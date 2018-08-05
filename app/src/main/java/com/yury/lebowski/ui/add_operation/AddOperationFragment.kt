@@ -6,22 +6,34 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.yury.lebowski.Navigator
+import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.R
-import com.yury.lebowski.databinding.AddOperationFragmentBinding
-import com.yury.lebowski.models.OperationType
-import com.yury.lebowski.util.data_binding.BindingComponent
-import com.yury.lebowski.util.data_binding.autoCleared
+import com.yury.lebowski.data.local.models.CurrencyType
+import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.data.local.models.OperationType
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
+import java.util.*
+import javax.inject.Inject
 
-private const val OPERATION_TYPE = "operation_type"
 
-class AddOperationFragment : Fragment() {
+class AddOperationFragment : DaggerFragment() {
+
+    val OPERATION_TYPE = "operation_type"
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private var operationType: OperationType? = null
     private lateinit var viewModel: AddOperationViewModel
-    private var binding: AddOperationFragmentBinding by autoCleared<AddOperationFragmentBinding>()
+
+    companion object {
+        fun newInstance(operationType: OperationType) = AddOperationFragment().apply {
+            arguments = bundleOf(OPERATION_TYPE to operationType)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +51,13 @@ class AddOperationFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
         menu?.findItem(R.id.settings_item)?.isVisible = false
+        menu?.findItem(R.id.statistics_item)?.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {
-            activity?.onBackPressed()
+            (activity as Navigator).navigateBack()
             return false
         }
         return super.onOptionsItemSelected(item)
@@ -63,35 +76,20 @@ class AddOperationFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.add_operation_fragment,
-                container,
-                false, BindingComponent())
-        return binding.root
+        return inflater.inflate(R.layout.add_operation_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
+        initAddButton()
+    }
+
+    private fun initAddButton() {
         add_button.setOnClickListener {
+            viewModel.addOperation(Operation(5, Date(), CurrencyType.Ruble, OperationType.Income, -10.0, -10.0, 1, 4))
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
-            activity?.onBackPressed()
+            (activity as Navigator).navigateBack()
         }
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, operationType?.let { AddOperationViewModelFactory(it) }).get(AddOperationViewModel::class.java)
-        binding.viewmodel = viewModel
-        binding.setLifecycleOwner(this)
-        binding.executePendingBindings();
-    }
-
-
-    companion object {
-        fun newInstance(operationType: OperationType) = AddOperationFragment().apply {
-            arguments = bundleOf(OPERATION_TYPE to operationType)
-        }
-    }
-
 }
