@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.main_activity.*
 
 private const val OPERATION_TYPE = "operation_type"
 
+
 class AddOperationFragment : Fragment() {
     private var operationType: OperationType? = null
     private lateinit var viewModel: AddOperationViewModel
