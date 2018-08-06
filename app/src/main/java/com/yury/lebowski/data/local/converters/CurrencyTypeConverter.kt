@@ -1,8 +1,7 @@
 package com.yury.lebowski.data.local.converters
 
 import androidx.room.TypeConverter
-import com.yury.lebowski.data.local.models.CurrencyType
-import com.yury.lebowski.data.local.models.OperationType
+import com.yury.lebowski.data.local.models.enums.CurrencyType
 
 
 class CurrencyTypeConverter {

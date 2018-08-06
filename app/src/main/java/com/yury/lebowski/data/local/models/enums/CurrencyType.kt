@@ -1,4 +1,4 @@
-package com.yury.lebowski.data.local.models
+package com.yury.lebowski.data.local.models.enums
 
 enum class CurrencyType(
         val code: String,

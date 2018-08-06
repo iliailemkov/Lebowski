@@ -23,7 +23,6 @@ class OperationAdapter(
         return operations.size
     }
 
-//    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: OperationHolder, pos: Int) {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
 
@@ -34,7 +33,7 @@ class OperationAdapter(
             holder.amount.text = String.format("%.2f", operations[pos].amount)
             holder.amount.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         }
-        holder.currency.text = operations[pos].currencyType.code
+        //holder.currency.text = operations[pos].currencyType.code
         holder.date.text = dateFormat.format(operations[pos].date)
         //holder.group.text = operations[pos]
     }

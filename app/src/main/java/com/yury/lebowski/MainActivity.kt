@@ -5,9 +5,14 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import com.facebook.stetho.Stetho
+import com.yury.lebowski.service.PeriodicOperationWorker
 import com.yury.lebowski.ui.home.HomeFragment
 import com.yury.lebowski.ui.settings.SettingsFragment
 import com.yury.lebowski.ui.statistics.StatisticsFragment
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity(), Navigator {
@@ -16,6 +21,23 @@ class MainActivity : AppCompatActivity(), Navigator {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        WorkManager.getInstance().getStatusesByTag(PeriodicOperationWorker.TAG).observeForever {
+            for (work in it!!) {
+                if (!work.state.isFinished) {
+                    return@observeForever
+                }
+            }
+            val periodicWorkRequest = PeriodicWorkRequest
+                    .Builder(PeriodicOperationWorker::class.java, 15, TimeUnit.MINUTES)
+                    .addTag(PeriodicOperationWorker.TAG)
+                    .build()
+            WorkManager.getInstance().enqueue(periodicWorkRequest)
+
+        }
+        Stetho.initialize(Stetho.newInitializerBuilder(this)
+                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                .build());
         supportFragmentManager.beginTransaction()
                 .replace(R.id.main_container, HomeFragment.newInstance())
                 .commit()

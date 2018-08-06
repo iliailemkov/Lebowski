@@ -1,7 +1,7 @@
 package com.yury.lebowski.di.module
 
 import android.app.Application
-import com.yury.lebowski.data.local.LebowskiDb
+import com.yury.lebowski.data.local.db.LebowskiDb
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -29,4 +29,8 @@ class RoomModule {
     @Provides
     @Singleton
     fun provideAccountOperationDao(db: LebowskiDb) = db.accountOperationDao()
+
+    @Provides
+    @Singleton
+    fun providePeriodicalOperationDao(db: LebowskiDb) = db.periodicalOperationDao()
 }

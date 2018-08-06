@@ -9,22 +9,24 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.yury.lebowski.data.local.converters.CurrencyTypeConverter
 import com.yury.lebowski.data.local.converters.DateConverter
 import com.yury.lebowski.data.local.converters.OperationTypeConverter
-import com.yury.lebowski.data.local.dao.AccountDao
-import com.yury.lebowski.data.local.dao.CategoryDao
-import com.yury.lebowski.data.local.dao.OperationDao
+import com.yury.lebowski.data.local.dao.*
 import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.data.local.models.Category
 import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.data.local.models.PeriodicalOperation
 import java.util.concurrent.Executors
 
 @Database(entities =
     [Account::class,
     Category::class,
-    Operation::class],
+    Operation::class,
+    PeriodicalOperation::class],
         version = 1,
         exportSchema = false)
 @TypeConverters(value =
-    [DateConverter::class, OperationTypeConverter::class, CurrencyTypeConverter::class])
+    [DateConverter::class,
+    OperationTypeConverter::class,
+    CurrencyTypeConverter::class])
 abstract class LebowskiDb : RoomDatabase() {
     companion object {
         private var INSTANCE: LebowskiDb? = null
@@ -47,10 +49,13 @@ abstract class LebowskiDb : RoomDatabase() {
                                 Executors.newSingleThreadScheduledExecutor().execute(Runnable {
                                     getInstance(context).accountDao().insertAll(PrepopulateData.accounts)
                                     getInstance(context).categoryDao().insertAll(PrepopulateData.categories)
+                                    //(context).operationDao().insertAll(PrepopulateData.operations)
+                                    //getInstance(context).periodicalOperationDao().insertAll(PrepopulateData.periodicalOperation)
                                 })
                             }
                         })
                         .build()
+
             }
             return INSTANCE as LebowskiDb
         }
@@ -59,4 +64,6 @@ abstract class LebowskiDb : RoomDatabase() {
     abstract fun accountDao() : AccountDao
     abstract fun categoryDao() : CategoryDao
     abstract fun operationDao() : OperationDao
+    abstract fun accountOperationDao() : AccountOperationDao
+    abstract fun periodicalOperationDao() : PeriodicalOperationDao
 }

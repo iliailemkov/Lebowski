@@ -1,6 +1,4 @@
-package com.yury.lebowski.data.local.models
-
-import android.media.audiofx.AudioEffect
+package com.yury.lebowski.data.local.models.enums
 
 enum class OperationType constructor(
         val effect: Int

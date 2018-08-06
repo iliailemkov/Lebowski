@@ -3,23 +3,28 @@ package com.yury.lebowski.ui.add_operation
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yury.lebowski.Navigator
-import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.R
-import com.yury.lebowski.data.local.models.CurrencyType
-import com.yury.lebowski.data.local.models.Operation
-import com.yury.lebowski.data.local.models.OperationType
+import com.yury.lebowski.data.local.models.*
+import com.yury.lebowski.data.local.models.enums.CurrencyType
+import com.yury.lebowski.data.local.models.enums.OperationType
+import com.yury.lebowski.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
 import java.util.*
 import javax.inject.Inject
+import android.widget.CompoundButton
 
 
-class AddOperationFragment : DaggerFragment() {
+
+
+class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
 
     val OPERATION_TYPE = "operation_type"
 
@@ -32,6 +37,18 @@ class AddOperationFragment : DaggerFragment() {
     companion object {
         fun newInstance(operationType: OperationType) = AddOperationFragment().apply {
             arguments = bundleOf(OPERATION_TYPE to operationType)
+        }
+    }
+
+    private val categoryList: Observer<List<Category>> = Observer { res ->
+        if(res != null) {
+            categories.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, res.map { l -> l.name })
+        }
+    }
+
+    private val accountList: Observer<List<Account>> = Observer { res ->
+        if(res != null) {
+            accounts.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, res.map { l -> l.name })
         }
     }
 
@@ -83,11 +100,55 @@ class AddOperationFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
         initAddButton()
+        initPeriodic()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.accounts.observe(this, accountList)
+        viewModel.categories.observe(this, categoryList)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.accounts.removeObservers(this)
+        viewModel.categories.removeObservers(this)
     }
 
     private fun initAddButton() {
-        add_button.setOnClickListener {
-            viewModel.addOperation(Operation(5, Date(), CurrencyType.Ruble, OperationType.Income, -10.0, -10.0, 1, 4))
+        add_button.setOnClickListener { addOperation() }
+    }
+
+    override fun onFocusChange(view: View?, condition: Boolean) {
+    }
+
+    private fun initPeriodic() {
+        switch_periodic.isChecked = false
+        operation_preiodic_layout.visibility = View.GONE
+        switch_periodic.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            operation_preiodic_layout.visibility = if(isChecked) View.VISIBLE else View.GONE
+        })
+    }
+
+    private fun addOperation() {
+        if(switch_periodic.isChecked) {
+            viewModel.addPeriodicOperation(Operation(null,
+                    Date(),
+                    operationType!!,
+                    moneyEditText.text.toString().toDouble(),
+                    accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
+                    categories.adapter.getItemId(categories.selectedItemId.toInt())), 1,
+                    operation_preiodic_input.text.toString().toLong())
+            Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
+            (activity as Navigator).navigateBack()
+        } else {
+            viewModel.addOperation(
+                    Operation(null,
+                            Date(),
+                            operationType!!,
+                            moneyEditText.text.toString().toDouble(),
+                            accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
+                            categories.adapter.getItemId(categories.selectedItemId.toInt())))
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             (activity as Navigator).navigateBack()
         }
