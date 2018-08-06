@@ -8,13 +8,13 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.yury.lebowski.Navigator
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.data.local.models.Operation
-import com.yury.lebowski.data.local.models.OperationType
+import com.yury.lebowski.data.local.models.enums.OperationType
 import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.ui.add_operation.AddOperationFragment
 import com.yury.lebowski.ui.home.OperationList.OperationAdapter
@@ -38,12 +38,12 @@ class HomeFragment : DaggerFragment() {
 
     private val accounts = Observer<List<Account>> { res ->
         if (res !== null) {
-            if (res[0].currentBalanceInUniversal < 0) {
+            if (res[0].balance < 0) {
                 balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_red_dark))
             } else {
                 balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_green_dark))
             }
-            balance_main.text = String.format("%.2f", res[0].currentBalanceInUniversal)
+            balance_main.text = String.format("%.2f", res[0].balance)
         }
     }
 

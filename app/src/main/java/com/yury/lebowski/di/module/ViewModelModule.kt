@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.yury.lebowski.di.ViewModelKey
 import com.yury.lebowski.ui.add_operation.AddOperationViewModel
 import com.yury.lebowski.ui.home.HomeViewModel
+import com.yury.lebowski.ui.settings.SettingsViewModel
 import com.yury.lebowski.ui.statistics.StatisticsViewModel
 import dagger.Binds
 import dagger.Module
@@ -26,13 +27,9 @@ internal abstract class ViewModelModule {
     @ViewModelKey(StatisticsViewModel::class)
     abstract fun bindStatisticsViewModel(viewModel : StatisticsViewModel) : ViewModel
 
-    /*@Binds
+    @Binds
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
     abstract fun bindSettingsViewModel(view : SettingsViewModel) : ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(TransactionViewModel::class)
-    abstract fun bindTransactionViewModel(view : TransactionViewModel) : ViewModel*/
 }

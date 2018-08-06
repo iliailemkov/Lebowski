@@ -31,7 +31,7 @@ class SharedPrefRepository @Inject constructor(var shared : SharedPreferences) {
     }
 
     fun setDefaultBalanace(account : Account) {
-        shared.edit().putLong(DEFAULT_BALANCE, account.id).apply()
+        shared.edit().putLong(DEFAULT_BALANCE, account.id!!).apply()
     }
 
     fun getDefaultBalanace() : Long {

@@ -5,7 +5,6 @@ import com.yury.lebowski.data.local.dao.AccountDao
 import com.yury.lebowski.data.local.dao.AccountOperationDao
 import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.data.local.models.Operation
-import com.yury.lebowski.data.remote.api.ExchangeApi
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
@@ -19,8 +18,15 @@ class AccountRepository @Inject constructor(
 
     fun addOperation(operation: Operation) {
         Executors.newSingleThreadScheduledExecutor().execute {
-            ExchangeApi.create().getExhangeRate(operation.currencyType.code + "_" + getBalanceById(operation.accountId).value?.currencyType?.code, "y")
-            accountOperationDao.insertOperationAndUpdateAmount(operation, operation.amountInUniversal, operation.accountId)
+            //ExchangeApi.create().getExhangeRate(operation.currencyType.code + "_" + getBalanceById(operation.accountId).value?.currencyType?.code, "y")
+            accountOperationDao.insertOperationAndUpdateAmount(operation, operation.amount, operation.accountId)
+        }
+    }
+
+    fun addPeriodicalOperation(operation: Operation, id: Long, period: Long) {
+        Executors.newSingleThreadScheduledExecutor().submit() {
+            //ExchangeApi.create().getExhangeRate(operation.currencyType.code + "_" + getBalanceById(operation.accountId).value?.currencyType?.code, "y")
+            accountOperationDao.insertPeriodOperationAndUpdateAmount(operation, operation.amount, operation.accountId, period)
         }
     }
 }

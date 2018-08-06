@@ -21,7 +21,15 @@
         <item>Русский</item>
         <item>English</item>
     </string-array>
+    <string name="settings_switch_outgo">Показывать только расходы</string>
+    <string name="settings_switch_legend">Показывать легенду</string>
+    <string name="license">Лицензия</string>
+    <string name="feedback">Обратная связь</string>
     <!--settings page-->
+
+    <!--statisitcs page-->
+    <string name="statisitcs">Статистика</string>
+    <!--statisitcs page-->
 
     <!--about page-->
     <string name="about">О приложении</string>
@@ -36,6 +44,8 @@
     <string name="account">Баланс</string>
     <string name="amount">Счет</string>
     <string name="add">Добавить</string>
+    <string name="periodic">Периодичность</string>
+    <string name="periodic_hint">Период в днях</string>
     <!--add operation page-->
 
     <!--Pages-->

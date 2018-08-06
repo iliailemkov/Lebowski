@@ -1,33 +1,82 @@
 package com.yury.lebowski.ui.statistics
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import com.github.mikephil.charting.data.PieDataSet
+import androidx.lifecycle.*
+import com.github.mikephil.charting.data.*
+import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
 import javax.inject.Inject
 
+
 class StatisticsViewModel @Inject constructor(
-        app: Application,
         private val accountRepository : AccountRepository,
-        //private val statisticsInteractor: StatisticsInteractor,
         private val spref : SharedPrefRepository,
         private val operationRepository: OperationRepository
-): AndroidViewModel(app) {
+): ViewModel() {
 
-    val pieSummary : LiveData<PieDataSet> = operationRepository.s
+    var currentBalance = MutableLiveData<List<Operation>>()
+        set(value) {
+            currentBalance.value = value.value
+        }
 
-    val categories = operationRepository.getAllCategories()
+    val pieSummary = Transformations.switchMap(currentBalance) { it -> getPieChartValues(1, it)}
 
-    val lineSummary by lazy {
-        operationRepository.getLineChartValues(1)
+    val lineSummary = Transformations.switchMap(currentBalance) { it -> getLineChartValues(1, it)}
+
+    val barSummary = Transformations.switchMap(currentBalance) { it -> getHorizontalBarChartValues(1, it)}
+
+    private val categoriesRepData = Observer<List<Operation>> { res ->
+        if (res !== null) {
+           currentBalance.value = res
+        }
     }
 
-    val barSummary by lazy {
-        operationRepository.getHorizontalBarChartValues(1)
+    fun getPieChartValues(accountId : Long, operations : List<Operation>) : LiveData<PieDataSet> {
+        val liveData = MutableLiveData<PieDataSet>()
+        val entries = ArrayList<PieEntry>()
+        val color = ArrayList<Int>()
+        var map : HashMap<String, Float?> = HashMap()
+
+        operations.forEach { operation ->
+            if(map.contains(operation.categoryId.toString())) {
+                if(map[operation.categoryId.toString()] == null) {
+                    map[operation.categoryId.toString()] = 0f
+                }
+                map[operation.categoryId.toString()] = map[operation.categoryId.toString()]?.plus(Math.abs(operation.amount.toFloat()))
+            } else {
+                map.put(operation.categoryId.toString(), operation.amount.toFloat())
+            }
+        }
+        map.forEach { v ->
+            entries.add(PieEntry(v.value?: 0f, v.key))
+        }
+
+        liveData.value = PieDataSet(entries, "")
+        liveData.value!!.colors = color
+        return liveData
     }
 
-    fun getShowLegend() = operationRepository.getShowLegend()
+    fun getLineChartValues(accountId : Long, operations : List<Operation>) : LiveData<LineDataSet> {
+        val liveData = MutableLiveData<LineDataSet>()
+        return liveData
+    }
+
+    fun getHorizontalBarChartValues(accountId : Long, operations : List<Operation>) : LiveData<BarDataSet> {
+        val liveData = MutableLiveData<BarDataSet>()
+        return liveData
+    }
+
+    fun getShowLegend() : Boolean {
+        return true
+    }
+
+    init {
+        operationRepository.getAllOperations().observeForever(categoriesRepData)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        operationRepository.getAllOperations().removeObserver(categoriesRepData)
+    }
 }

@@ -1,11 +1,10 @@
 package com.yury.lebowski.ui.statistics
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.animation.Easing
@@ -100,7 +99,6 @@ class StatisticsFragment : DaggerFragment() {
 
     override fun onStart() {
         super.onStart()
-        //viewModel.categorie.observe(this, dataCat)
         viewModel.pieSummary.observe(this, dataPieSet)
         viewModel.lineSummary.observe(this, dataLineSet)
         viewModel.barSummary.observe(this, dataBarSet)
@@ -113,10 +111,35 @@ class StatisticsFragment : DaggerFragment() {
         viewModel.barSummary.removeObservers(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu?) {
         menu?.findItem(R.id.settings_item)?.isVisible = false
         menu?.findItem(R.id.statistics_item)?.isVisible = false
         super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity?.setTitle(R.string.statisitcs)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            activity?.onBackPressed()
+            return false
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        activity?.setTitle(R.string.app_name)
     }
 
     private fun initPieChart() {

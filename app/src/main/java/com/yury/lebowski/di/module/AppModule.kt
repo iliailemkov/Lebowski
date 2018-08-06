@@ -3,14 +3,11 @@ package com.yury.lebowski.di.module
 import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.yury.lebowski.data.local.dao.AccountDao
-import com.yury.lebowski.data.local.dao.AccountOperationDao
-import com.yury.lebowski.data.local.dao.CategoryDao
-import com.yury.lebowski.data.local.dao.OperationDao
+import com.yury.lebowski.data.local.dao.*
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
-import com.yury.lebowski.domain.StatisticsInteractor
+import com.yury.lebowski.service.PeriodicOperationWorker
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -29,8 +26,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideOperationRepository(accountDao : AccountDao, operationDao: OperationDao, categoryDao: CategoryDao) =
-            OperationRepository(accountDao, operationDao, categoryDao)
+    fun provideOperationRepository(accountDao : AccountDao, operationDao: OperationDao, categoryDao: CategoryDao, periodicalOperationDao: PeriodicalOperationDao) =
+            OperationRepository(accountDao, operationDao, categoryDao, periodicalOperationDao)
 
     @Provides
     @Singleton

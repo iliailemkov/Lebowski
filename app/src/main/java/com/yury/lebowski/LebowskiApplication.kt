@@ -1,5 +1,6 @@
 package com.yury.lebowski
 
+import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
 import com.yury.lebowski.di.DaggerAppComponent
 import dagger.android.AndroidInjector
