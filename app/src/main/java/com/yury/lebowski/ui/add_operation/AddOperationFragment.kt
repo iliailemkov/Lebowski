@@ -98,6 +98,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
         spinner_currency.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, CurrencyType.values().map { c -> c.code })
+        viewModel.filterCategory.value = operationType
         initAddButton()
         initPeriodic()
     }
