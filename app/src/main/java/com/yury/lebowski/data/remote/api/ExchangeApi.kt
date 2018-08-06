@@ -3,6 +3,7 @@ package com.yury.lebowski.data.remote.api
 import androidx.lifecycle.LiveData
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -13,7 +14,7 @@ interface ExchangeApi {
 
     @GET("/api/v6/convert")
     fun getExhangeRate(@Query("q") fromTo: String,
-                       @Query("compact") compact: String): LiveData<ResponseBody>
+                       @Query("compact") compact: String): Call<ResponseBody>
 
 
     companion object {

@@ -46,6 +46,7 @@
     <string name="add">Добавить</string>
     <string name="periodic">Периодичность</string>
     <string name="periodic_hint">Период в днях</string>
+    <string name="incorrect_data">Неправильно введены значения</string>
     <!--add operation page-->
 
     <!--Pages-->
@@ -73,6 +74,7 @@
     <string name="cash">Наличные</string>
     <string name="credit_card">Кредитная карта</string>
     <string name="successfully_added">Операция добавлена успешно</string>
+    <string name="currency">Валюта</string>
     <!--Accounts-->
 
 </resources>

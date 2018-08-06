@@ -42,6 +42,20 @@
             android:layout_gravity="end"
             android:layout_margin="8dp" />
 
+        <TextView
+            android:id="@+id/currency_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/currency" />
+
+        <Spinner
+            android:id="@+id/spinner_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="8dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/money_layout"
             android:layout_width="match_parent"

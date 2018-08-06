@@ -1,10 +1,7 @@
 package com.yury.lebowski.data.repository
 
 import androidx.lifecycle.LiveData
-import com.yury.lebowski.data.local.dao.AccountDao
-import com.yury.lebowski.data.local.dao.CategoryDao
-import com.yury.lebowski.data.local.dao.OperationDao
-import com.yury.lebowski.data.local.dao.PeriodicalOperationDao
+import com.yury.lebowski.data.local.dao.*
 import com.yury.lebowski.data.local.models.Category
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.enums.OperationType

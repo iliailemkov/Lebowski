@@ -21,8 +21,11 @@ interface AccountOperationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPeriod(periodicalOperation: PeriodicalOperation)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun update(operation: Operation)
+
     @Transaction
-    fun insertOperationAndUpdateAmount(operation: Operation, amount: Double, accountId: Long) {
+    fun  insertOperationAndUpdateAmount(operation: Operation, amount: Double, accountId: Long) {
         insertOperation(operation)
         updateAmount(amount, accountId)
     }

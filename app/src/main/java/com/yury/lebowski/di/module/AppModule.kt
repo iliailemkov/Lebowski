@@ -21,12 +21,15 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAccountRepository(accountDao: AccountDao, accountOperationDao: AccountOperationDao) =
-            AccountRepository(accountDao, accountOperationDao)
+    fun provideAccountRepository(accountDao: AccountDao, accountOperationDao: AccountOperationDao, exchangeRateDao: ExchangeRateDao) =
+            AccountRepository(accountDao, accountOperationDao, exchangeRateDao)
 
     @Provides
     @Singleton
-    fun provideOperationRepository(accountDao : AccountDao, operationDao: OperationDao, categoryDao: CategoryDao, periodicalOperationDao: PeriodicalOperationDao) =
+    fun provideOperationRepository(accountDao : AccountDao,
+                                   operationDao: OperationDao,
+                                   categoryDao: CategoryDao,
+                                   periodicalOperationDao: PeriodicalOperationDao) =
             OperationRepository(accountDao, operationDao, categoryDao, periodicalOperationDao)
 
     @Provides

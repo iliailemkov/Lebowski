@@ -10,17 +10,16 @@ import com.yury.lebowski.data.local.converters.CurrencyTypeConverter
 import com.yury.lebowski.data.local.converters.DateConverter
 import com.yury.lebowski.data.local.converters.OperationTypeConverter
 import com.yury.lebowski.data.local.dao.*
-import com.yury.lebowski.data.local.models.Account
-import com.yury.lebowski.data.local.models.Category
-import com.yury.lebowski.data.local.models.Operation
-import com.yury.lebowski.data.local.models.PeriodicalOperation
+import com.yury.lebowski.data.local.models.*
 import java.util.concurrent.Executors
+
 
 @Database(entities =
     [Account::class,
     Category::class,
     Operation::class,
-    PeriodicalOperation::class],
+    PeriodicalOperation::class,
+    ExchangeRate::class],
         version = 1,
         exportSchema = false)
 @TypeConverters(value =
@@ -49,6 +48,7 @@ abstract class LebowskiDb : RoomDatabase() {
                                 Executors.newSingleThreadScheduledExecutor().execute(Runnable {
                                     getInstance(context).accountDao().insertAll(PrepopulateData.accounts)
                                     getInstance(context).categoryDao().insertAll(PrepopulateData.categories)
+                                    getInstance(context).exchangeRateDao().insertAll(PrepopulateData.rates)
                                     //(context).operationDao().insertAll(PrepopulateData.operations)
                                     //getInstance(context).periodicalOperationDao().insertAll(PrepopulateData.periodicalOperation)
                                 })
@@ -66,4 +66,5 @@ abstract class LebowskiDb : RoomDatabase() {
     abstract fun operationDao() : OperationDao
     abstract fun accountOperationDao() : AccountOperationDao
     abstract fun periodicalOperationDao() : PeriodicalOperationDao
+    abstract fun exchangeRateDao() : ExchangeRateDao
 }

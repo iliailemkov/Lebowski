@@ -13,7 +13,7 @@ interface AccountDao {
     fun getAll() : LiveData<List<Account>>
 
     @Query("SELECT * FROM Account WHERE id = :id")
-    fun findById(id: Long) : LiveData<Account>
+    fun findById(id: Long) : Account
 
     @Insert
     fun insertAll(list: List<Account>)

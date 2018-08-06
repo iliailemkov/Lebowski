@@ -31,6 +31,11 @@ object PrepopulateData {
             Category(15, (OperationType.Income), LebowskiApplication.instance.getString(R.string.other_income))
     )
 
+    val rates = listOf(
+            ExchangeRate(1, CurrencyType.Dollar, CurrencyType.Ruble, 0.01),
+            ExchangeRate(2, CurrencyType.Ruble, CurrencyType.Dollar, 63.0)
+    )
+
     /*val operations = listOf(
             Operation(1, Date(), CurrencyType.Dollar, OperationType.Income, 999.0, 999.0, 1, 1)
     )*/
