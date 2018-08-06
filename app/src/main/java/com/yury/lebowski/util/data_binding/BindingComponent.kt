@@ -4,7 +4,7 @@ import androidx.databinding.DataBindingComponent
 import com.yury.lebowski.util.data_binding.spinner.InverseSpinnerBindings
 import com.yury.lebowski.util.data_binding.spinner.SpinnerBindings
 
-class BindingComponent : DataBindingComponent {
+class BindingComponent: DataBindingComponent {
     override fun getSpinnerBindings(): SpinnerBindings {
         return SpinnerBindings()
     }

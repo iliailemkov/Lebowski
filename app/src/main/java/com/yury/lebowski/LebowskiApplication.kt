@@ -1,28 +1,14 @@
 package com.yury.lebowski
 
-<<<<<<< HEAD
 import android.app.Application
+import androidx.databinding.DataBindingUtil
 import com.squareup.leakcanary.LeakCanary
-=======
-import com.facebook.stetho.Stetho
-import com.squareup.leakcanary.LeakCanary
-import com.yury.lebowski.di.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
->>>>>>> develop
+import com.yury.lebowski.util.data_binding.BindingComponent
 
-
-class LebowskiApplication() : DaggerApplication() {
+class LebowskiApplication() : Application() {
     companion object {
         lateinit var instance: LebowskiApplication
             private set
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent
-                .builder()
-                .create(this)
-                .build()
     }
 
     override fun onCreate() {
@@ -33,6 +19,8 @@ class LebowskiApplication() : DaggerApplication() {
             // You should not init your app in this process.
             return;
         }
-        LeakCanary.install(this)
+        LeakCanary.install(this);
+
+        //DataBindingUtil.setDefaultComponent(BindingComponent())
     }
 }

@@ -2,6 +2,7 @@ package com.yury.lebowski.ui.home
 
 <<<<<<< HEAD
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.yury.lebowski.models.CurrencyType
 import com.yury.lebowski.repository.BalanceRepository
@@ -19,10 +20,10 @@ class HomeViewModel : ViewModel() {
 
     init {
         val balanceInUniversal = balanceRepository.getAmountInUniversal()
-        val rate = rateRepository.getLastOfflineRate(CurrencyType.Ruble)
-        balanceMain.value = "$balanceInUniversal $"
+        val rate =  rateRepository.getLastOfflineRate(CurrencyType.Ruble)
+        balanceMain.value =  "$balanceInUniversal $"
         currency.value = rate.toString()
-        balanceSecondary.value = "${balanceInUniversal * rate} \u20BD"
+        balanceSecondary.value =  "${balanceInUniversal * rate} \u20BD"
     }
 =======
 import androidx.lifecycle.ViewModel

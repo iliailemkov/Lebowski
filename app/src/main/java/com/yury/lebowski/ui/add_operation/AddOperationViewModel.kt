@@ -1,42 +1,18 @@
 package com.yury.lebowski.ui.add_operation
 
-<<<<<<< HEAD
-=======
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
->>>>>>> develop
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel;
 import com.yury.lebowski.LebowskiApplication
-import com.yury.lebowski.data.local.models.Operation
-import com.yury.lebowski.data.local.models.enums.CurrencyType
-import com.yury.lebowski.data.local.models.enums.OperationType
-import com.yury.lebowski.data.repository.AccountRepository
-import com.yury.lebowski.data.repository.OperationRepository
-import javax.inject.Inject
+import com.yury.lebowski.models.Accounts
+import com.yury.lebowski.models.Categories
+import com.yury.lebowski.models.OperationType
 
-class AddOperationViewModel @Inject constructor(
-        private val accountRepository: AccountRepository,
-        private val operationRepository: OperationRepository
-) : ViewModel() {
+class AddOperationViewModel(private val operationType: OperationType) : ViewModel() {
+    val categories = Categories.filter { it.operationType == operationType }.map { getResourceString(it.nameResourceId) }
+    val accounts = Accounts.map { getResourceString(it.nameResourceId) }
 
-<<<<<<< HEAD
     // TODO: find better way to get resources
-    private fun getResourceString(resId: Int) = LebowskiApplication.instance.resources.getString(resId)
-=======
-    var filterCategory = MutableLiveData<OperationType>()
-        set(value) {
-            filterCategory.value = value.value
-        }
->>>>>>> develop
+    private fun getResourceString(resId : Int ) = LebowskiApplication.instance.resources.getString(resId)
 
-    val categories = Transformations.switchMap(filterCategory) { operationRepository.getCategoriesByType(filterCategory.value ?: OperationType.Expenditure) }
-    val accounts = accountRepository.getBalances()
-
-    fun addOperation(operation: Operation, currencyType: CurrencyType) {
-        accountRepository.addOperation(operation, currencyType)
-    }
-
-    fun addPeriodicOperation(operation: Operation, id: Long, period: Long, currencyType: CurrencyType) {
-        accountRepository.addPeriodicalOperation(operation, id, period, currencyType)
-    }
 }

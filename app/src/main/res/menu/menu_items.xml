@@ -13,5 +13,5 @@
         android:title="@string/settings"
         android:icon="@drawable/ic_settings_24dp"
         compat:showAsAction="always"
-        tools:ignore="AppCompatResource" />
+        tools:ignore="AppCompatResource"/>
 </menu>
