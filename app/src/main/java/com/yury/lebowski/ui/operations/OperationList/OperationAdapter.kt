@@ -1,4 +1,4 @@
-package com.yury.lebowski.ui.home.OperationList
+package com.yury.lebowski.ui.operations.OperationList
 
 import android.content.Context
 import android.view.LayoutInflater

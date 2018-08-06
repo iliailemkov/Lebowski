@@ -12,5 +12,4 @@ class HomeViewModel @Inject constructor(
         private val operationRepository: OperationRepository
 ): ViewModel() {
     val accounts by lazy { accountRepository.getBalances() }
-    val operations by lazy { operationRepository.getOperations(1) }
 }

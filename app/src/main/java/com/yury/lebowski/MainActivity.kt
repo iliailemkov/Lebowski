@@ -1,6 +1,7 @@
 package com.yury.lebowski
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.facebook.stetho.Stetho
+import com.yury.lebowski.navigation.NavigationDetailContainer
+import com.yury.lebowski.navigation.Navigator
+import com.yury.lebowski.navigation.NavigatorMainContainer
 import com.yury.lebowski.service.PeriodicOperationWorker
 import com.yury.lebowski.ui.home.HomeFragment
 import com.yury.lebowski.ui.settings.SettingsFragment
-import com.yury.lebowski.ui.statistics.StatisticsFragment
 import java.util.concurrent.TimeUnit
 
 
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity(), Navigator {
                 return false
             }
             R.id.statistics_item -> {
-                navigateTo(StatisticsFragment.newInstance(), "NavigateStatistics")
+                //navigateTo(StatisticsFragment.newInstance(), "NavigateStatistics")
                 return false
             }
         }
@@ -68,14 +71,36 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun navigateTo(fragment: Fragment, transaction: String?) {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, fragment)
-                .addToBackStack(transaction)
-                .commit()
+        if(isWindowWithDetail()) {
+            fragment::class.java.declaredAnnotations.forEach {
+                if(it is NavigatorMainContainer) {
+                    supportFragmentManager.beginTransaction()
+                            .add(R.id.main_container, fragment)
+                            .addToBackStack(transaction)
+                            .commit()
+                } else if(it is NavigationDetailContainer) {
+                    supportFragmentManager.beginTransaction()
+                            .add(R.id.detail_container, fragment)
+                            .disallowAddToBackStack()
+                            .commit()
+                }
+            }
+        } else {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_container, fragment)
+                    .addToBackStack(transaction)
+                    .commit()
+        }
     }
 
     override fun navigateBack() {
         supportFragmentManager.popBackStack()
+    }
+
+    override fun isWindowWithDetail() : Boolean {
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        return displayMetrics.heightPixels < displayMetrics.widthPixels && displayMetrics.widthPixels >= 900f
     }
 
 }

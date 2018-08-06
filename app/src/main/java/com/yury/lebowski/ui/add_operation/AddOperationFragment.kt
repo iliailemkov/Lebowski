@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.yury.lebowski.Navigator
+import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.*
 import com.yury.lebowski.data.local.models.enums.CurrencyType
@@ -20,8 +20,9 @@ import kotlinx.android.synthetic.main.add_operation_fragment.*
 import java.util.*
 import javax.inject.Inject
 import android.widget.CompoundButton
+import com.yury.lebowski.navigation.NavigationDetailContainer
 
-
+@NavigationDetailContainer
 class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
 
     val OPERATION_TYPE = "operation_type"

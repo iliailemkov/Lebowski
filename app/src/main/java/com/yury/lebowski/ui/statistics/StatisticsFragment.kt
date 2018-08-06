@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.animation.Easing
@@ -15,14 +16,20 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Category
 import com.yury.lebowski.di.ViewModelFactory
+import com.yury.lebowski.navigation.NavigationDetailContainer
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_statistic.*
 import javax.inject.Inject
 
+@NavigationDetailContainer
 class StatisticsFragment : DaggerFragment() {
 
+    val ACCOUNT_ID = "account_id"
+
     companion object {
-        fun newInstance() = StatisticsFragment()
+        fun newInstance(accountId: Long) = StatisticsFragment().apply {
+            arguments = bundleOf(ACCOUNT_ID to accountId)
+        }
     }
 
     @Inject

@@ -8,15 +8,16 @@ import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import com.yury.lebowski.Navigator
+import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.R
 import com.yury.lebowski.di.ViewModelFactory
+import com.yury.lebowski.navigation.NavigatorMainContainer
 import com.yury.lebowski.ui.about.AboutFragment
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_settings.*
 import javax.inject.Inject
 
-
+@NavigatorMainContainer
 class SettingsFragment : DaggerFragment() {
 
     @Inject
