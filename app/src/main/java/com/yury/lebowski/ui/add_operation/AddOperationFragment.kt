@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.add_operation_fragment.*
 import java.util.*
 import javax.inject.Inject
 import android.widget.CompoundButton
-import kotlinx.android.synthetic.main.home_fragment.*
 
 
 class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
@@ -116,7 +115,13 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
     }
 
     private fun initAddButton() {
-        add_button.setOnClickListener { addOperation() }
+        add_button.setOnClickListener {
+            try {
+                addOperation()
+            } catch (e : Exception) {
+                Toast.makeText(context, R.string.incorrect_data, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onFocusChange(view: View?, condition: Boolean) {

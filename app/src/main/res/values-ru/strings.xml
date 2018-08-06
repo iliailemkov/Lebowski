@@ -46,6 +46,7 @@
     <string name="add">Добавить</string>
     <string name="periodic">Периодичность</string>
     <string name="periodic_hint">Период в днях</string>
+    <string name="incorrect_data">Неправильно введены значения</string>
     <!--add operation page-->
 
     <!--Pages-->

@@ -57,6 +57,7 @@
     <string name="add">Add</string>
     <string name="periodic">Periodic</string>
     <string name="periodic_hint">Periodic</string>
+    <string name="incorrect_data">Incorrect input data</string>
     <!--add operation page-->
 
     <!--Pages-->
