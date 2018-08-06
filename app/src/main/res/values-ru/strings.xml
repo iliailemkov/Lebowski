@@ -73,6 +73,7 @@
     <string name="cash">Наличные</string>
     <string name="credit_card">Кредитная карта</string>
     <string name="successfully_added">Операция добавлена успешно</string>
+    <string name="currency">Валюта</string>
     <!--Accounts-->
 
 </resources>

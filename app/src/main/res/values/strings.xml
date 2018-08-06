@@ -84,6 +84,7 @@
     <string name="cash">Cash</string>
     <string name="credit_card">Credit card</string>
     <string name="successfully_added">Added successfully</string>
+    <string name="currency">Currency</string>
     <!--Accounts-->
 
 </resources>

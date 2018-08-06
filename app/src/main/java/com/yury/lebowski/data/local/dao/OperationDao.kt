@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.PeriodicalOperation
 

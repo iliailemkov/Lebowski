@@ -20,8 +20,7 @@ import kotlinx.android.synthetic.main.add_operation_fragment.*
 import java.util.*
 import javax.inject.Inject
 import android.widget.CompoundButton
-
-
+import kotlinx.android.synthetic.main.home_fragment.*
 
 
 class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
@@ -99,6 +98,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
+        spinner_currency.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, CurrencyType.values().map { c -> c.code })
         initAddButton()
         initPeriodic()
     }
@@ -138,7 +138,8 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                     moneyEditText.text.toString().toDouble(),
                     accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                     categories.adapter.getItemId(categories.selectedItemId.toInt())), 1,
-                    operation_preiodic_input.text.toString().toLong())
+                    operation_preiodic_input.text.toString().toLong(),
+                    CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             (activity as Navigator).navigateBack()
         } else {
@@ -148,7 +149,8 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                             operationType!!,
                             moneyEditText.text.toString().toDouble(),
                             accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
-                            categories.adapter.getItemId(categories.selectedItemId.toInt())))
+                            categories.adapter.getItemId(categories.selectedItemId.toInt())),
+                            CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             (activity as Navigator).navigateBack()
         }
