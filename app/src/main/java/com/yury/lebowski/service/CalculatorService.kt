@@ -1,10 +1,9 @@
 package com.yury.lebowski.service
 
-import com.yury.lebowski.models.Record
-import com.yury.lebowski.repository.RateRepository
+import com.yury.lebowski.data.local.models.Operation
 
 
-fun calculateBalanceAfterOperations(start_balance: Double, operations: List<Record>): Double {
+/*fun calculateBalanceAfterOperations(start_balance: Double, operations: List<Operation>): Double {
     val rateRepository = RateRepository()
-    return start_balance + operations.sumByDouble { it.operationType.effect() * it.amount / rateRepository.getLastOfflineRate(it.currencyType) }
-}
+    return start_balance + operations.sumByDouble { it.operationType.effect * it.amount / rateRepository.getLastOfflineRate(it.currencyType) }
+}*/

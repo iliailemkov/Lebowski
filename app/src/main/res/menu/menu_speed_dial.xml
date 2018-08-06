@@ -9,10 +9,4 @@
         android:id="@+id/add_income"
         android:icon="@drawable/ic_arrow_upward_24dp"
         android:title="@string/add_income" />
-
-    <item
-        android:id="@+id/manage_categories"
-        android:icon="@drawable/ic_mode_edit_24dp"
-        android:title="@string/manage_categories" />
-
 </menu>
