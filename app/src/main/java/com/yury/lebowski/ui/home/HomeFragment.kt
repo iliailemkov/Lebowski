@@ -38,12 +38,14 @@ class HomeFragment : DaggerFragment() {
 
     private val accounts = Observer<List<Account>> { res ->
         if (res !== null) {
-            if (res[0].balance < 0) {
-                balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_red_dark))
-            } else {
-                balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_green_dark))
+            if(!res.isEmpty()) {
+                if (res[0].balance < 0) {
+                    balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_red_dark))
+                } else {
+                    balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_green_dark))
+                }
+                balance_main.text = String.format("%.2f", res[0].balance)
             }
-            balance_main.text = String.format("%.2f", res[0].balance)
         }
     }
 
@@ -83,7 +85,7 @@ class HomeFragment : DaggerFragment() {
         speedDial.setOnActionSelectedListener { it ->
             when (it.id) {
                 R.id.add_income -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Income), "NaviagteAddIncome")
-                R.id.add_expenditure -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Income), "NaviagteAddIncome")
+                R.id.add_expenditure -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Expenditure), "NaviagteAddExpenditure")
             }
             false
         }

@@ -98,6 +98,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
         spinner_currency.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, CurrencyType.values().map { c -> c.code })
+        viewModel.filterCategory.value = operationType
         initAddButton()
         initPeriodic()
     }
@@ -140,7 +141,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
             viewModel.addPeriodicOperation(Operation(null,
                     Date(),
                     operationType!!,
-                    moneyEditText.text.toString().toDouble(),
+                    moneyEditText.text.toString().toDouble() * operationType?.effect!!,
                     accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                     categories.adapter.getItemId(categories.selectedItemId.toInt())), 1,
                     operation_preiodic_input.text.toString().toLong(),
@@ -152,7 +153,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                     Operation(null,
                             Date(),
                             operationType!!,
-                            moneyEditText.text.toString().toDouble(),
+                            moneyEditText.text.toString().toDouble() * operationType?.effect!!,
                             accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                             categories.adapter.getItemId(categories.selectedItemId.toInt())),
                             CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
