@@ -140,7 +140,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
             viewModel.addPeriodicOperation(Operation(null,
                     Date(),
                     operationType!!,
-                    moneyEditText.text.toString().toDouble(),
+                    moneyEditText.text.toString().toDouble() * operationType?.effect!!,
                     accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                     categories.adapter.getItemId(categories.selectedItemId.toInt())), 1,
                     operation_preiodic_input.text.toString().toLong(),
@@ -152,7 +152,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                     Operation(null,
                             Date(),
                             operationType!!,
-                            moneyEditText.text.toString().toDouble(),
+                            moneyEditText.text.toString().toDouble() * operationType?.effect!!,
                             accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                             categories.adapter.getItemId(categories.selectedItemId.toInt())),
                             CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
