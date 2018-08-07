@@ -13,50 +13,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/category_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/category" />
-
-        <Spinner
-            android:id="@+id/categories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="8dp" />
-
-        <TextView
-            android:id="@+id/account_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/account" />
-
-        <Spinner
-            android:id="@+id/accounts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="8dp" />
-
-        <TextView
-            android:id="@+id/currency_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/currency" />
-
-        <Spinner
-            android:id="@+id/spinner_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="8dp" />
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/money_layout"
+            android:id="@+id/til_account_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
@@ -64,7 +22,7 @@
             android:paddingBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/moneyEditText"
+                android:id="@+id/et_account_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/amount"
@@ -73,12 +31,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Switch
-            android:id="@+id/switch_periodic"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_currency"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/periodic" />
+            android:layout_gravity="end"
+            android:layout_margin="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/operation_preiodic_layout"
@@ -98,7 +56,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/add_button"
+            android:id="@+id/add_account_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

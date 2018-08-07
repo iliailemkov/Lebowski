@@ -2,6 +2,7 @@ package com.yury.lebowski.di.module
 
 import androidx.lifecycle.ViewModel
 import com.yury.lebowski.di.ViewModelKey
+import com.yury.lebowski.ui.add_account.AddAccountViewModel
 import com.yury.lebowski.ui.add_operation.AddOperationViewModel
 import com.yury.lebowski.ui.home.HomeViewModel
 import com.yury.lebowski.ui.operations.OperationsViewModel
@@ -37,4 +38,9 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
     abstract fun bindSettingsViewModel(view : SettingsViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddAccountViewModel::class)
+    abstract fun bindAddAccountViewModel(view : AddAccountViewModel) : ViewModel
 }

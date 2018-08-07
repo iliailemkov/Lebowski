@@ -3,6 +3,7 @@ package com.yury.lebowski.data.local.converters
 import androidx.room.TypeConverter
 import com.yury.lebowski.data.local.models.enums.OperationType
 
+
 class OperationTypeConverter {
 
     @TypeConverter

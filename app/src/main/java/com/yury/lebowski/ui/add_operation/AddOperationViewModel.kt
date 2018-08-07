@@ -3,7 +3,6 @@ package com.yury.lebowski.ui.add_operation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.yury.lebowski.LebowskiApplication
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.enums.CurrencyType
 import com.yury.lebowski.data.local.models.enums.OperationType
@@ -21,7 +20,9 @@ class AddOperationViewModel @Inject constructor(
             filterCategory.value = value.value
         }
 
-    val categories = Transformations.switchMap(filterCategory) { operationRepository.getCategoriesByType(filterCategory.value ?: OperationType.Expenditure) }
+    val categories = Transformations.switchMap(filterCategory) {
+        operationRepository.getCategoriesByType(filterCategory.value ?: OperationType.Expenditure)
+    }
     val accounts = accountRepository.getBalances()
 
     fun addOperation(operation: Operation, currencyType: CurrencyType) {

@@ -1,28 +1,32 @@
 package com.yury.lebowski.ui.add_operation
 
-import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
+import android.widget.CompoundButton
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.R
-import com.yury.lebowski.data.local.models.*
+import com.yury.lebowski.data.local.models.Account
+import com.yury.lebowski.data.local.models.Category
+import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.enums.CurrencyType
 import com.yury.lebowski.data.local.models.enums.OperationType
 import com.yury.lebowski.di.ViewModelFactory
+import com.yury.lebowski.navigation.Navigator
+import com.yury.lebowski.navigation.NavigatorMainContainer
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
 import java.util.*
 import javax.inject.Inject
-import android.widget.CompoundButton
-import com.yury.lebowski.navigation.NavigationDetailContainer
 
-@NavigationDetailContainer
+
+@NavigatorMainContainer
 class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
 
     val OPERATION_TYPE = "operation_type"
@@ -40,13 +44,13 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
     }
 
     private val categoryList: Observer<List<Category>> = Observer { res ->
-        if(res != null) {
+        if (res != null) {
             categories.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, res.map { l -> l.name })
         }
     }
 
     private val accountList: Observer<List<Account>> = Observer { res ->
-        if(res != null) {
+        if (res != null) {
             accounts.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, res.map { l -> l.name })
         }
     }
@@ -56,38 +60,6 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
         arguments?.let {
             operationType = it.get(OPERATION_TYPE) as OperationType
         }
-        operationType?.let {
-            activity?.setTitle(when (it) {
-                OperationType.Income -> R.string.add_income
-                OperationType.Expenditure -> R.string.add_expenditure
-            })
-        }
-        setHasOptionsMenu(true)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?) {
-        menu?.findItem(R.id.settings_item)?.isVisible = false
-        menu?.findItem(R.id.statistics_item)?.isVisible = false
-        super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home) {
-            (activity as Navigator).navigateBack()
-            return false
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        activity?.setTitle(R.string.app_name)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -97,6 +69,10 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as Navigator).initToolbar(
+                if (operationType == OperationType.Expenditure) R.string.add_expenditure else R.string.add_income,
+                R.dimen.toolbar_elevation,
+                this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
         spinner_currency.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, CurrencyType.values().map { c -> c.code })
         viewModel.filterCategory.value = operationType
@@ -117,10 +93,14 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
     }
 
     private fun initAddButton() {
+        val slideDown = AnimationUtils.loadAnimation(context, R.anim.slide_down);
+        if (switch_periodic.isChecked) {
+            add_button.startAnimation(slideDown);
+        }
         add_button.setOnClickListener {
             try {
                 addOperation()
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 Toast.makeText(context, R.string.incorrect_data, Toast.LENGTH_SHORT).show()
             }
         }
@@ -133,12 +113,20 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
         switch_periodic.isChecked = false
         operation_preiodic_layout.visibility = View.GONE
         switch_periodic.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            operation_preiodic_layout.visibility = if(isChecked) View.VISIBLE else View.GONE
+            val slideInLeft = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            val slideOutRight = AnimationUtils.loadAnimation(context, android.R.anim.slide_out_right);
+            if (isChecked) {
+                operation_preiodic_layout.startAnimation(slideInLeft);
+                operation_preiodic_layout.visibility = View.VISIBLE
+            } else {
+                operation_preiodic_layout.startAnimation(slideOutRight);
+                operation_preiodic_layout.visibility = View.GONE
+            }
         })
     }
 
     private fun addOperation() {
-        if(switch_periodic.isChecked) {
+        if (switch_periodic.isChecked) {
             viewModel.addPeriodicOperation(Operation(null,
                     Date(),
                     operationType!!,
@@ -157,7 +145,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                             moneyEditText.text.toString().toDouble() * operationType?.effect!!,
                             accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                             categories.adapter.getItemId(categories.selectedItemId.toInt())),
-                            CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
+                    CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             (activity as Navigator).navigateBack()
         }

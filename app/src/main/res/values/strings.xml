@@ -9,6 +9,7 @@
     <string name="rate">Rate</string>
     <string name="future_operations">Here will be your operation history</string>
     <!--speed dial-->
+    <string name="add_account">Add account</string>
     <string name="add_expenditure">Add expenditure</string>
     <string name="add_income">Add income</string>
     <string name="manage_categories">Manage categories</string>
@@ -44,7 +45,14 @@
 
     <!--statisitcs page-->
     <string name="statisitcs">Statisitcs</string>
+    <string name="start_date">Start date</string>
+    <string name="finish_date">Finish date</string>
+    <string name="plot_btn">Plot</string>
     <!--statisitcs page-->
+
+    <!--account page-->
+    <string name="add_account_page_title">Add account</string>
+    <!--account page-->
 
     <!--about page-->
     <string name="about">About</string>

@@ -1,6 +1,5 @@
 package com.yury.lebowski.data.remote.api
 
-import androidx.lifecycle.LiveData
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call

@@ -1,10 +1,10 @@
 package com.yury.lebowski.ui.statistics
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,14 +14,14 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.yury.lebowski.R
-import com.yury.lebowski.data.local.models.Category
 import com.yury.lebowski.di.ViewModelFactory
-import com.yury.lebowski.navigation.NavigationDetailContainer
+import com.yury.lebowski.navigation.NavigatiorDetailContainer
+import com.yury.lebowski.navigation.Navigator
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_statistic.*
 import javax.inject.Inject
 
-@NavigationDetailContainer
+@NavigatiorDetailContainer
 class StatisticsFragment : DaggerFragment() {
 
     val ACCOUNT_ID = "account_id"
@@ -37,8 +37,8 @@ class StatisticsFragment : DaggerFragment() {
 
     private lateinit var viewModel: StatisticsViewModel
 
-    private val dataPieSet : Observer<PieDataSet> = Observer { res ->
-        if(res != null) {
+    private val dataPieSet: Observer<PieDataSet> = Observer { res ->
+        if (res != null) {
             val dataSet = viewModel.pieSummary.value
             dataSet!!.sliceSpace = 8f
             dataSet.selectionShift = 8f
@@ -55,8 +55,8 @@ class StatisticsFragment : DaggerFragment() {
         }
     }
 
-    private val dataLineSet : Observer<LineDataSet> = Observer { res ->
-        if(res != null) {
+    private val dataLineSet: Observer<LineDataSet> = Observer { res ->
+        if (res != null) {
             val dataSet = viewModel.lineSummary.value
             //dataSet!!.sliceSpace = 8f
             //dataSet.selectionShift = 8f
@@ -73,8 +73,8 @@ class StatisticsFragment : DaggerFragment() {
         }
     }
 
-    private val dataBarSet : Observer<BarDataSet> = Observer { res ->
-        if(res != null) {
+    private val dataBarSet: Observer<BarDataSet> = Observer { res ->
+        if (res != null) {
             val dataSet = viewModel.barSummary.value
             //dataSet!!. = 8f
             //dataSet.selectionShift = 8f
@@ -99,6 +99,7 @@ class StatisticsFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as Navigator).initToolbar(R.string.statisitcs, R.dimen.toolbar_elevation, this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(StatisticsViewModel::class.java)
         initPieChart()
 
@@ -116,37 +117,6 @@ class StatisticsFragment : DaggerFragment() {
         viewModel.pieSummary.removeObservers(this)
         viewModel.lineSummary.removeObservers(this)
         viewModel.barSummary.removeObservers(this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?) {
-        menu?.findItem(R.id.settings_item)?.isVisible = false
-        menu?.findItem(R.id.statistics_item)?.isVisible = false
-        super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity?.setTitle(R.string.statisitcs)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home) {
-            activity?.onBackPressed()
-            return false
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        activity?.setTitle(R.string.app_name)
     }
 
     private fun initPieChart() {

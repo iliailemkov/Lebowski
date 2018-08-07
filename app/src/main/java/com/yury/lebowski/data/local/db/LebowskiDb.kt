@@ -15,7 +15,7 @@ import java.util.concurrent.Executors
 
 
 @Database(entities =
-    [Account::class,
+[Account::class,
     Category::class,
     Operation::class,
     PeriodicalOperation::class,
@@ -23,7 +23,7 @@ import java.util.concurrent.Executors
         version = 1,
         exportSchema = false)
 @TypeConverters(value =
-    [DateConverter::class,
+[DateConverter::class,
     OperationTypeConverter::class,
     CurrencyTypeConverter::class])
 abstract class LebowskiDb : RoomDatabase() {
@@ -61,10 +61,10 @@ abstract class LebowskiDb : RoomDatabase() {
         }
     }
 
-    abstract fun accountDao() : AccountDao
-    abstract fun categoryDao() : CategoryDao
-    abstract fun operationDao() : OperationDao
-    abstract fun accountOperationDao() : AccountOperationDao
-    abstract fun periodicalOperationDao() : PeriodicalOperationDao
-    abstract fun exchangeRateDao() : ExchangeRateDao
+    abstract fun accountDao(): AccountDao
+    abstract fun categoryDao(): CategoryDao
+    abstract fun operationDao(): OperationDao
+    abstract fun accountOperationDao(): AccountOperationDao
+    abstract fun periodicalOperationDao(): PeriodicalOperationDao
+    abstract fun exchangeRateDao(): ExchangeRateDao
 }

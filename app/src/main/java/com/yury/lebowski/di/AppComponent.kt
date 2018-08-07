@@ -1,11 +1,11 @@
 package com.yury.lebowski.di
 
 import android.app.Application
+import com.yury.lebowski.LebowskiApplication
 import com.yury.lebowski.di.module.AppModule
+import com.yury.lebowski.di.module.RoomModule
 import com.yury.lebowski.di.module.ViewModelModule
 import com.yury.lebowski.di.module.ViewModule
-import com.yury.lebowski.LebowskiApplication
-import com.yury.lebowski.di.module.RoomModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -22,11 +22,12 @@ import javax.inject.Singleton
             ViewModelModule::class
         ]
 )
-interface AppComponent: AndroidInjector<LebowskiApplication> {
+interface AppComponent : AndroidInjector<LebowskiApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
         fun create(app: Application): Builder
+
         fun build(): AppComponent
     }
 }

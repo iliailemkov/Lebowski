@@ -1,7 +1,8 @@
 package com.yury.lebowski.data.local.models
 
-import androidx.room.*
-import com.yury.lebowski.data.local.models.enums.CurrencyType
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import com.yury.lebowski.data.local.models.enums.OperationType
 import java.util.*
 

@@ -1,16 +1,16 @@
 package com.yury.lebowski.ui.settings
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.R
 import com.yury.lebowski.di.ViewModelFactory
+import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.navigation.NavigatorMainContainer
 import com.yury.lebowski.ui.about.AboutFragment
 import dagger.android.support.DaggerFragment
@@ -34,19 +34,9 @@ class SettingsFragment : DaggerFragment() {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?) {
-        menu?.findItem(R.id.settings_item)?.isVisible = false
-        menu?.findItem(R.id.statistics_item)?.isVisible = false
-        super.onPrepareOptionsMenu(menu)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as Navigator).initToolbar(R.string.settings, R.dimen.toolbar_elevation, this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SettingsViewModel::class.java)
         switch_summary.isChecked = viewModel.getSummaryBoolean()
         switch_summary.setOnCheckedChangeListener { compoundButton, b ->
@@ -68,25 +58,5 @@ class SettingsFragment : DaggerFragment() {
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Where's my money?")
             startActivity(Intent.createChooser(emailIntent, "Send email"))
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity?.setTitle(R.string.settings)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home) {
-            activity?.onBackPressed()
-            return false
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        activity?.setTitle(R.string.app_name)
     }
 }

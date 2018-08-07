@@ -8,6 +8,6 @@ class OperationsViewModel @Inject constructor(
         private val operationRepository: OperationRepository
 ) : ViewModel() {
 
-    val operations by lazy { operationRepository.getOperations(1) }
+    val operations = operationRepository.getOperations(1)
 
 }

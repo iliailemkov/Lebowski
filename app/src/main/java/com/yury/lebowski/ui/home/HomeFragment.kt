@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.di.ViewModelFactory
+import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.navigation.NavigatorMainContainer
 import com.yury.lebowski.ui.home.AccountList.AccountAdapter
 import com.yury.lebowski.ui.operations.OperationsFragment
@@ -32,7 +32,7 @@ class HomeFragment : DaggerFragment() {
 
     private lateinit var viewModel: HomeViewModel
 
-    var accountAdapter : AccountAdapter? = null
+    var accountAdapter: AccountAdapter? = null
 
     private val accounts = Observer<List<Account>> { res ->
         if (res !== null) {
@@ -48,6 +48,7 @@ class HomeFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as Navigator).initToolbar(R.string.app_name, R.dimen.toolbar_elevation, this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
         initAccounts()
     }
@@ -66,21 +67,21 @@ class HomeFragment : DaggerFragment() {
         accountAdapter = AccountAdapter { id ->
             (activity as Navigator).navigateTo(OperationsFragment.newInstance(id), "NavigateToOperations")
         }
-        rv_operation_list.adapter = accountAdapter
-        rv_operation_list.layoutManager = LinearLayoutManager(context)
-        rv_operation_list.addItemDecoration(DividerItemDecoration(context, VERTICAL))
+        rv_account_list.adapter = accountAdapter
+        rv_account_list.layoutManager = LinearLayoutManager(context)
+        rv_account_list.addItemDecoration(DividerItemDecoration(context, VERTICAL))
     }
 
-   /* private fun initFab() {
-        speedDial.inflate(R.menu.menu_speed_dial)
-        speedDial.setOnActionSelectedListener { it ->
-            when (it.id) {
-                R.id.add_income -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Income), "NaviagteAddIncome")
-                R.id.add_expenditure -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Expenditure), "NaviagteAddExpenditure")
-            }
-            false
-        }
-    }*/
+    /* private fun initFab() {
+         speedDial.inflate(R.menu.menu_speed_dial)
+         speedDial.setOnActionSelectedListener { it ->
+             when (it.id) {
+                 R.id.add_income -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Income), "NaviagteAddIncome")
+                 R.id.add_expenditure -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Expenditure), "NaviagteAddExpenditure")
+             }
+             false
+         }
+     }*/
 
     /*private fun initOperationList() {
         operationAdapter = OperationAdapter(context!!)

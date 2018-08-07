@@ -8,7 +8,7 @@ enum class CurrencyType(
     Dollar("USD", 840);
 
     companion object {
-        fun findByCode(value : String): CurrencyType? {
+        fun findByCode(value: String): CurrencyType? {
             for (item in CurrencyType.values())
                 if (item.code == value)
                     return item
