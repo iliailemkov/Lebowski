@@ -4,6 +4,7 @@ import androidx.work.Worker
 import com.yury.lebowski.data.local.db.LebowskiDb
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.PeriodicalOperation
+import com.yury.lebowski.data.local.models.enums.OperationState
 import java.util.*
 
 class PeriodicOperationWorker : Worker() {
@@ -29,6 +30,7 @@ class PeriodicOperationWorker : Worker() {
             addOperation(Operation(null,
                     Date(periodicalOperations.period + operation.date.time),
                     operation.operationType,
+                    OperationState.Normal,
                     operation.amount,
                     operation.accountId,
                     operation.categoryId), periodicalOperations.operationId, periodicalOperations.period)

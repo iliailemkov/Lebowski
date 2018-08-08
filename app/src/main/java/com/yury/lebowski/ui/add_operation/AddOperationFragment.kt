@@ -16,6 +16,7 @@ import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.data.local.models.Category
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.enums.CurrencyType
+import com.yury.lebowski.data.local.models.enums.OperationState
 import com.yury.lebowski.data.local.models.enums.OperationType
 import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.navigation.Navigator
@@ -130,6 +131,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
             viewModel.addPeriodicOperation(Operation(null,
                     Date(),
                     operationType!!,
+                    OperationState.Normal,
                     moneyEditText.text.toString().toDouble() * operationType?.effect!!,
                     accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                     categories.adapter.getItemId(categories.selectedItemId.toInt())), 1,
@@ -142,6 +144,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                     Operation(null,
                             Date(),
                             operationType!!,
+                            OperationState.Normal,
                             moneyEditText.text.toString().toDouble() * operationType?.effect!!,
                             accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
                             categories.adapter.getItemId(categories.selectedItemId.toInt())),

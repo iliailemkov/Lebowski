@@ -20,6 +20,9 @@ import com.yury.lebowski.navigation.Navigator
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_statistic.*
 import javax.inject.Inject
+import com.github.mikephil.charting.data.BarData
+
+
 
 @NavigatiorDetailContainer
 class StatisticsFragment : DaggerFragment() {
@@ -76,15 +79,15 @@ class StatisticsFragment : DaggerFragment() {
     private val dataBarSet: Observer<BarDataSet> = Observer { res ->
         if (res != null) {
             val dataSet = viewModel.barSummary.value
-            //dataSet!!. = 8f
-            //dataSet.selectionShift = 8f
             dataSet?.colors = ColorTemplate.MATERIAL_COLORS.toList()
             dataSet?.setDrawValues(true)
             val data = BarData(dataSet)
+            data.barWidth = 0.9f
             data.setValueFormatter(PercentFormatter())
             data.setValueTextSize(12f)
             data.setValueTextColor(Color.BLACK)
             horizontal_bar_chart.data = data
+            horizontal_bar_chart.setFitBars(true)
             horizontal_bar_chart.isHighlightPerTapEnabled = true
             horizontal_bar_chart.highlightValues(null)
             horizontal_bar_chart.invalidate()

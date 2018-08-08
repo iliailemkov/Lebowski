@@ -8,12 +8,14 @@ import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Operation
 import java.text.SimpleDateFormat
 
-class OperationAdapter : RecyclerView.Adapter<OperationHolder>() {
+class OperationAdapter(
+        private val onClickAction: (Long) -> Unit
+) : RecyclerView.Adapter<OperationHolder>() {
 
     var operations: List<Operation> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): OperationHolder {
-        return OperationHolder(LayoutInflater.from(parent.context).inflate(R.layout.operation_list_item, parent, false))
+        return OperationHolder(LayoutInflater.from(parent.context).inflate(R.layout.operation_list_item, parent, false), operations[p1].operationState)
     }
 
     override fun getItemCount(): Int {
@@ -32,6 +34,9 @@ class OperationAdapter : RecyclerView.Adapter<OperationHolder>() {
         }
         holder.date.text = dateFormat.format(operations[pos].date)
         holder.group.text = operations[pos].categoryId.toString()
+        holder.itemView.setOnClickListener {
+            onClickAction(operations[pos].id!!)
+        }
     }
 
 }

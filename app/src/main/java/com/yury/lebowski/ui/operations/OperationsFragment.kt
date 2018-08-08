@@ -1,6 +1,5 @@
 package com.yury.lebowski.ui.operations
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.di.ViewModelFactory
 import com.yury.lebowski.navigation.NavigatiorDetailContainer
 import com.yury.lebowski.navigation.Navigator
 import com.yury.lebowski.ui.operations.OperationList.OperationAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.operation_fragment.*
 import kotlinx.android.synthetic.main.operation_recycler.*
-import androidx.fragment.app.FragmentTabHost
-
-
+import javax.inject.Inject
 
 
 @NavigatiorDetailContainer
@@ -33,6 +31,11 @@ class OperationsFragment : DaggerFragment() {
             arguments = bundleOf(ACCOUNT_ID to accountId)
         }
     }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private lateinit var viewModel: OperationsViewModel
 
     var operationAdapter: OperationAdapter? = null
 
@@ -56,7 +59,7 @@ class OperationsFragment : DaggerFragment() {
         val tabTitles = arrayOf(getString(R.string.operation_page_tab_history),
                 getString(R.string.operation_page_tab_periodical),
                 getString(R.string.operation_page_tab_draft))
-        val adapter = OperationTabListAdapter(fragmentManager!!, tabTitles)
+        val adapter = OperationTabListAdapter(fragmentManager!!, tabTitles, accountId!!)
         stockViewPager.adapter = adapter
         stockTabLayout.setupWithViewPager(stockViewPager)
     }
@@ -79,7 +82,9 @@ class OperationsFragment : DaggerFragment() {
     }
 
     private fun initOperationList() {
-        operationAdapter = OperationAdapter()
+        operationAdapter = OperationAdapter { id ->
+            (activity as Navigator).navigateTo(OperationsFragment.newInstance(id), "NavigateToOperations")
+        }
         rv_operation_list.adapter = operationAdapter
         rv_operation_list.layoutManager = LinearLayoutManager(context)
         rv_operation_list.addItemDecoration(DividerItemDecoration(context, VERTICAL))

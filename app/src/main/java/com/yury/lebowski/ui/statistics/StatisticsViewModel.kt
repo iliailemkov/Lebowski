@@ -1,10 +1,7 @@
 package com.yury.lebowski.ui.statistics
 
 import androidx.lifecycle.*
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.data.*
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
@@ -67,6 +64,26 @@ class StatisticsViewModel @Inject constructor(
 
     fun getHorizontalBarChartValues(accountId: Long, operations: List<Operation>): LiveData<BarDataSet> {
         val liveData = MutableLiveData<BarDataSet>()
+        val entries = ArrayList<BarEntry>()
+        val color = ArrayList<Int>()
+        var map: HashMap<String, Float?> = HashMap()
+
+        operations.forEach { operation ->
+            if (map.contains(operation.categoryId.toString())) {
+                if (map[operation.categoryId.toString()] == null) {
+                    map[operation.categoryId.toString()] = 0f
+                }
+                map[operation.categoryId.toString()] = map[operation.categoryId.toString()]?.plus(Math.abs(operation.amount.toFloat()))
+            } else {
+                map.put(operation.categoryId.toString(), operation.amount.toFloat())
+            }
+        }
+        map.forEach { v ->
+            entries.add(BarEntry(v.value ?: 0f, v.key.toFloat()))
+        }
+
+        liveData.value = BarDataSet(entries, "")
+        liveData.value!!.colors = color
         return liveData
     }
 

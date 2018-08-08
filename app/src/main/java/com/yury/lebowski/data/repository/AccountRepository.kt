@@ -7,6 +7,7 @@ import com.yury.lebowski.data.local.dao.ExchangeRateDao
 import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.enums.CurrencyType
+import com.yury.lebowski.data.local.models.enums.OperationState
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
@@ -40,6 +41,7 @@ class AccountRepository @Inject constructor(
                 val newOperation = Operation(null,
                         operation.date,
                         operation.operationType,
+                        OperationState.Normal,
                         newAmount,
                         operation.accountId,
                         operation.categoryId)
@@ -59,6 +61,7 @@ class AccountRepository @Inject constructor(
                 val newOperation = Operation(null,
                         operation.date,
                         operation.operationType,
+                        OperationState.Normal,
                         newAmount,
                         operation.accountId,
                         operation.categoryId)
