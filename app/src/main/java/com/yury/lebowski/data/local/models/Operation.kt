@@ -12,7 +12,7 @@ data class Operation(
         val date: Date,
         val operationType: OperationType,
         val amount: Double,
-        @ForeignKey(entity = Account::class, parentColumns = ["id"], childColumns = ["accountId"])
+        @ForeignKey(entity = Account::class, parentColumns = ["id"], childColumns = ["accountId"], onDelete = ForeignKey.CASCADE)
         val accountId: Long,
         @ForeignKey(entity = Category::class, parentColumns = ["id"], childColumns = ["categoryId"])
         val categoryId: Long

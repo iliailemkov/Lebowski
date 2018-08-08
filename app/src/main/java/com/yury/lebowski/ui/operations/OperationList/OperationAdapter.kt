@@ -31,6 +31,7 @@ class OperationAdapter : RecyclerView.Adapter<OperationHolder>() {
             holder.amount.setTextColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_red_dark))
         }
         holder.date.text = dateFormat.format(operations[pos].date)
+        holder.group.text = operations[pos].categoryId.toString()
     }
 
 }

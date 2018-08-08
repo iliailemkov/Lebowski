@@ -2,8 +2,10 @@ package com.yury.lebowski.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -19,9 +21,12 @@ import com.yury.lebowski.ui.operations.OperationsFragment
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 import javax.inject.Inject
+import android.widget.AdapterView.AdapterContextMenuInfo
+
+
 
 @NavigatorMainContainer
-class HomeFragment : DaggerFragment() {
+class HomeFragment : DaggerFragment(), View.OnCreateContextMenuListener {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -63,10 +68,25 @@ class HomeFragment : DaggerFragment() {
         viewModel.accounts.removeObservers(this)
     }
 
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val index = item.groupId
+        var toast: Toast? = null
+        when (item.order) {
+            0 -> {
+                viewModel.deleteAccount(accountAdapter!!.accounts[index].id!!)
+                toast = Toast.makeText(context, "Account delete", Toast.LENGTH_SHORT)
+                toast!!.show()
+                return true
+            }
+            else -> return super.onContextItemSelected(item)
+        }
+    }
+
     private fun initAccounts() {
         accountAdapter = AccountAdapter { id ->
             (activity as Navigator).navigateTo(OperationsFragment.newInstance(id), "NavigateToOperations")
         }
+        registerForContextMenu(rv_account_list)
         rv_account_list.adapter = accountAdapter
         rv_account_list.layoutManager = LinearLayoutManager(context)
         rv_account_list.addItemDecoration(DividerItemDecoration(context, VERTICAL))

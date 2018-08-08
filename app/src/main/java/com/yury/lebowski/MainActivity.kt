@@ -111,11 +111,15 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun initToolbar(title: Int, elevation: Int, fragment: Fragment) {
+    override fun initToolbar(title: Int, elevation: Int?, fragment: Fragment) {
         if (!isWindowWithDetail() || fragment::class.java.declaredAnnotations.any { it is NavigatorMainContainer }) {
             toolbar.setTitle(title)
         }
-        toolbar.elevation = resources.getDimension(elevation)
+        if(elevation == null) {
+            toolbar.elevation = 0f
+        } else {
+            toolbar.elevation = resources.getDimension(elevation)
+        }
     }
 
     override fun navigateTo(fragment: Fragment, transaction: String?) {
@@ -131,6 +135,8 @@ class MainActivity : AppCompatActivity(),
                 }
                 if (it is NavigatiorDetailContainer) {
                     supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+
                             .replace(R.id.detail_container, fragment)
                             .commit()
                     return

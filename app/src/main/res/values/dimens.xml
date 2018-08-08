@@ -2,6 +2,17 @@
 <resources>
     <!-- app -->
     <dimen name="list_item_width">72dp</dimen>
+    <dimen name="empty_elevation">0dp</dimen>
     <dimen name="toolbar_elevation">8dp</dimen>
+    <dimen name="item_elevation">4dp</dimen>
+    <dimen name="app_margin">8dp</dimen>
+    <dimen name="item_input_margin">16dp</dimen>
+    <dimen name="item_text_size">20sp</dimen>
+    <dimen name="item_secondary_text_size">16sp</dimen>
     <!-- app -->
+
+    <!-- settings page -->
+    <dimen name="settings_text_size">16sp</dimen>
+    <dimen name="settings_item_margin">16dp</dimen>
+    <!-- settings page -->
 </resources>

@@ -1,6 +1,8 @@
 package com.yury.lebowski.ui.home.AccountList
 
+import android.view.ContextMenu
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +10,7 @@ import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Account
 
 class AccountAdapter(
-        private val onClick: (Long) -> Unit
+        private val onClickAction: (Long) -> Unit
 ) : RecyclerView.Adapter<AccountHolder>() {
 
     var accounts: List<Account> = emptyList()
@@ -32,7 +34,7 @@ class AccountAdapter(
         holder.currency.text = accounts[pos].currencyType.code
         holder.name.text = accounts[pos].name
         holder.itemView.setOnClickListener {
-            onClick(accounts[pos].id!!)
+            onClickAction(accounts[pos].id!!)
         }
     }
 }

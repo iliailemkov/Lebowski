@@ -142,8 +142,6 @@ class StatisticsFragment : DaggerFragment() {
         pie_chart.animateY(1000, Easing.EasingOption.EaseInOutQuad)
         pie_chart.setEntryLabelColor(Color.BLACK)
         pie_chart.setEntryLabelTextSize(14f)
-
-        //pie_chart.setOnChartValueSelectedListener(this)
     }
 
 

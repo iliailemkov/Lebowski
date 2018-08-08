@@ -15,7 +15,6 @@ interface ExchangeApi {
     fun getExhangeRate(@Query("q") fromTo: String,
                        @Query("compact") compact: String): Call<ResponseBody>
 
-
     companion object {
         fun create(): ExchangeApi {
 

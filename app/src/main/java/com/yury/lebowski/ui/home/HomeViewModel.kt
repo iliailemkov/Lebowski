@@ -9,5 +9,9 @@ class HomeViewModel @Inject constructor(
         private val accountRepository: AccountRepository,
         private val operationRepository: OperationRepository
 ) : ViewModel() {
+
     val accounts by lazy { accountRepository.getBalances() }
+
+    fun deleteAccount(accountId: Long) = accountRepository.delete(accountId)
+
 }

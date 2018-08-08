@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 
 
 interface Navigator {
-    fun initToolbar(@StringRes title: Int, @DimenRes elevation: Int, fragment: Fragment)
+    fun initToolbar(@StringRes title: Int, @DimenRes elevation: Int?, fragment: Fragment)
     fun navigateTo(fragment: Fragment, transaction: String?)
     fun navigateBack()
     fun isWindowWithDetail(): Boolean

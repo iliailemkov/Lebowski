@@ -16,17 +16,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_account_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_account_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/amount"
-                android:inputType="numberDecimal"
+                android:hint="@string/account_input_title"
+                android:inputType="textShortMessage"
                 android:textColor="@android:color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -38,33 +35,13 @@
             android:layout_gravity="end"
             android:layout_margin="8dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/operation_preiodic_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/periodic_hint"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/operation_preiodic_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <Button
             android:id="@+id/add_account_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="@dimen/item_input_margin"
             android:background="@color/colorPrimary"
-            android:elevation="2dp"
+            android:elevation="@dimen/item_elevation"
             android:text="@string/add"
             android:textColor="@android:color/black" />
 

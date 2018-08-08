@@ -58,7 +58,9 @@ dependencies {
     //android
     implementation "androidx.appcompat:appcompat:$androidxVersion"
     implementation "androidx.cardview:cardview:$androidxVersion"
+    implementation "androidx.viewpager:viewpager:$androidxVersion"
     implementation "androidx.recyclerview:recyclerview:$androidxVersion"
+    implementation "com.google.android.material:material:$androidxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     // retrofit 2

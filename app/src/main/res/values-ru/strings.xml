@@ -8,11 +8,19 @@
     <string name="rate">Рейтинг</string>
     <string name="future_operations">Тут должна быть история операций</string>
     <!--speed dial-->
-    <string name="add_expenditure">Добавить траты</string>
+    <string name="add_account">Добавить кошелек</string>
+    <string name="add_expenditure">Добавить Расходы</string>
     <string name="add_income">Добавить доходы</string>
     <string name="manage_categories">Редактировать категории</string>
     <string name="tbd">TBD</string>
     <!--home page-->
+
+    <!--operations page-->
+    <string name="operations_page_title">Операции</string>
+    <string name="operation_page_tab_history">История</string>
+    <string name="operation_page_tab_periodical">Периодические</string>
+    <string name="operation_page_tab_draft">Черновики</string>
+    <!--operations page-->
 
     <!--settings page-->
     <string name="settings">Настройки</string>
@@ -23,12 +31,24 @@
     </string-array>
     <string name="settings_switch_outgo">Показывать только расходы</string>
     <string name="settings_switch_legend">Показывать легенду</string>
+    <string name="mit_license">Copyright © 2018
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+            SOFTWARE.
+    </string>
     <string name="license">Лицензия</string>
     <string name="feedback">Обратная связь</string>
     <!--settings page-->
 
     <!--statisitcs page-->
     <string name="statisitcs">Статистика</string>
+    <string name="start_date">Дата начала</string>
+    <string name="finish_date">Дата окончания</string>
+    <string name="plot_btn">Построить</string>
     <!--statisitcs page-->
 
     <!--about page-->
@@ -75,6 +95,8 @@
     <string name="credit_card">Кредитная карта</string>
     <string name="successfully_added">Операция добавлена успешно</string>
     <string name="currency">Валюта</string>
+    <string name="account_input_title">Название кошелька</string>
+    <string name="account_incorrect_name">Некорректное название</string>
     <!--Accounts-->
 
 </resources>

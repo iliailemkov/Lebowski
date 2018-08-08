@@ -8,4 +8,5 @@ class OperationHolder(view: View) : RecyclerView.ViewHolder(view) {
     val amount = view.tv_amount!!
     val currency = view.tv_currency!!
     val date = view.tv_date!!
+    val group =  view.tv_name
 }

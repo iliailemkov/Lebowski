@@ -21,9 +21,15 @@ class AccountRepository @Inject constructor(
 
     fun getRates() = exchangeRateDao.getAll()
 
+    fun delete(accountId: Long) = accountDao.delete(accountId)
+
     fun updateRates(currencyFrom: CurrencyType, currencyTo: CurrencyType) {}
 
     fun getRate(currencyFrom: CurrencyType, currencyTo: CurrencyType): Double = exchangeRateDao.findByCurrency(currencyFrom, currencyTo)
+
+    fun addAccount(account: Account) {
+        accountDao.insert(account)
+    }
 
     fun addOperation(operation: Operation, currencyType: CurrencyType) {
         Executors.newSingleThreadScheduledExecutor().execute {

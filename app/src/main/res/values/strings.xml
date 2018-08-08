@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Lebowski</string>
-
-
     <!--Pages-->
+
+    <string name="context_menu_delete">Delete</string>
 
     <!--home page-->
     <string name="rate">Rate</string>
@@ -18,6 +19,9 @@
 
     <!--operations page-->
     <string name="operations_page_title">Operations</string>
+    <string name="operation_page_tab_history">History</string>
+    <string name="operation_page_tab_periodical">Periodical</string>
+    <string name="operation_page_tab_draft">Draft</string>
     <!--operations page-->
 
     <!--settings page-->
@@ -49,10 +53,6 @@
     <string name="finish_date">Finish date</string>
     <string name="plot_btn">Plot</string>
     <!--statisitcs page-->
-
-    <!--account page-->
-    <string name="add_account_page_title">Add account</string>
-    <!--account page-->
 
     <!--about page-->
     <string name="about">About</string>
@@ -98,6 +98,8 @@
     <string name="credit_card">Credit card</string>
     <string name="successfully_added">Added successfully</string>
     <string name="currency">Currency</string>
+    <string name="account_input_title">Account title</string>
+    <string name="account_incorrect_name">Incorrect name</string>
     <!--Accounts-->
 
 </resources>
