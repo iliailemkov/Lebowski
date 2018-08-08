@@ -9,6 +9,9 @@ import com.yury.lebowski.data.local.models.Account
 @Dao
 interface AccountDao {
 
+    @Query("DELETE FROM Account WHERE :id = id")
+    fun delete(id: Long)
+
     @Query("SELECT * FROM Account")
     fun getAll() : LiveData<List<Account>>
 
@@ -16,5 +19,9 @@ interface AccountDao {
     fun findById(id: Long) : Account
 
     @Insert
+    fun insert(account : Account)
+
+    @Insert
     fun insertAll(list: List<Account>)
+
 }

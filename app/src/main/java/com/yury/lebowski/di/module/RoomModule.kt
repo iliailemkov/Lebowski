@@ -36,5 +36,5 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun provideExchangeRate(db: LebowskiDb) = db.exchangeRateDao()
+    fun provideExchangeRateDao(db: LebowskiDb) = db.exchangeRateDao()
 }

@@ -3,7 +3,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
@@ -18,7 +17,7 @@
             android:id="@+id/category_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/item_input_margin"
             android:text="@string/category" />
 
         <Spinner
@@ -26,13 +25,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_margin="8dp" />
+            android:layout_margin="@dimen/item_input_margin" />
 
         <TextView
             android:id="@+id/account_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/item_input_margin"
             android:text="@string/account" />
 
         <Spinner
@@ -40,13 +39,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_margin="8dp" />
+            android:layout_margin="@dimen/item_input_margin" />
 
         <TextView
             android:id="@+id/currency_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/item_input_margin"
             android:text="@string/currency" />
 
         <Spinner
@@ -54,15 +53,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_margin="8dp" />
+            android:layout_margin="@dimen/item_input_margin" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/money_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:layout_margin="@dimen/item_input_margin">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/moneyEditText"
@@ -78,17 +75,15 @@
             android:id="@+id/switch_periodic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/periodic"/>
+            android:layout_margin="@dimen/item_input_margin"
+            android:text="@string/periodic" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/operation_preiodic_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/periodic_hint"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp">
+            android:layout_margin="@dimen/item_input_margin">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/operation_preiodic_input"
@@ -102,14 +97,11 @@
             android:id="@+id/add_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="@dimen/item_input_margin"
             android:background="@color/colorPrimary"
-            android:elevation="2dp"
+            android:elevation="@dimen/item_elevation"
             android:text="@string/add"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 

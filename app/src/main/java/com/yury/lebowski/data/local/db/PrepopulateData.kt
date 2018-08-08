@@ -5,6 +5,7 @@ import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.*
 import com.yury.lebowski.data.local.models.enums.CurrencyType
 import com.yury.lebowski.data.local.models.enums.OperationType
+import java.util.*
 
 
 object PrepopulateData {
@@ -36,9 +37,22 @@ object PrepopulateData {
             ExchangeRate(2, CurrencyType.Ruble, CurrencyType.Dollar, 63.0)
     )
 
-    /*val operations = listOf(
-            Operation(1, Date(), CurrencyType.Dollar, OperationType.Income, 999.0, 999.0, 1, 1)
-    )*/
+    val operations = listOf(
+            Operation(1, Date(), OperationType.Income, 999.0, 1, 1),
+            Operation(2, Date(), OperationType.Income, 999.0, 1, 1),
+            Operation(3, Date(), OperationType.Income, 999.0, 1, 2),
+            Operation(4, Date(), OperationType.Income, 999.0, 1, 2),
+            Operation(5, Date(), OperationType.Income, 999.0, 1, 2),
+            Operation(6, Date(), OperationType.Income, 999.0, 1, 3),
+            Operation(7, Date(), OperationType.Income, 999.0, 1, 3),
+            Operation(8, Date(), OperationType.Income, 999.0, 1, 3),
+            Operation(9, Date(), OperationType.Income, 999.0, 1, 1),
+            Operation(10, Date(), OperationType.Income, 999.0, 1, 1),
+            Operation(11, Date(), OperationType.Income, 999.0, 1, 1),
+            Operation(12, Date(), OperationType.Income, 999.0, 1, 1),
+            Operation(13, Date(), OperationType.Income, 999.0, 1, 1),
+            Operation(14, Date(), OperationType.Income, 999.0, 1, 1)
+    )
 
     /*val periodicalOperation = listOf(
             PeriodicalOperation(1, 1, 1200)

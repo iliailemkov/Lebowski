@@ -1,19 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Lebowski</string>
-
-
     <!--Pages-->
+
+    <string name="context_menu_delete">Delete</string>
 
     <!--home page-->
     <string name="rate">Rate</string>
     <string name="future_operations">Here will be your operation history</string>
     <!--speed dial-->
+    <string name="add_account">Add account</string>
     <string name="add_expenditure">Add expenditure</string>
     <string name="add_income">Add income</string>
     <string name="manage_categories">Manage categories</string>
     <string name="tbd">TBD</string>
     <!--home page-->
+
+    <!--operations page-->
+    <string name="operations_page_title">Operations</string>
+    <string name="operation_page_tab_history">History</string>
+    <string name="operation_page_tab_periodical">Periodical</string>
+    <string name="operation_page_tab_draft">Draft</string>
+    <!--operations page-->
 
     <!--settings page-->
     <string name="settings">Settings</string>
@@ -40,6 +49,9 @@
 
     <!--statisitcs page-->
     <string name="statisitcs">Statisitcs</string>
+    <string name="start_date">Start date</string>
+    <string name="finish_date">Finish date</string>
+    <string name="plot_btn">Plot</string>
     <!--statisitcs page-->
 
     <!--about page-->
@@ -86,6 +98,8 @@
     <string name="credit_card">Credit card</string>
     <string name="successfully_added">Added successfully</string>
     <string name="currency">Currency</string>
+    <string name="account_input_title">Account title</string>
+    <string name="account_incorrect_name">Incorrect name</string>
     <!--Accounts-->
 
 </resources>

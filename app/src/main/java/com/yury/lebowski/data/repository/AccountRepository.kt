@@ -11,24 +11,30 @@ import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class AccountRepository @Inject constructor(
-        private val accountDao : AccountDao,
-        private val accountOperationDao : AccountOperationDao,
+        private val accountDao: AccountDao,
+        private val accountOperationDao: AccountOperationDao,
         private val exchangeRateDao: ExchangeRateDao
 ) {
-    fun getBalanceById(id: Long) : Account = accountDao.findById(id)
+    fun getBalanceById(id: Long): Account = accountDao.findById(id)
 
-    fun getBalances() : LiveData<List<Account>> = accountDao.getAll()
+    fun getBalances(): LiveData<List<Account>> = accountDao.getAll()
 
     fun getRates() = exchangeRateDao.getAll()
 
+    fun delete(accountId: Long) = accountDao.delete(accountId)
+
     fun updateRates(currencyFrom: CurrencyType, currencyTo: CurrencyType) {}
 
-    fun getRate(currencyFrom: CurrencyType, currencyTo: CurrencyType) : Double  = exchangeRateDao.findByCurrency(currencyFrom, currencyTo)
+    fun getRate(currencyFrom: CurrencyType, currencyTo: CurrencyType): Double = exchangeRateDao.findByCurrency(currencyFrom, currencyTo)
+
+    fun addAccount(account: Account) {
+        accountDao.insert(account)
+    }
 
     fun addOperation(operation: Operation, currencyType: CurrencyType) {
         Executors.newSingleThreadScheduledExecutor().execute {
             val account = getBalanceById(operation.accountId)
-            if(!currencyType.code.equals(account.currencyType.code)) {
+            if (!currencyType.code.equals(account.currencyType.code)) {
                 val rate = getRate(currencyType, account.currencyType)
                 val newAmount = operation.amount * rate
                 val newOperation = Operation(null,
@@ -47,7 +53,7 @@ class AccountRepository @Inject constructor(
     fun addPeriodicalOperation(operation: Operation, id: Long, period: Long, currencyType: CurrencyType) {
         Executors.newSingleThreadScheduledExecutor().submit() {
             val account = getBalanceById(operation.accountId)
-            if(!currencyType.code.equals(account.currencyType.code)) {
+            if (!currencyType.code.equals(account.currencyType.code)) {
                 val rate = getRate(currencyType, account.currencyType)
                 val newAmount = operation.amount * rate
                 val newOperation = Operation(null,
