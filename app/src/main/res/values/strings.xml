@@ -60,6 +60,7 @@
     <string name="start_date">Start date</string>
     <string name="finish_date">Finish date</string>
     <string name="plot_btn">Plot</string>
+    <string name="summary_incorrect_value">Incorrect value</string>
     <!--statisitcs page-->
 
     <!--about page-->
@@ -78,6 +79,7 @@
     <string name="periodic">Periodic</string>
     <string name="periodic_hint">Periodic</string>
     <string name="incorrect_data">Incorrect input data</string>
+    <string name="operation_incorrect_value">Incorrect value</string>
     <!--add operation page-->
 
     <!--Pages-->

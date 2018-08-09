@@ -57,8 +57,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/money_layout"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/item_input_margin">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -80,10 +81,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/operation_preiodic_layout"
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:hint="@string/periodic_hint"
-            android:layout_margin="@dimen/item_input_margin">
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/item_input_margin"
+            android:hint="@string/periodic_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/operation_preiodic_input"

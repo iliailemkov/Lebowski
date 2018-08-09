@@ -9,4 +9,6 @@ data class Category(
         @PrimaryKey(autoGenerate = true) val id: Long?,
         val operationType: OperationType,
         val name: String
-)
+) : SpinnerObject {
+    override fun getTitle() = name
+}

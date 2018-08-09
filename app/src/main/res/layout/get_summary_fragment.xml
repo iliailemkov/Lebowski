@@ -43,6 +43,20 @@
                 android:textColor="@android:color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/get_summary_account_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_input_margin"
+            android:text="@string/account" />
+
+        <Spinner
+            android:id="@+id/get_summary_accounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/item_input_margin" />
+
         <Button
             android:id="@+id/plot_summary_button"
             android:layout_width="match_parent"

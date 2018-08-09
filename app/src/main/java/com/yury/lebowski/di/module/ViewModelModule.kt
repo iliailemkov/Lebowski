@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.yury.lebowski.di.ViewModelKey
 import com.yury.lebowski.ui.add_account.AddAccountViewModel
 import com.yury.lebowski.ui.add_operation.AddOperationViewModel
+import com.yury.lebowski.ui.get_summary.GetSummaryViewModel
 import com.yury.lebowski.ui.home.HomeViewModel
 import com.yury.lebowski.ui.operations.OperationsViewModel
 import com.yury.lebowski.ui.settings.SettingsViewModel
@@ -43,4 +44,9 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddAccountViewModel::class)
     abstract fun bindAddAccountViewModel(view : AddAccountViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetSummaryViewModel::class)
+    abstract fun bindGetSummaryViewModel(view : GetSummaryViewModel) : ViewModel
 }
