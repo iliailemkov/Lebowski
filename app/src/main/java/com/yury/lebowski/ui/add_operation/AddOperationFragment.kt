@@ -1,5 +1,6 @@
 package com.yury.lebowski.ui.add_operation
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,11 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.add_operation_fragment.*
 import java.util.*
 import javax.inject.Inject
+import android.content.DialogInterface
+import android.util.Log
+import android.widget.NumberPicker
+import androidx.appcompat.app.AlertDialog
+import kotlinx.android.synthetic.main.get_summary_fragment.*
 
 
 @NavigatorMainContainer
@@ -34,6 +40,8 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    private var alertDialog : AlertDialog? = null
 
     private var operationType: OperationType? = null
     private lateinit var viewModel: AddOperationViewModel
@@ -79,6 +87,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
         viewModel.filterCategory.value = operationType
         initAddButton()
         initPeriodic()
+        initDayNumberPicker()
     }
 
     override fun onStart() {
@@ -151,6 +160,25 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                     CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
             Toast.makeText(activity, getString(R.string.successfully_added), Toast.LENGTH_SHORT).show()
             (activity as Navigator).navigateBack()
+        }
+    }
+
+    private fun initDayNumberPicker() {
+        val dialog = AlertDialog.Builder(context!!)
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.periodical_picker, null)
+        dialog.setTitle(R.string.number_picker_title).setMessage(R.string.number_picker_message).setView(dialogView)
+        val numberPicker = dialogView.findViewById(R.id.dialog_number_picker) as NumberPicker
+        numberPicker.maxValue = 365
+        numberPicker.minValue = 1
+        numberPicker.wrapSelectorWheel = false
+        dialog.setPositiveButton(R.string.number_picker_done) {
+            dialogInterface, i -> operation_preiodic_input.setText(numberPicker.value.toString())
+        }
+        dialog.setNegativeButton(R.string.number_picker_cancel, DialogInterface.OnClickListener { dialogInterface, i -> })
+        alertDialog = dialog.create()
+        operation_preiodic_input.setOnClickListener {
+            alertDialog!!.show()
         }
     }
 }

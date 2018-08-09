@@ -2,7 +2,6 @@ package com.yury.lebowski.ui.get_summary
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

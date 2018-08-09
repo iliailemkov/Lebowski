@@ -8,6 +8,12 @@
     <string name="context_menu_add_operation">Add operation</string>
     <string name="context_menu_delete">Delete</string>
 
+    <string name="number_picker_title">Days</string>
+    <string name="number_picker_message">Pick days count</string>
+    <string name="number_picker_done">Done</string>
+    <string name="number_picker_cancel">Cancel</string>
+
+
     <!--home page-->
     <string name="rate">Rate</string>
     <string name="future_operations">Here will be your operation history</string>
