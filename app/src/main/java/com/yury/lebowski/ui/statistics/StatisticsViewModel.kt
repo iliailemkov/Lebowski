@@ -1,11 +1,13 @@
 package com.yury.lebowski.ui.statistics
 
 import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.github.mikephil.charting.data.*
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
+import java.util.*
 import javax.inject.Inject
 
 
@@ -14,6 +16,10 @@ class StatisticsViewModel @Inject constructor(
         private val spref: SharedPrefRepository,
         private val operationRepository: OperationRepository
 ) : ViewModel() {
+
+    var startDate: Date? = null
+    var finishDate: Date? = null
+    var accountId: Long? = null
 
     var currentBalance = MutableLiveData<List<Operation>>()
         set(value) {
@@ -91,12 +97,15 @@ class StatisticsViewModel @Inject constructor(
         return true
     }
 
-    init {
-        operationRepository.getAllOperations().observeForever(categoriesRepData)
+    fun initFilterOperations(startDate: Date, finishDate: Date, accountId: Long) {
+        this.startDate = startDate
+        this.finishDate = finishDate
+        this.accountId = accountId
+        operationRepository.getFilterOperations(startDate, finishDate, accountId).observeForever(categoriesRepData)
     }
 
     override fun onCleared() {
         super.onCleared()
-        operationRepository.getAllOperations().removeObserver(categoriesRepData)
+        operationRepository.getFilterOperations(startDate!!, finishDate!!, accountId!!).observeForever(categoriesRepData)
     }
 }

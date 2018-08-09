@@ -1,5 +1,6 @@
 package com.yury.lebowski.data.local.db
 
+import android.text.format.DateUtils
 import com.yury.lebowski.LebowskiApplication
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.*

@@ -87,21 +87,46 @@ class OperationTabFragment @Inject constructor(
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val index = item.groupId
         var toast: Toast? = null
-        when (item.order) {
-            0 -> {
-                //viewModel.deleteAccount(accountAdapter!!.accounts[index].id!!)
-                toast = Toast.makeText(context, "Account delete", Toast.LENGTH_SHORT)
-                toast!!.show()
-                return true
+        if (getUserVisibleHint()) {
+            if (operationState == OperationState.Normal) {
+                when (item.order) {
+                    0 -> {
+                        viewModel.addDraft(operationAdapter!!.operations[index])
+                        toast = Toast.makeText(context, "addDraft", Toast.LENGTH_SHORT)
+                        toast!!.show()
+                        return true
+                    }
+                    1 -> {
+                        viewModel.deleteOperation(operationAdapter!!.operations[index])
+                        toast = Toast.makeText(context, "Account delete", Toast.LENGTH_SHORT)
+                        toast!!.show()
+                        return true
+                    }
+                    else -> return super.onContextItemSelected(item)
+                }
+            } else {
+                when (item.order) {
+                    0 -> {
+                        viewModel.addOperationFromDraft(operationAdapter!!.operations[index])
+                        toast = Toast.makeText(context, "addOperationFromDraft", Toast.LENGTH_SHORT)
+                        toast!!.show()
+                        return true
+                    }
+                    1 -> {
+                        viewModel.deleteOperation(operationAdapter!!.operations[index])
+                        toast = Toast.makeText(context, "Account delete", Toast.LENGTH_SHORT)
+                        toast!!.show()
+                        return true
+                    }
+                    else -> return super.onContextItemSelected(item)
+                }
             }
-            else -> return super.onContextItemSelected(item)
         }
+        return false
     }
 
     private fun initOperationList() {
-        operationAdapter = OperationAdapter { id ->
-            (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Income), "NavigateToAddOperations")
-        }
+        operationAdapter = OperationAdapter()
         rv_operation_list.adapter = operationAdapter
         rv_operation_list.layoutManager = LinearLayoutManager(context)
         rv_operation_list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

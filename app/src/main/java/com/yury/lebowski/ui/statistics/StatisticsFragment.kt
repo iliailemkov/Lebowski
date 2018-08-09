@@ -21,19 +21,26 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_statistic.*
 import javax.inject.Inject
 import com.github.mikephil.charting.data.BarData
-
+import com.yury.lebowski.data.local.models.enums.OperationType
+import java.util.*
 
 
 @NavigatiorDetailContainer
 class StatisticsFragment : DaggerFragment() {
 
     val ACCOUNT_ID = "account_id"
+    val START_DATE = "start_date"
+    val FINISH_DATE = "finish_date"
 
     companion object {
-        fun newInstance(accountId: Long) = StatisticsFragment().apply {
-            arguments = bundleOf(ACCOUNT_ID to accountId)
+        fun newInstance(accountId: Long, startTimeMls: Long, finishTimeMls: Long) = StatisticsFragment().apply {
+            arguments = bundleOf(ACCOUNT_ID to accountId, START_DATE to startTimeMls, FINISH_DATE to finishTimeMls)
         }
     }
+
+    private var startDate : Date? = null
+
+    private var finishDate : Date? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -104,6 +111,12 @@ class StatisticsFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as Navigator).initToolbar(R.string.statisitcs, R.dimen.toolbar_elevation, this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(StatisticsViewModel::class.java)
+        arguments?.let {
+            startDate = Date(it.get(START_DATE) as Long)
+            finishDate = Date(it.get(START_DATE) as Long)
+            viewModel.initFilterOperations(startDate!!, finishDate!!, 1)
+            //viewModel.currentBalance.value = viewModel.currentBalance.value?.filter { it.date > startDate && it.date < finishDate}
+        }
         initPieChart()
 
     }

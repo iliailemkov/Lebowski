@@ -1,10 +1,8 @@
 package com.yury.lebowski.ui.operations
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.enums.OperationState
 
 class OperationTabListAdapter(fm: FragmentManager, tabTitle: Array<String>, accountId: Long) : FragmentStatePagerAdapter(fm) {

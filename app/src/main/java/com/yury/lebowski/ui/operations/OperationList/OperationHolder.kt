@@ -19,11 +19,12 @@ class OperationHolder(view: View, operationState: OperationState) : RecyclerView
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-        if (operationState == OperationState.Draft) {
-            menu.add(adapterPosition, v.id, 0, R.string.context_menu_add_operation)
-            menu.add(adapterPosition, v.id, 0, R.string.context_menu_delete)
+        if (operationState == OperationState.Normal) {
+            menu.add(adapterPosition, v.id, 0, R.string.context_menu_to_draft)
+            menu.add(adapterPosition, v.id, 1, R.string.context_menu_delete)
         } else {
-            menu.add(adapterPosition, v.id, 0, R.string.context_menu_delete)
+            menu.add(adapterPosition, v.id, 0, R.string.context_menu_add_operation)
+            menu.add(adapterPosition, v.id, 1, R.string.context_menu_delete)
         }
     }
 }

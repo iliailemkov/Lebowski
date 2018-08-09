@@ -59,7 +59,7 @@ class OperationsFragment : DaggerFragment() {
         val tabTitles = arrayOf(getString(R.string.operation_page_tab_history),
                 getString(R.string.operation_page_tab_periodical),
                 getString(R.string.operation_page_tab_draft))
-        val adapter = OperationTabListAdapter(fragmentManager!!, tabTitles, accountId!!)
+        val adapter = OperationTabListAdapter(childFragmentManager!!, tabTitles, accountId!!)
         stockViewPager.adapter = adapter
         stockTabLayout.setupWithViewPager(stockViewPager)
     }
@@ -71,7 +71,7 @@ class OperationsFragment : DaggerFragment() {
         }
     }
 
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         //viewModel.operations.observe(this, operations)
     }
@@ -83,10 +83,10 @@ class OperationsFragment : DaggerFragment() {
 
     private fun initOperationList() {
         operationAdapter = OperationAdapter { id ->
-            (activity as Navigator).navigateTo(OperationsFragment.newInstance(id), "NavigateToOperations")
+            (activity as Navigator).navigateTo(OperationsFragment.newInstance(), "NavigateToOperations")
         }
         rv_operation_list.adapter = operationAdapter
         rv_operation_list.layoutManager = LinearLayoutManager(context)
         rv_operation_list.addItemDecoration(DividerItemDecoration(context, VERTICAL))
-    }
+    }*/
 }

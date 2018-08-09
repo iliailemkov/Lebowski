@@ -22,14 +22,26 @@ class AccountRepository @Inject constructor(
 
     fun getRates() = exchangeRateDao.getAll()
 
-    fun delete(accountId: Long) = accountDao.delete(accountId)
+    fun deleteAccount(accountId: Long) {
+        Executors.newSingleThreadScheduledExecutor().execute {
+            accountDao.delete(accountId)
+        }
+    }
+
+    fun deleteOperation(operationId: Long, amount: Double, accountId: Long) {
+        Executors.newSingleThreadScheduledExecutor().execute {
+            accountOperationDao.deleteOperationAndUpdateAmount(operationId, amount, accountId)
+        }
+    }
 
     fun updateRates(currencyFrom: CurrencyType, currencyTo: CurrencyType) {}
 
     fun getRate(currencyFrom: CurrencyType, currencyTo: CurrencyType): Double = exchangeRateDao.findByCurrency(currencyFrom, currencyTo)
 
     fun addAccount(account: Account) {
-        accountDao.insert(account)
+        Executors.newSingleThreadScheduledExecutor().execute {
+            accountDao.insert(account)
+        }
     }
 
     fun addOperation(operation: Operation, currencyType: CurrencyType) {
@@ -52,8 +64,14 @@ class AccountRepository @Inject constructor(
         }
     }
 
+    fun addOperationFromDraft(operation: Operation) {
+        Executors.newSingleThreadScheduledExecutor().execute {
+            accountOperationDao.insertOperationAndUpdateAmount(operation, operation.amount, operation.accountId)
+        }
+    }
+
     fun addPeriodicalOperation(operation: Operation, id: Long, period: Long, currencyType: CurrencyType) {
-        Executors.newSingleThreadScheduledExecutor().submit() {
+        Executors.newSingleThreadScheduledExecutor().execute {
             val account = getBalanceById(operation.accountId)
             if (!currencyType.code.equals(account.currencyType.code)) {
                 val rate = getRate(currencyType, account.currencyType)

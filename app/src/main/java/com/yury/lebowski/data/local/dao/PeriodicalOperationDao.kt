@@ -17,5 +17,4 @@ interface PeriodicalOperationDao {
 
     @Insert
     fun insertAll(list: List<PeriodicalOperation>)
-
 }

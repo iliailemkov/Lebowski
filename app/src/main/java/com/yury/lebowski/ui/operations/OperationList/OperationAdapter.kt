@@ -8,9 +8,7 @@ import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Operation
 import java.text.SimpleDateFormat
 
-class OperationAdapter(
-        private val onClickAction: (Long) -> Unit
-) : RecyclerView.Adapter<OperationHolder>() {
+class OperationAdapter : RecyclerView.Adapter<OperationHolder>() {
 
     var operations: List<Operation> = emptyList()
 
@@ -34,9 +32,6 @@ class OperationAdapter(
         }
         holder.date.text = dateFormat.format(operations[pos].date)
         holder.group.text = operations[pos].categoryId.toString()
-        holder.itemView.setOnClickListener {
-            onClickAction(operations[pos].id!!)
-        }
     }
 
 }

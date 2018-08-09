@@ -55,9 +55,11 @@ class MainActivity : AppCompatActivity(),
         toolbar.setTitle(R.string.app_name)
         toolbar.elevation = resources.getDimension(R.dimen.toolbar_elevation)
         supportFragmentManager.addOnBackStackChangedListener(this)
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, HomeFragment.newInstance())
-                .commit()
+        if(supportFragmentManager.backStackEntryCount == 0) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_container, HomeFragment.newInstance())
+                    .commit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
