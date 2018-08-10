@@ -183,7 +183,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                             Date(),
                             operationType!!,
                             OperationState.Normal,
-                            moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() / 100 * operationType?.effect!!,
+                            moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() * operationType?.effect!!,
                             (accounts.adapter.getItem(accounts.selectedItemPosition) as Account).id!!,
                             (categories.adapter.getItem(categories.selectedItemPosition) as Category).id!!), 1,
                                                                                         operation_preiodic_input.text.toString().toLong() * 24 * 3600 * 1000,
@@ -196,7 +196,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                                 Date(),
                                 operationType!!,
                                 OperationState.Normal,
-                                moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() / 100 * operationType?.effect!!,
+                                moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() * operationType?.effect!!,
                                 (accounts.adapter.getItem(accounts.selectedItemPosition) as Account).id!!,
                                 (categories.adapter.getItem(categories.selectedItemPosition) as Category).id!!),
                         CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
