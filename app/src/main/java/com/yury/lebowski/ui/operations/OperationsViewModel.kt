@@ -10,6 +10,7 @@ import com.yury.lebowski.data.repository.OperationRepository
 import java.util.*
 import javax.inject.Inject
 
+
 class OperationsViewModel @Inject constructor(
         private val operationRepository: OperationRepository,
         private val accountRepository: AccountRepository
@@ -24,10 +25,10 @@ class OperationsViewModel @Inject constructor(
 
     var operationState : OperationState = OperationState.Normal
 
-    val operations = Transformations.switchMap(accountId) { operationRepository.getOperations(accountId.value?:1) }
+    val operations = Transformations.switchMap(accountId) { operationRepository.getWrapperOperations(accountId.value?:1) }
 
-    fun deleteOperation(operation: Operation) {
-        accountRepository.deleteOperation(operation.id!!, if(operation.operationState == OperationState.Draft) (-1 * operation.amount) else 0.0, operation.accountId)
+    fun deleteOperation(operationId: Long, operationState: OperationState, amount: Double, accountId: Long) {
+        accountRepository.deleteOperation(operationId, if(operationState == OperationState.Draft) (-1 * amount) else 0.0, accountId)
     }
 
     fun addDraft(operation: Operation) = operationRepository.addDraftOperation(operation)

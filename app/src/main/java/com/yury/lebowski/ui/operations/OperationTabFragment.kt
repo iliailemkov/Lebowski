@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.data.local.models.OperationWrapper
 import com.yury.lebowski.data.local.models.enums.OperationState
 import com.yury.lebowski.data.local.models.enums.OperationType
 import com.yury.lebowski.di.ViewModelFactory
@@ -46,7 +47,7 @@ class OperationTabFragment @Inject constructor(
 
     var operationState: OperationState? = null
 
-    private val operations: Observer<List<Operation>> = Observer { res ->
+    private val operations: Observer<List<OperationWrapper>> = Observer { res ->
         if (res != null) {
             operationAdapter?.operations = res.filter { it.operationState == operationState }
             operationAdapter?.notifyDataSetChanged()
@@ -91,13 +92,22 @@ class OperationTabFragment @Inject constructor(
             if (operationState == OperationState.Normal) {
                 when (item.order) {
                     0 -> {
-                        viewModel.addDraft(operationAdapter!!.operations[index])
+                        viewModel.addDraft(Operation(null,
+                                operationAdapter!!.operations[index].date,
+                                operationAdapter!!.operations[index].operationType,
+                                operationAdapter!!.operations[index].operationState,
+                                operationAdapter!!.operations[index].amount,
+                                operationAdapter!!.operations[index].accountId,
+                                operationAdapter!!.operations[index].categoryId))
                         toast = Toast.makeText(context, "addDraft", Toast.LENGTH_SHORT)
                         toast!!.show()
                         return true
                     }
                     1 -> {
-                        viewModel.deleteOperation(operationAdapter!!.operations[index])
+                        viewModel.deleteOperation(operationAdapter!!.operations[index].id!!,
+                                operationAdapter!!.operations[index].operationState,
+                                operationAdapter!!.operations[index].amount,
+                                operationAdapter!!.operations[index].accountId)
                         toast = Toast.makeText(context, "Account delete", Toast.LENGTH_SHORT)
                         toast!!.show()
                         return true
@@ -107,13 +117,22 @@ class OperationTabFragment @Inject constructor(
             } else {
                 when (item.order) {
                     0 -> {
-                        viewModel.addOperationFromDraft(operationAdapter!!.operations[index])
+                        viewModel.addOperationFromDraft(Operation(operationAdapter!!.operations[index].id,
+                                operationAdapter!!.operations[index].date,
+                                operationAdapter!!.operations[index].operationType,
+                                operationAdapter!!.operations[index].operationState,
+                                operationAdapter!!.operations[index].amount,
+                                operationAdapter!!.operations[index].accountId,
+                                operationAdapter!!.operations[index].categoryId))
                         toast = Toast.makeText(context, "addOperationFromDraft", Toast.LENGTH_SHORT)
                         toast!!.show()
                         return true
                     }
                     1 -> {
-                        viewModel.deleteOperation(operationAdapter!!.operations[index])
+                        viewModel.deleteOperation(operationAdapter!!.operations[index].id!!,
+                                operationAdapter!!.operations[index].operationState,
+                                operationAdapter!!.operations[index].amount,
+                                operationAdapter!!.operations[index].accountId)
                         toast = Toast.makeText(context, "Account delete", Toast.LENGTH_SHORT)
                         toast!!.show()
                         return true

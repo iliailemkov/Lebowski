@@ -10,7 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.yury.lebowski.R
@@ -19,10 +20,8 @@ import com.yury.lebowski.navigation.NavigatiorDetailContainer
 import com.yury.lebowski.navigation.Navigator
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_statistic.*
-import javax.inject.Inject
-import com.github.mikephil.charting.data.BarData
-import com.yury.lebowski.data.local.models.enums.OperationType
 import java.util.*
+import javax.inject.Inject
 
 
 @NavigatiorDetailContainer
@@ -41,6 +40,8 @@ class StatisticsFragment : DaggerFragment() {
     private var startDate : Date? = null
 
     private var finishDate : Date? = null
+
+    private var accountId : Long? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -65,42 +66,6 @@ class StatisticsFragment : DaggerFragment() {
         }
     }
 
-    private val dataLineSet: Observer<LineDataSet> = Observer { res ->
-        if (res != null) {
-            val dataSet = viewModel.lineSummary.value
-            //dataSet!!.sliceSpace = 8f
-            //dataSet.selectionShift = 8f
-            //dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
-            //dataSet.setDrawValues(true)
-            /*val data = LineDataSet()
-            data.setValueFormatter(PercentFormatter())
-            data.setValueTextSize(12f)
-            data.setValueTextColor(Color.BLACK)
-            line_chart.data = data
-            line_chart.isHighlightPerTapEnabled = true
-            line_chart.highlightValues(null)
-            line_chart.invalidate()*/
-        }
-    }
-
-    private val dataBarSet: Observer<BarDataSet> = Observer { res ->
-        if (res != null) {
-            val dataSet = viewModel.barSummary.value
-            dataSet?.colors = ColorTemplate.MATERIAL_COLORS.toList()
-            dataSet?.setDrawValues(true)
-            val data = BarData(dataSet)
-            data.barWidth = 0.9f
-            data.setValueFormatter(PercentFormatter())
-            data.setValueTextSize(12f)
-            data.setValueTextColor(Color.BLACK)
-            horizontal_bar_chart.data = data
-            horizontal_bar_chart.setFitBars(true)
-            horizontal_bar_chart.isHighlightPerTapEnabled = true
-            horizontal_bar_chart.highlightValues(null)
-            horizontal_bar_chart.invalidate()
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -113,9 +78,9 @@ class StatisticsFragment : DaggerFragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(StatisticsViewModel::class.java)
         arguments?.let {
             startDate = Date(it.get(START_DATE) as Long)
-            finishDate = Date(it.get(START_DATE) as Long)
-            viewModel.initFilterOperations(startDate!!, finishDate!!, 1)
-            //viewModel.currentBalance.value = viewModel.currentBalance.value?.filter { it.date > startDate && it.date < finishDate}
+            finishDate = Date(it.get(FINISH_DATE) as Long)
+            accountId = it.get(ACCOUNT_ID) as Long
+            viewModel.initFilterOperations(startDate!!, finishDate!!, accountId!!)
         }
         initPieChart()
 
@@ -124,15 +89,11 @@ class StatisticsFragment : DaggerFragment() {
     override fun onStart() {
         super.onStart()
         viewModel.pieSummary.observe(this, dataPieSet)
-        viewModel.lineSummary.observe(this, dataLineSet)
-        viewModel.barSummary.observe(this, dataBarSet)
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.pieSummary.removeObservers(this)
-        viewModel.lineSummary.removeObservers(this)
-        viewModel.barSummary.removeObservers(this)
     }
 
     private fun initPieChart() {
@@ -159,6 +120,4 @@ class StatisticsFragment : DaggerFragment() {
         pie_chart.setEntryLabelColor(Color.BLACK)
         pie_chart.setEntryLabelTextSize(14f)
     }
-
-
 }
