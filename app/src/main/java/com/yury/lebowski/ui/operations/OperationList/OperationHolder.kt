@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.operation_list_item.view.*
 
 class OperationHolder(view: View, operationState: OperationState) : RecyclerView.ViewHolder(view), View.OnCreateContextMenuListener {
     val amount = view.tv_amount!!
-    val currency = view.tv_currency!!
     val date = view.tv_date!!
     val group =  view.tv_name
     val operationState = operationState

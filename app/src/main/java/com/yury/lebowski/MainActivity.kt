@@ -1,8 +1,7 @@
 package com.yury.lebowski
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.DisplayMetrics
+ import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View

@@ -86,6 +86,13 @@ class AccountRepository @Inject constructor(
                 accountOperationDao.insertOperationAndUpdateAmount(newOperation, newAmount, operation.accountId)
             } else {
                 accountOperationDao.insertPeriodOperationAndUpdateAmount(operation, operation.amount, operation.accountId, period)
+                accountOperationDao.insertOperation(Operation(null,
+                        operation.date,
+                        operation.operationType,
+                        OperationState.Periodical,
+                        operation.amount,
+                        operation.accountId,
+                        operation.categoryId))
             }
         }
     }

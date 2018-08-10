@@ -56,24 +56,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/app_margin"
+        android:layout_marginEnd="16dp"
         android:layout_weight="1"
         android:text="balance"
         android:textSize="@dimen/item_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_currency"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_currency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/app_margin"
-        android:layout_weight="1"
-        android:text="USD"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/item_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

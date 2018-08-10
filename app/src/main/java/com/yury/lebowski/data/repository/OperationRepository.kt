@@ -1,7 +1,6 @@
 package com.yury.lebowski.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import com.yury.lebowski.data.local.dao.AccountDao
 import com.yury.lebowski.data.local.dao.CategoryDao
 import com.yury.lebowski.data.local.dao.OperationDao

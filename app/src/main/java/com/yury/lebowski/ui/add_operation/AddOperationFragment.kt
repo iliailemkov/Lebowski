@@ -85,7 +85,6 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddOperationViewModel::class.java)
         spinner_currency.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, CurrencyType.values().map { c -> c.code })
         viewModel.filterCategory.value = operationType
-        initAmount()
         initAddButton()
         initPeriodic()
         initDayNumberPicker()
@@ -120,29 +119,6 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
     override fun onFocusChange(view: View?, condition: Boolean) {
     }
 
-    private fun initAmount() {
-        moneyEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
-            }
-            private var current = ""
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if(!s.toString().equals(current)){
-                    moneyEditText.removeTextChangedListener(this);
-                    var cleanString: String = s.toString().replace("[,.\\s+]".toRegex(), "")
-                    var parsed = cleanString.toDouble()
-                    var formatted = NumberFormat.getInstance().format((parsed/100));
-                    current = formatted;
-                    moneyEditText.setText(formatted);
-                    moneyEditText.setSelection(formatted.length);
-                    moneyEditText.addTextChangedListener(this);
-                }
-            }
-
-            override fun afterTextChanged(s: Editable) {
-            }
-        })
-    }
 
     private fun initPeriodic() {
         switch_periodic.isChecked = false
@@ -210,7 +186,7 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                             moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() / 100 * operationType?.effect!!,
                             (accounts.adapter.getItem(accounts.selectedItemPosition) as Account).id!!,
                             (categories.adapter.getItem(categories.selectedItemPosition) as Category).id!!), 1,
-                                                                                        operation_preiodic_input.text.toString().toLong(),
+                                                                                        operation_preiodic_input.text.toString().toLong() * 24 * 3600 * 1000,
                             CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
                     (activity as Navigator).navigateBack()
                 }
