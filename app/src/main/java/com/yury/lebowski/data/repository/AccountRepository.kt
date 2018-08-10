@@ -1,13 +1,22 @@
 package com.yury.lebowski.data.repository
 
+import android.text.format.DateUtils
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.yury.lebowski.data.local.dao.AccountDao
 import com.yury.lebowski.data.local.dao.AccountOperationDao
 import com.yury.lebowski.data.local.dao.ExchangeRateDao
 import com.yury.lebowski.data.local.models.Account
+import com.yury.lebowski.data.local.models.ExchangeRate
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.enums.CurrencyType
 import com.yury.lebowski.data.local.models.enums.OperationState
+import com.yury.lebowski.data.remote.api.ExchangeApi
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
@@ -36,7 +45,25 @@ class AccountRepository @Inject constructor(
 
     fun updateRates(currencyFrom: CurrencyType, currencyTo: CurrencyType) {}
 
-    fun getRate(currencyFrom: CurrencyType, currencyTo: CurrencyType): Double = exchangeRateDao.findByCurrency(currencyFrom, currencyTo)
+    fun getRate(currencyFrom: CurrencyType, currencyTo: CurrencyType): Double {
+        Executors.newSingleThreadScheduledExecutor().execute {
+            exchangeRateDao.findByCurrency(currencyFrom, currencyTo)
+            ExchangeApi.create().getExhangeRate(currencyFrom.code + "_" + currencyTo.code, "y").enqueue(object : Callback<ResponseBody> {
+
+                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+
+                }
+
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.body() != null) {
+                        exchangeRateDao.insertAll(listOf(
+                                ExchangeRate(null, currencyFrom, currencyTo, response.body()?.string().toString().substringAfterLast(":").dropLast(2).toDouble(), Date())))
+                    }
+                }
+            })
+        }
+        return exchangeRateDao.getAll().findLast { DateUtils.isToday(it.date.time) }?.rate!!
+    }
 
     fun addAccount(account: Account) {
         Executors.newSingleThreadScheduledExecutor().execute {
