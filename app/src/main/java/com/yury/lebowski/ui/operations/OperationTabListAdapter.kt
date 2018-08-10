@@ -17,7 +17,7 @@ class OperationTabListAdapter(fm: FragmentManager, tabTitle: Array<String>, acco
     override fun getItem(position: Int): Fragment? {
         when (position) {
             0 -> return OperationTabFragment.newInstance(OperationState.Normal, accountId)
-            1 -> return OperationTabFragment.newInstance(OperationState.Normal, accountId)
+            1 -> return OperationTabFragment.newInstance(OperationState.Periodical, accountId)
             2 -> return OperationTabFragment.newInstance(OperationState.Draft, accountId)
             else -> return null
         }

@@ -9,6 +9,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.yury.lebowski.data.local.models.OperationWrapper
+import com.yury.lebowski.data.local.models.enums.OperationType
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
@@ -44,13 +45,22 @@ class StatisticsViewModel @Inject constructor(
         val entries = ArrayList<PieEntry>()
         val color = ArrayList<Int>()
         var map: HashMap<String, Float?> = HashMap()
-
         operations.forEach { operation ->
-            if(startDate!!.before(operation.date) && finishDate!!.after(operation.date)) {
-                if (map.contains(operation.categoryName)) {
-                    map[operation.categoryName] = map[operation.categoryName]?.plus(Math.abs(operation.amount.toFloat()))
-                } else {
-                    map.put(operation.categoryName, operation.amount.toFloat())
+            if(spref.getOnlyOutcomes()) {
+                if(startDate!!.before(operation.date) && finishDate!!.after(operation.date) && operation.operationType ==  OperationType.Expenditure) {
+                    if (map.contains(operation.categoryName)) {
+                        map[operation.categoryName] = map[operation.categoryName]?.plus(Math.abs(operation.amount.toFloat()))
+                    } else {
+                        map.put(operation.categoryName, operation.amount.toFloat())
+                    }
+                }
+            } else {
+                if(startDate!!.before(operation.date) && finishDate!!.after(operation.date)) {
+                    if (map.contains(operation.categoryName)) {
+                        map[operation.categoryName] = map[operation.categoryName]?.plus(Math.abs(operation.amount.toFloat()))
+                    } else {
+                        map.put(operation.categoryName, operation.amount.toFloat())
+                    }
                 }
             }
         }
@@ -63,13 +73,8 @@ class StatisticsViewModel @Inject constructor(
         return liveData
     }
 
-    fun getLineChartValues(accountId: Long, operations: List<OperationWrapper>): LiveData<LineDataSet> {
-        val liveData = MutableLiveData<LineDataSet>()
-        return liveData
-    }
-
     fun getShowLegend(): Boolean {
-        return true
+        return spref.getShowlegend()
     }
 
     fun initFilterOperations(startDate: Date, finishDate: Date, accountId: Long) {

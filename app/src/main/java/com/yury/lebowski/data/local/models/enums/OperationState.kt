@@ -2,7 +2,8 @@ package com.yury.lebowski.data.local.models.enums
 
 enum class OperationState {
     Normal,
-    Draft;
+    Draft,
+    Periodical;
 
     companion object {
         fun findByOrdinal(value : Int): OperationState? {

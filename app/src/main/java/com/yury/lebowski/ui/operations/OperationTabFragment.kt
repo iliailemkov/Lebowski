@@ -89,7 +89,7 @@ class OperationTabFragment @Inject constructor(
         val index = item.groupId
         var toast: Toast? = null
         if (getUserVisibleHint()) {
-            if (operationState == OperationState.Normal) {
+            if (operationState == OperationState.Normal || operationState == OperationState.Periodical) {
                 when (item.order) {
                     0 -> {
                         viewModel.addDraft(Operation(null,

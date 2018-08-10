@@ -47,13 +47,10 @@ abstract class LebowskiDb : RoomDatabase() {
                         .addCallback(object : Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)
-                                Executors.newSingleThreadScheduledExecutor().execute(Runnable {
-                                    getInstance(context).accountDao().insertAll(PrepopulateData.accounts)
+                                Executors.newSingleThreadScheduledExecutor().execute {
                                     getInstance(context).categoryDao().insertAll(PrepopulateData.categories)
                                     getInstance(context).exchangeRateDao().insertAll(PrepopulateData.rates)
-                                    getInstance(context).operationDao().insertAll(PrepopulateData.operations)
-                                    //getInstance(context).periodicalOperationDao().insertAll(PrepopulateData.periodicalOperation)
-                                })
+                                }
                             }
                         })
                         .build()
