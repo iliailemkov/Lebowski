@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
-import android.widget.CompoundButton
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -208,10 +207,10 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                             Date(),
                             operationType!!,
                             OperationState.Normal,
-                            moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() * operationType?.effect!!,
-                            accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
-                            categories.adapter.getItemId(categories.selectedItemId.toInt())), 1,
-                            operation_preiodic_input.text.toString().toLong(),
+                            moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() / 100 * operationType?.effect!!,
+                            (accounts.adapter.getItem(accounts.selectedItemPosition) as Account).id!!,
+                            (categories.adapter.getItem(categories.selectedItemPosition) as Category).id!!), 1,
+                                                                                        operation_preiodic_input.text.toString().toLong(),
                             CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
                     (activity as Navigator).navigateBack()
                 }
@@ -221,9 +220,9 @@ class AddOperationFragment : DaggerFragment(), View.OnFocusChangeListener {
                                 Date(),
                                 operationType!!,
                                 OperationState.Normal,
-                                moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() * operationType?.effect!!,
-                                accounts.adapter.getItemId(accounts.selectedItemId.toInt()),
-                                categories.adapter.getItemId(categories.selectedItemId.toInt())),
+                                moneyEditText.text.toString().replace("[,.\\s+]".toRegex(), "").toDouble() / 100 * operationType?.effect!!,
+                                (accounts.adapter.getItem(accounts.selectedItemPosition) as Account).id!!,
+                                (categories.adapter.getItem(categories.selectedItemPosition) as Category).id!!),
                         CurrencyType.findByCode(spinner_currency.adapter.getItem(spinner_currency.selectedItemPosition).toString())!!)
                 (activity as Navigator).navigateBack()
             }

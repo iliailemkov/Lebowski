@@ -1,6 +1,7 @@
 package com.yury.lebowski
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity(),
         FragmentManager.OnBackStackChangedListener,
         Navigator {
 
+    private val TOOLBAR_TITLE = "toolbar_title"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -51,19 +54,30 @@ class MainActivity : AppCompatActivity(),
                 .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                 .build())
         setSupportActionBar(toolbar)
+        if(savedInstanceState != null) {
+            supportActionBar?.title = savedInstanceState.getString(TOOLBAR_TITLE) ?: ""
+        }
         initSpeedDial()
-        toolbar.setTitle(R.string.app_name)
-        toolbar.elevation = resources.getDimension(R.dimen.toolbar_elevation)
         supportFragmentManager.addOnBackStackChangedListener(this)
+
         if(supportFragmentManager.backStackEntryCount == 0) {
+            toolbar.setTitle(R.string.app_name)
+            toolbar.elevation = resources.getDimension(R.dimen.toolbar_elevation)
             supportFragmentManager.beginTransaction()
                     .replace(R.id.main_container, HomeFragment.newInstance())
                     .commit()
+        } else {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            speedDial.visibility = View.GONE
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_items, menu)
+        if(supportFragmentManager.backStackEntryCount > 0) {
+            toolbar.menu.findItem(R.id.settings_item).isVisible = false
+            toolbar.menu.findItem(R.id.statistics_item).isVisible = false
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -83,6 +97,11 @@ class MainActivity : AppCompatActivity(),
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(TOOLBAR_TITLE, toolbar.title.toString())
     }
 
     override fun onBackStackChanged() {
