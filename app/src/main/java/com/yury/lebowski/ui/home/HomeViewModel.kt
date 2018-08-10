@@ -12,6 +12,6 @@ class HomeViewModel @Inject constructor(
 
     val accounts by lazy { accountRepository.getBalances() }
 
-    fun deleteAccount(accountId: Long) = accountRepository.delete(accountId)
+    fun deleteAccount(accountId: Long) = accountRepository.deleteAccount(accountId)
 
 }

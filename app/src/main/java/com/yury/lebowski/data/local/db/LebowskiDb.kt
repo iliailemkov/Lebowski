@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.yury.lebowski.data.local.converters.CurrencyTypeConverter
 import com.yury.lebowski.data.local.converters.DateConverter
+import com.yury.lebowski.data.local.converters.OperationStateConverter
 import com.yury.lebowski.data.local.converters.OperationTypeConverter
 import com.yury.lebowski.data.local.dao.*
 import com.yury.lebowski.data.local.models.*
@@ -25,7 +26,8 @@ import java.util.concurrent.Executors
 @TypeConverters(value =
 [DateConverter::class,
     OperationTypeConverter::class,
-    CurrencyTypeConverter::class])
+    CurrencyTypeConverter::class,
+    OperationStateConverter::class])
 abstract class LebowskiDb : RoomDatabase() {
     companion object {
         private var INSTANCE: LebowskiDb? = null
@@ -49,7 +51,7 @@ abstract class LebowskiDb : RoomDatabase() {
                                     getInstance(context).accountDao().insertAll(PrepopulateData.accounts)
                                     getInstance(context).categoryDao().insertAll(PrepopulateData.categories)
                                     getInstance(context).exchangeRateDao().insertAll(PrepopulateData.rates)
-                                    //(context).operationDao().insertAll(PrepopulateData.operations)
+                                    getInstance(context).operationDao().insertAll(PrepopulateData.operations)
                                     //getInstance(context).periodicalOperationDao().insertAll(PrepopulateData.periodicalOperation)
                                 })
                             }

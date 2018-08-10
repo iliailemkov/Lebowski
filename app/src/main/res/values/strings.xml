@@ -4,7 +4,15 @@
     <string name="app_name">Lebowski</string>
     <!--Pages-->
 
+    <string name="context_menu_to_draft">To draft</string>
+    <string name="context_menu_add_operation">Add operation</string>
     <string name="context_menu_delete">Delete</string>
+
+    <string name="number_picker_title">Days</string>
+    <string name="number_picker_message">Pick days count</string>
+    <string name="number_picker_done">Done</string>
+    <string name="number_picker_cancel">Cancel</string>
+
 
     <!--home page-->
     <string name="rate">Rate</string>
@@ -52,6 +60,7 @@
     <string name="start_date">Start date</string>
     <string name="finish_date">Finish date</string>
     <string name="plot_btn">Plot</string>
+    <string name="summary_incorrect_value">Incorrect value</string>
     <!--statisitcs page-->
 
     <!--about page-->
@@ -70,6 +79,7 @@
     <string name="periodic">Periodic</string>
     <string name="periodic_hint">Periodic</string>
     <string name="incorrect_data">Incorrect input data</string>
+    <string name="operation_incorrect_value">Incorrect value</string>
     <!--add operation page-->
 
     <!--Pages-->

@@ -12,5 +12,4 @@ class AddAccountViewModel @Inject constructor(
     fun addAccount(account: Account) {
         accountRepository.addAccount(account)
     }
-
 }

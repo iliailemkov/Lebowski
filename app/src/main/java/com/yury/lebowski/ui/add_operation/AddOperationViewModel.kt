@@ -23,6 +23,7 @@ class AddOperationViewModel @Inject constructor(
     val categories = Transformations.switchMap(filterCategory) {
         operationRepository.getCategoriesByType(filterCategory.value ?: OperationType.Expenditure)
     }
+
     val accounts = accountRepository.getBalances()
 
     fun addOperation(operation: Operation, currencyType: CurrencyType) {
