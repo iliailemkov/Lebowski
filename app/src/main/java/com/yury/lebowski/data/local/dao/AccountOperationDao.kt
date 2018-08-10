@@ -15,6 +15,9 @@ interface AccountOperationDao {
     @Insert
     fun insertOperation(operation: Operation)
 
+    @Query("DELETE FROM Operation WHERE id = :id")
+    fun deleteOperation(id: Long)
+
     @Insert
     fun insertPeriodOperation(operation: Operation) : Long
 
@@ -25,8 +28,14 @@ interface AccountOperationDao {
     fun update(operation: Operation)
 
     @Transaction
-    fun  insertOperationAndUpdateAmount(operation: Operation, amount: Double, accountId: Long) {
+    fun insertOperationAndUpdateAmount(operation: Operation, amount: Double, accountId: Long) {
         insertOperation(operation)
+        updateAmount(amount, accountId)
+    }
+
+    @Transaction
+    fun deleteOperationAndUpdateAmount(operationId: Long, amount: Double, accountId: Long) {
+        deleteOperation(operationId)
         updateAmount(amount, accountId)
     }
 

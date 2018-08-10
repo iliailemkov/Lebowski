@@ -12,6 +12,7 @@ import com.yury.lebowski.data.local.db.LebowskiDb
 import com.yury.lebowski.data.local.models.Account
 import com.yury.lebowski.data.local.models.Operation
 import com.yury.lebowski.data.local.models.enums.CurrencyType
+import com.yury.lebowski.data.local.models.enums.OperationState
 import com.yury.lebowski.data.local.models.enums.OperationType
 import org.junit.*
 import org.junit.rules.TestRule
@@ -40,7 +41,7 @@ class AccountOperationDaoTest {
                     0.0,
                     CurrencyType.Dollar))
 
-    private val operations = listOf(Operation(1, Date(), OperationType.Income, 999.0, 1, 1))
+    private val operations = listOf(Operation(1, Date(), OperationType.Income, OperationState.Normal,999.0, 1, 1))
 
     @Before
     fun setup() {

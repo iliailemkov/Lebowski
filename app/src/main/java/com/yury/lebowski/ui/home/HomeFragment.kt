@@ -2,28 +2,31 @@ package com.yury.lebowski.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import com.yury.lebowski.Navigator
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Account
-import com.yury.lebowski.data.local.models.Operation
-import com.yury.lebowski.data.local.models.enums.OperationType
 import com.yury.lebowski.di.ViewModelFactory
-import com.yury.lebowski.ui.add_operation.AddOperationFragment
-import com.yury.lebowski.ui.home.OperationList.OperationAdapter
+import com.yury.lebowski.navigation.Navigator
+import com.yury.lebowski.navigation.NavigatorMainContainer
+import com.yury.lebowski.ui.home.AccountList.AccountAdapter
+import com.yury.lebowski.ui.operations.OperationsFragment
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 import javax.inject.Inject
+import android.widget.AdapterView.AdapterContextMenuInfo
 
 
-class HomeFragment : DaggerFragment() {
+
+@NavigatorMainContainer
+class HomeFragment : DaggerFragment(), View.OnCreateContextMenuListener {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -34,25 +37,12 @@ class HomeFragment : DaggerFragment() {
 
     private lateinit var viewModel: HomeViewModel
 
-    var operationAdapter: OperationAdapter? = null
+    var accountAdapter: AccountAdapter? = null
 
     private val accounts = Observer<List<Account>> { res ->
         if (res !== null) {
-            if(!res.isEmpty()) {
-                if (res[0].balance < 0) {
-                    balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_red_dark))
-                } else {
-                    balance_main.setTextColor(ContextCompat.getColor(context!!, android.R.color.holo_green_dark))
-                }
-                balance_main.text = String.format("%.2f", res[0].balance)
-            }
-        }
-    }
-
-    private val operations: Observer<List<Operation>> = Observer { res ->
-        if (res != null) {
-            operationAdapter?.operations = res
-            operationAdapter?.notifyDataSetChanged()
+            accountAdapter?.accounts = res
+            accountAdapter?.notifyDataSetChanged()
         }
     }
 
@@ -63,39 +53,61 @@ class HomeFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as Navigator).initToolbar(R.string.app_name, R.dimen.toolbar_elevation, this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
-        initFab()
-        initOperationList()
+        initAccounts()
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.accounts.observe(this, this.accounts)
-        viewModel.operations.observe(this, this.operations)
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.accounts.removeObservers(this)
-        viewModel.operations.removeObservers(this)
     }
 
-    private fun initFab() {
-        speedDial.inflate(R.menu.menu_speed_dial)
-        speedDial.setOnActionSelectedListener { it ->
-            when (it.id) {
-                R.id.add_income -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Income), "NaviagteAddIncome")
-                R.id.add_expenditure -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Expenditure), "NaviagteAddExpenditure")
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val index = item.groupId
+        var toast: Toast? = null
+        when (item.order) {
+            0 -> {
+                viewModel.deleteAccount(accountAdapter!!.accounts[index].id!!)
+                toast = Toast.makeText(context, "Account delete", Toast.LENGTH_SHORT)
+                toast!!.show()
+                return true
             }
-            false
+            else -> return super.onContextItemSelected(item)
         }
     }
 
-    private fun initOperationList() {
+    private fun initAccounts() {
+        accountAdapter = AccountAdapter { id ->
+            (activity as Navigator).navigateTo(OperationsFragment.newInstance(id), "NavigateToOperations")
+        }
+        registerForContextMenu(rv_account_list)
+        rv_account_list.adapter = accountAdapter
+        rv_account_list.layoutManager = LinearLayoutManager(context)
+        rv_account_list.addItemDecoration(DividerItemDecoration(context, VERTICAL))
+    }
+
+    /* private fun initFab() {
+         speedDial.inflate(R.menu.menu_speed_dial)
+         speedDial.setOnActionSelectedListener { it ->
+             when (it.id) {
+                 R.id.add_income -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Income), "NaviagteAddIncome")
+                 R.id.add_expenditure -> (activity as Navigator).navigateTo(AddOperationFragment.newInstance(OperationType.Expenditure), "NaviagteAddExpenditure")
+             }
+             false
+         }
+     }*/
+
+    /*private fun initOperationList() {
         operationAdapter = OperationAdapter(context!!)
         rv_operation_list.adapter = operationAdapter
         rv_operation_list.layoutManager = LinearLayoutManager(context)
         rv_operation_list.addItemDecoration(DividerItemDecoration(context, VERTICAL))
-    }
+    }*/
 
 }

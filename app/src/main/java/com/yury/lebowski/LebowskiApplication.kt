@@ -1,6 +1,5 @@
 package com.yury.lebowski
 
-import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
 import com.yury.lebowski.di.DaggerAppComponent
 import dagger.android.AndroidInjector
@@ -24,8 +23,6 @@ class LebowskiApplication() : DaggerApplication() {
         super.onCreate()
         instance = this
         if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
             return;
         }
         LeakCanary.install(this)

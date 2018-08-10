@@ -2,17 +2,14 @@ package com.yury.lebowski.data.local.db
 
 import com.yury.lebowski.LebowskiApplication
 import com.yury.lebowski.R
-import com.yury.lebowski.data.local.models.*
+import com.yury.lebowski.data.local.models.Category
+import com.yury.lebowski.data.local.models.ExchangeRate
 import com.yury.lebowski.data.local.models.enums.CurrencyType
 import com.yury.lebowski.data.local.models.enums.OperationType
+import java.util.*
 
 
 object PrepopulateData {
-    val accounts = listOf(
-            Account(1, "Наличка", 0.0, CurrencyType.Dollar),
-            Account(2, "Карта", 0.0, CurrencyType.Ruble)
-    )
-
     val categories = listOf(
             Category(1, OperationType.Expenditure, LebowskiApplication.instance.getString(R.string.vehicle)),
             Category(2, (OperationType.Expenditure), LebowskiApplication.instance.getString(R.string.housing)),
@@ -32,15 +29,7 @@ object PrepopulateData {
     )
 
     val rates = listOf(
-            ExchangeRate(1, CurrencyType.Dollar, CurrencyType.Ruble, 0.01),
-            ExchangeRate(2, CurrencyType.Ruble, CurrencyType.Dollar, 63.0)
+            ExchangeRate(1, CurrencyType.Dollar, CurrencyType.Ruble, 0.01, Date()),
+            ExchangeRate(2, CurrencyType.Ruble, CurrencyType.Dollar, 63.0, Date())
     )
-
-    /*val operations = listOf(
-            Operation(1, Date(), CurrencyType.Dollar, OperationType.Income, 999.0, 999.0, 1, 1)
-    )*/
-
-    /*val periodicalOperation = listOf(
-            PeriodicalOperation(1, 1, 1200)
-    )*/
 }

@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.yury.lebowski.data.local.converters.CurrencyTypeConverter
 import com.yury.lebowski.data.local.converters.DateConverter
+import com.yury.lebowski.data.local.converters.OperationStateConverter
 import com.yury.lebowski.data.local.converters.OperationTypeConverter
 import com.yury.lebowski.data.local.dao.*
 import com.yury.lebowski.data.local.models.*
@@ -15,7 +16,7 @@ import java.util.concurrent.Executors
 
 
 @Database(entities =
-    [Account::class,
+[Account::class,
     Category::class,
     Operation::class,
     PeriodicalOperation::class,
@@ -23,9 +24,10 @@ import java.util.concurrent.Executors
         version = 1,
         exportSchema = false)
 @TypeConverters(value =
-    [DateConverter::class,
+[DateConverter::class,
     OperationTypeConverter::class,
-    CurrencyTypeConverter::class])
+    CurrencyTypeConverter::class,
+    OperationStateConverter::class])
 abstract class LebowskiDb : RoomDatabase() {
     companion object {
         private var INSTANCE: LebowskiDb? = null
@@ -45,13 +47,10 @@ abstract class LebowskiDb : RoomDatabase() {
                         .addCallback(object : Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)
-                                Executors.newSingleThreadScheduledExecutor().execute(Runnable {
-                                    getInstance(context).accountDao().insertAll(PrepopulateData.accounts)
+                                Executors.newSingleThreadScheduledExecutor().execute {
                                     getInstance(context).categoryDao().insertAll(PrepopulateData.categories)
                                     getInstance(context).exchangeRateDao().insertAll(PrepopulateData.rates)
-                                    //(context).operationDao().insertAll(PrepopulateData.operations)
-                                    //getInstance(context).periodicalOperationDao().insertAll(PrepopulateData.periodicalOperation)
-                                })
+                                }
                             }
                         })
                         .build()
@@ -61,10 +60,10 @@ abstract class LebowskiDb : RoomDatabase() {
         }
     }
 
-    abstract fun accountDao() : AccountDao
-    abstract fun categoryDao() : CategoryDao
-    abstract fun operationDao() : OperationDao
-    abstract fun accountOperationDao() : AccountOperationDao
-    abstract fun periodicalOperationDao() : PeriodicalOperationDao
-    abstract fun exchangeRateDao() : ExchangeRateDao
+    abstract fun accountDao(): AccountDao
+    abstract fun categoryDao(): CategoryDao
+    abstract fun operationDao(): OperationDao
+    abstract fun accountOperationDao(): AccountOperationDao
+    abstract fun periodicalOperationDao(): PeriodicalOperationDao
+    abstract fun exchangeRateDao(): ExchangeRateDao
 }

@@ -1,22 +1,20 @@
-package com.yury.lebowski.ui.home.OperationList
+package com.yury.lebowski.ui.operations.OperationList
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.yury.lebowski.R
 import com.yury.lebowski.data.local.models.Operation
+import com.yury.lebowski.data.local.models.OperationWrapper
 import java.text.SimpleDateFormat
 
-class OperationAdapter(
-        private val context: Context
-) : RecyclerView.Adapter<OperationHolder>() {
+class OperationAdapter : RecyclerView.Adapter<OperationHolder>() {
 
-    var operations : List<Operation> = emptyList()
+    var operations: List<OperationWrapper> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): OperationHolder {
-        return OperationHolder(LayoutInflater.from(context).inflate(R.layout.operation_list_item, parent, false))
+        return OperationHolder(LayoutInflater.from(parent.context).inflate(R.layout.operation_list_item, parent, false), operations[p1].operationState!!)
     }
 
     override fun getItemCount(): Int {
@@ -26,16 +24,15 @@ class OperationAdapter(
     override fun onBindViewHolder(holder: OperationHolder, pos: Int) {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
 
-        if(operations[pos].amount >= 0) {
-            holder.amount.setTextColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
+        if (operations[pos].amount >= 0) {
+            holder.amount.setTextColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_green_dark))
             holder.amount.setText("+" + String.format("%.2f", operations[pos].amount))
         } else {
             holder.amount.text = String.format("%.2f", operations[pos].amount)
-            holder.amount.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+            holder.amount.setTextColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_red_dark))
         }
-        //holder.currency.text = operations[pos].currencyType.code
         holder.date.text = dateFormat.format(operations[pos].date)
-        //holder.group.text = operations[pos]
+        holder.group.text = operations[pos].categoryName.toString()
     }
 
 }

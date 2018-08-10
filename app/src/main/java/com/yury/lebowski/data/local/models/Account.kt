@@ -11,4 +11,6 @@ data class Account(
         val name: String,
         val balance: Double,
         val currencyType: CurrencyType
-)
+) : SpinnerObject {
+    override fun getTitle() = name
+}

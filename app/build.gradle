@@ -46,6 +46,7 @@ ext {
     test_rules = "1.0.2"
     espresso_contrib = "3.0.2"
     robolecric_version = "3.7"
+    mockito_version = "2.6.1"
 }
 
 dependencies {
@@ -58,7 +59,9 @@ dependencies {
     //android
     implementation "androidx.appcompat:appcompat:$androidxVersion"
     implementation "androidx.cardview:cardview:$androidxVersion"
+    implementation "androidx.viewpager:viewpager:$androidxVersion"
     implementation "androidx.recyclerview:recyclerview:$androidxVersion"
+    implementation "com.google.android.material:material:$androidxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     // retrofit 2
@@ -94,6 +97,8 @@ dependencies {
     // test
     androidTestImplementation 'android.arch.core:core-testing:1.0.0-alpha3'
     testImplementation "junit:junit:$junit"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_version"
     androidTestImplementation "com.android.support.test:runner:$test_runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_core"
     androidTestImplementation "com.android.support.test:rules:$test_rules"

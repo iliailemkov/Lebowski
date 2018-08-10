@@ -2,8 +2,11 @@ package com.yury.lebowski.di.module
 
 import androidx.lifecycle.ViewModel
 import com.yury.lebowski.di.ViewModelKey
+import com.yury.lebowski.ui.add_account.AddAccountViewModel
 import com.yury.lebowski.ui.add_operation.AddOperationViewModel
+import com.yury.lebowski.ui.get_summary.GetSummaryViewModel
 import com.yury.lebowski.ui.home.HomeViewModel
+import com.yury.lebowski.ui.operations.OperationsViewModel
 import com.yury.lebowski.ui.settings.SettingsViewModel
 import com.yury.lebowski.ui.statistics.StatisticsViewModel
 import dagger.Binds
@@ -24,6 +27,11 @@ internal abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(OperationsViewModel::class)
+    abstract fun bindOperationsViewModel(view : OperationsViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(StatisticsViewModel::class)
     abstract fun bindStatisticsViewModel(viewModel : StatisticsViewModel) : ViewModel
 
@@ -32,4 +40,13 @@ internal abstract class ViewModelModule {
     @ViewModelKey(SettingsViewModel::class)
     abstract fun bindSettingsViewModel(view : SettingsViewModel) : ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddAccountViewModel::class)
+    abstract fun bindAddAccountViewModel(view : AddAccountViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetSummaryViewModel::class)
+    abstract fun bindGetSummaryViewModel(view : GetSummaryViewModel) : ViewModel
 }

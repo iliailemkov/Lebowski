@@ -7,7 +7,6 @@ import com.yury.lebowski.data.local.dao.*
 import com.yury.lebowski.data.repository.AccountRepository
 import com.yury.lebowski.data.repository.OperationRepository
 import com.yury.lebowski.data.repository.SharedPrefRepository
-import com.yury.lebowski.service.PeriodicOperationWorker
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -26,7 +25,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideOperationRepository(accountDao : AccountDao,
+    fun provideOperationRepository(accountDao: AccountDao,
                                    operationDao: OperationDao,
                                    categoryDao: CategoryDao,
                                    periodicalOperationDao: PeriodicalOperationDao) =
