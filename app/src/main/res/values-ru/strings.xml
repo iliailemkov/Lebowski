@@ -4,12 +4,21 @@
     <string name="app_name">Большой Лебовски</string>
     <!--Pages-->
 
+    <string name="context_menu_to_draft">В шаблон</string>
+    <string name="context_menu_add_operation">Добавить операцию</string>
+    <string name="context_menu_delete">Удалить</string>
+
+    <string name="number_picker_title">Дни</string>
+    <string name="number_picker_message">Выбрать количество</string>
+    <string name="number_picker_done">Применить</string>
+    <string name="number_picker_cancel">Отменить</string>
+
     <!--home page-->
     <string name="rate">Рейтинг</string>
     <string name="future_operations">Тут должна быть история операций</string>
     <!--speed dial-->
     <string name="add_account">Добавить кошелек</string>
-    <string name="add_expenditure">Добавить Расходы</string>
+    <string name="add_expenditure">Добавить расходы</string>
     <string name="add_income">Добавить доходы</string>
     <string name="manage_categories">Редактировать категории</string>
     <string name="tbd">TBD</string>
@@ -49,6 +58,7 @@
     <string name="start_date">Дата начала</string>
     <string name="finish_date">Дата окончания</string>
     <string name="plot_btn">Построить</string>
+    <string name="summary_incorrect_value">Некорректные значения</string>
     <!--statisitcs page-->
 
     <!--about page-->
@@ -67,6 +77,8 @@
     <string name="periodic">Периодичность</string>
     <string name="periodic_hint">Период в днях</string>
     <string name="incorrect_data">Неправильно введены значения</string>
+    <string name="operation_incorrect_value">Неправильно введены значения</string>
+
     <!--add operation page-->
 
     <!--Pages-->
